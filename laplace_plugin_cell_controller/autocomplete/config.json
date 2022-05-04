@@ -4,14 +4,14 @@
 
     "variations" : [
         {
-            "description" : "example_autocomplete",
+            "description" : "autocomplete",
             "url"         : "index.html",
 
             "icons": [ "resources/light/icon.png", "resources/light/icon@2x.png" ],
 			"icons2": [
 				{
 					"style" : "light",
-					
+
 					"100%": {
 						"normal": "resources/light/icon.png"
 					},
@@ -30,7 +30,7 @@
 				},
 				{
 					"style" : "dark",
-					
+
 					"100%": {
 						"normal": "resources/dark/icon.png"
 					},
@@ -62,7 +62,7 @@
             "isUpdateOleOnResize" : false,
 
             "buttons"        : [ ],
-			
+
 			"events" : [
 				"onInputHelperClear",
 				"onInputHelperInput"
