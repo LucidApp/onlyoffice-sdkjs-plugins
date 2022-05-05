@@ -1,17 +1,17 @@
 {
-    "name" : "example_autocomplete",
+    "name" : "QIN Office Assistant",
     "guid" : "asc.{A103601F-FDA0-418A-BC37-A514031894C0}",
 
     "variations" : [
         {
-            "description" : "example_autocomplete",
+            "description" : "QIN Office Assistant",
             "url"         : "index.html",
 
             "icons": [ "resources/light/icon.png", "resources/light/icon@2x.png" ],
 			"icons2": [
 				{
 					"style" : "light",
-					
+
 					"100%": {
 						"normal": "resources/light/icon.png"
 					},
@@ -30,7 +30,7 @@
 				},
 				{
 					"style" : "dark",
-					
+
 					"100%": {
 						"normal": "resources/dark/icon.png"
 					},
@@ -51,9 +51,9 @@
             "isViewer"        : false,
             "EditorsSupport"  : ["word", "slide", "cell"],
 
-            "isVisual"        : false,
+            "isVisual"        : true,
             "isModal"         : false,
-            "isInsideMode"    : false,
+            "isInsideMode"    : true,
             "isSystem"        : true,
 
             "initDataType"    : "none",
@@ -62,7 +62,7 @@
             "isUpdateOleOnResize" : false,
 
             "buttons"        : [ ],
-			
+
 			"events" : [
 				"onInputHelperClear",
 				"onInputHelperInput"
