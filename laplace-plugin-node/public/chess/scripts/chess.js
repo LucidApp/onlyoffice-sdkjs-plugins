@@ -16,7 +16,7 @@
  *
  */
 (function(window, undefined){
-
+    console.log("chess function start");
     // chess board implementation
     function CChessBoard(div_name)
     {
@@ -584,12 +584,12 @@
             var _info = window.Asc.plugin.info;
 
             var _method = (_info.objectId === undefined) ? "AddOleObject" : "EditOleObject";
-			
+
             _info.width = _info.width ? _info.width : 70;
             _info.height = _info.height ? _info.height : 70;
 			_info.widthPix = (_info.mmToPx * _info.width) >> 0;
 			_info.heightPix = (_info.mmToPx * _info.height) >> 0;
-			
+
 			var _param = {
 				guid : _info.guid,
 				widthPix : _info.widthPix,

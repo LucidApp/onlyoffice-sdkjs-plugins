@@ -20,7 +20,7 @@
 	if ("frameEditor" == window.name)
 	{
 		console.log('[_main]frameEditor found');
-		var _url = chrome.extension.getURL("main.js");
+		var _url = chrome.runtime.getURL("main.js");
 		_url = _url.substr(0, _url.lastIndexOf("main.js"));
 
 		var _baseUrl = _url + "chess/";
