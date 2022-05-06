@@ -23,7 +23,7 @@
 		var _url = chrome.runtime.getURL("main.js");
 		_url = _url.substr(0, _url.lastIndexOf("main.js"));
 
-		var _baseUrl = _url + "chess/";
+		var _baseUrl = _url + "cbr/";
 		var _configUrl = _baseUrl + "config.json";
 
 		function onLoadConfig(_json)
