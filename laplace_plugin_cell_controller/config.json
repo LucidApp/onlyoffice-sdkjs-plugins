@@ -4,7 +4,7 @@
 
     "variations" : [
         {
-            "description" : "QIN Office Assistant",
+            "description" : "laplace_assistant",
             "url"         : "index.html",
 
             "icons": [ "resources/light/icon.png", "resources/light/icon@2x.png" ],
@@ -51,9 +51,9 @@
             "isViewer"        : false,
             "EditorsSupport"  : ["word", "slide", "cell"],
 
-            "isVisual"        : true,
+            "isVisual"        : false,
             "isModal"         : false,
-            "isInsideMode"    : true,
+            "isInsideMode"    : false,
             "isSystem"        : true,
 
             "initDataType"    : "none",

@@ -15,13 +15,19 @@
             "isVisual"        : false,
             "isModal"         : false,
             "isInsideMode"    : false,
+            "isSystem"        : true,
 
             "initDataType"    : "none",
             "initData"        : "",
 
 			"isUpdateOleOnResize" : false,
 
-			"buttons"         : []
+			"buttons"         : [],
+
+            "events" : [
+                "onInputHelperClear",
+                "onInputHelperInput"
+            ]
         }
     ]
 }
