@@ -1,22 +1,7 @@
-/**
- *
- * (c) Copyright Ascensio System SIA 2020
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
 
 let data = {};
+let current_cell = null;
+let current_col = 0;
 
 const parseCsv = csv => {
   let lines = csv.split("\n");
@@ -37,12 +22,15 @@ const parseCsv = csv => {
 
   window.Asc.plugin.init = function (text) {
     console.log("[auto]plugin init");
+    // Asc.scope.cell = current_cell;
+    // Asc.scope.col = 333;
     if (!window.isInit) {
       window.isInit = true;
 
       window.Asc.plugin.currentText = "";
       window.Asc.plugin.createInputHelper();
       window.Asc.plugin.getInputHelper().createWindow();
+      window.Asc.plugin.executeMethod("GetCurrentContentControl");
 
       console.log("[auto]window init");
 
@@ -56,35 +44,65 @@ const parseCsv = csv => {
 
     //FIXME: event initional plugin
     //close the plugin (simulate button click)
-    this.button(-1);
+    // this.button(-1);
   };
 
-  let current_cell = null;
-  let base_command = '';
-  base_command += 'var oSheet = Api.GetActiveSheet();';
-  base_command += 'var oSheet = Api.GetActiveSheet();';
-  base_command += 'var active = oSheet.GetActiveCell();';
-  base_command += 'var row = active.GetRow();';
-  base_command += 'var col = active.GetCol();';
+  // window.Asc.plugin.button = function (id) {
+  //   // FIXME: this.executeCommand("close", "");
+  // };
+
+  // window.Asc.plugin.onCommandCallback = function(result) {
+  //   console.log("[callback]Current Col:", current_col, current_cell);
+  //   console.log("[callback]result:", result);
+  // };
+  //
+  // window.Asc.plugin.event_onTargetPositionChanged = function(data) {
+  //   window.Asc.plugin.executeMethod("GetCurrentContentControl");
+  //   console.log("[event]onTargetPositionChanged:", data, this);
+  // };
+  //
+  // window.Asc.plugin.event_onClick = function(isSelectionUse) {
+  //   window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function(obj) {
+  //     window.Asc.plugin.currentContentControl = obj;
+  //     console.log("[event]onClick:", isSelectionUse, obj, this);
+  //   });
+  // };
+  //
+  // window.Asc.plugin.onMethodReturn = function(data) {
+  //   console.log("[event]onMethodReturn:", data, this);
+  // };
 
   window.Asc.plugin.inputHelper_onSelectItem = function (t) {
     if (!t) return;
-    let command = '';
     const item = data.map(i => i).find(i => i.id === t.id);
     console.log("[auto]inputHelper_onSelectItem", t, item);
 
-    command = base_command + 'oSheet.GetRangeByNumber(row, col).SetValue("' + `Item No. ${item.no}` + '");';
-    command += 'oSheet.GetRangeByNumber(row, col + 1).SetValue("' + item.name + '");';
-    command += 'oSheet.GetRangeByNumber(row, col + 2).SetValue("' + item.specification + '");';
-    command += 'oSheet.GetRangeByNumber(row, col + 3).SetValue("' + item.description + '");';
-    command += 'oSheet.GetRangeByNumber(row, col + 5).SetNumberFormat("@");';
-    command += 'oSheet.GetRangeByNumber(row, col + 5).SetValue("' + item.price + '");';
-
-    // window.Asc.plugin.executeMethod("InputText", [item.text, window.Asc.plugin.currentText]);
-    console.log("[auto]READY TO EXECUTE COMMAND:", command);
-    window.Asc.plugin.executeMethod("InputText", [`Item No. ${item.no}`, window.Asc.plugin.currentText]);
-    window.Asc.plugin.info.recalculate = true;
-    window.Asc.plugin.executeCommand('command', command);
+    Asc.scope.item = item;
+    this.callCommand(function (){
+      const oSheet = Api.GetActiveSheet();
+      const oCell = oSheet.GetActiveCell();
+      const item = Asc.scope.item;
+      let row = oCell.GetRow();
+      let col = oCell.GetCol();
+      console.log("[cmd-input]cell:", oCell, row, col);
+      console.log("[cmd-input]item:", item);
+      oSheet.GetRangeByNumber(row, col).SetValue(`Item No. ${item.no}`);
+      oSheet.GetRangeByNumber(row, 7).SetValue(`${item.name}, ${item.specification}, ${item.description}`);
+      // 单价
+      oSheet.GetRangeByNumber(row, 12).SetNumberFormat("_(￥* #,##0.00_)");
+      oSheet.GetRangeByNumber(row, 12).SetValue(item.price);
+      // 单位
+      oSheet.GetRangeByNumber(row, 13).SetValue(item.unit);
+      // 年度议价
+      oSheet.GetRangeByNumber(row, 16).SetNumberFormat("_(￥* #,##0.00_)");
+      oSheet.GetRangeByNumber(row, 16).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
+      // 总价
+      oSheet.GetRangeByNumber(row, 18).SetNumberFormat("_(￥* #,##0.00_)");
+      oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} *  P${row + 1}`);
+      // Item No.
+      oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.no}`);
+      console.log("[cmd-input]cmd DONE");
+    }, false, true);
     window.Asc.plugin.getInputHelper().unShow();
   };
 
@@ -99,10 +117,32 @@ const parseCsv = csv => {
     else
       window.Asc.plugin.currentText = data.text;
 
-    let get_cell_command = base_command + 'return active;';
-    window.Asc.plugin.executeCommand('command', get_cell_command, function (result) {
-      console.log("Current Cell:", result);
-    });
+    // window.Asc.plugin.executeMethod("GetCurrentContentControl", null, function (data) {
+    //   console.log("[auto]content_id:", data);
+    // });
+    //
+    // this.callCommand(function() {
+    //   let oSheet = Api.GetActiveSheet();
+    //   let oCell = oSheet.GetActiveCell();
+    //   console.log('[cmd]scope:', Asc.scope);
+    //   console.log('[cmd]cell:', oCell);
+    //   let row = oCell.GetRow();
+    //   let col = oCell.GetCol();
+    //   current_cell = oCell;
+    //   current_col = col;
+    //   console.log('[cmd]cell position:', row, col);
+    //   console.log('[cmd]current:', current_cell, current_col);
+    //   Asc.scope.cell = oCell;
+    //   Asc.scope.col = col;
+    //   return oCell;
+    // }, false, false,
+    //   function (result, error) {
+    //     console.log("[in-callback]Current Col:", current_col, current_cell);
+    //     console.log("[in-callback]result:", result, error, this);
+    //     console.log("[in-callback]scope:", Asc.scope);
+    //   }
+    // );
+    // console.log("Current Col:", current_col, current_cell);
 
     // correct by space
     var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");
@@ -127,7 +167,7 @@ const parseCsv = csv => {
         const item = variants[i];
         items.push({
           id: item.id,
-          text: `${item.id}. ${item.name}, ${item.specification}, ￥${item.price}`
+          text: `${item.id}. ${item.name}, ${item.specification}, ${item.description} ,￥${item.price}`
         });
       }
 
