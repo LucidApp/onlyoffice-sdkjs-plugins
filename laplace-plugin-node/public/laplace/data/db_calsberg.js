@@ -1,4 +1,4 @@
-﻿const csv_data_calsberg =`no,Category 品类,Sub-category_L1,Sub-category_L2,Sub-category_L3,Sub-category 子品类,name,specification,description,unit,price_2021,price,price_2023
+﻿const csv_data_calsberg =`item_no,Category 品类,Sub-category_L1,Sub-category_L2,Sub-category_L3,Sub-category 子品类,name,specification,description,unit,price_2021,price,price_2023
 001,Brand Promotion,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,北上广深，税前工资(含社保、意外险等） ,2年以上渠道产品推广经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞175cm Weight：52-60KG,per person/ day,540.00,521.10,502.86
 002,Brand Promotion,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,北上广深，税前工资(含社保、意外险等） ,1年以上渠道产品推广经验，形象气质佳，工作态度积极，沟通能力强，且身高＞170cm Weight：50-58KG,per person/ day,460.00,443.90,428.36
 003,Brand Promotion,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,北上广深，税前工资(含社保、意外险等） ,有渠道产品推销广经验，形象气质佳，工作态度积极，且身高＞165cm Weight：48-56KG,per person/ day,415.00,400.48,386.46

@@ -15,381 +15,409 @@
  * limitations under the License.
  *
  */
-(function(window, undefined){
-	console.log("[ext] start");
-	var Comments = null;
-	var ExampleUserData = {
-		probCat : [{id:0, text:'None'},{id:1, text:'Defect'},{id:2, text:'Bug'}],
-		severity : [{id:0, text:'None'},{id:1, text:'General'},{id:2, text:'Normal'}],
-		submitted : [{id:0, text:'None'}, {id:1, text:'User_1'},{id:2, text:'User_2'}]
-		// ,accepted : [{id:0, text:'None'}, {id:1, text:'Accepted'}, {id:2, text:'Not'}]
-	};
+(function (window, undefined) {
+  console.log("[ext] start");
+  var Comments = null;
+  var ExampleUserData = {
+    client: [{id: 0, text: 'None'}, {id: 1, text: 'Defect'}, {id: 2, text: 'Bug'}],
+    region: [{id: 0, text: 'None'}, {id: 1, text: 'General'}, {id: 2, text: 'Normal'}],
+    submitted: [{id: 0, text: 'None'}, {id: 1, text: 'User_1'}, {id: 2, text: 'User_2'}]
+    // ,accepted : [{id:0, text:'None'}, {id:1, text:'Accepted'}, {id:2, text:'Not'}]
+  };
 
-    window.Asc.plugin.init = function() {
-			console.log("[ext] code.js init");
-		$('#select_Category').select2({
-			data : ExampleUserData.probCat,
-			minimumResultsForSearch: Infinity,
-			width : '120px'
-		});
-		$('#select_Severity').select2({
-			data : ExampleUserData.severity,
-			minimumResultsForSearch: Infinity,
-			width : '120px'
-		});
-		// $('#select_Accept').select2({
-		// 	data : ExampleUserData.accepted,
-		// 	minimumResultsForSearch: Infinity,
-		// 	width : '120px'
-		// });
-		$('#select_Submit').select2({
-			data : ExampleUserData.submitted,
-			width : '120px'
-		});
+  window.Asc.plugin.init = function () {
+    console.log("[ext] code.js init");
+    if (localStorage['client'] && localStorage['client'].id > 0) {
 
-		$('#btn_Submit').on('click', function() {
-			var comment = $('#textarea_Comment').val().trim();
-			var author = $('#inp_author').val().trim();
-			var userId = author === window.Asc.plugin.info.userName ? window.Asc.plugin.info.userId : "";
-			if (!author) {
-				userId = window.Asc.plugin.info.userId;
-				author = window.Asc.plugin.info.userName;
-			}
-			if (!comment) {
-				alert("Error! The comment text can't be empty.")
-				return;
-			}
-			let userData = {
-				probCat : {id: $('#select_Category').find(':selected').val(), text:$('#select_Category').find(':selected').text()},
-				severity : {id: $('#select_Severity').find(':selected').val(), text:$('#select_Severity').find(':selected').text()},
-				submitted : {id: $('#select_Submit').find(':selected').val(), text:$('#select_Submit').find(':selected').text()}
-			};
-			clearFields();
-			window.Asc.plugin.executeMethod("AddComment",[{Text: comment, UserName: author, UserId: userId, UserData : JSON.stringify(userData)}], function(comment) {
-				console.log(comment)
-			});
-		});
+    } else {
+      localStorage['client'] = db_clients[0];
+    }
+    let regions = localStorage['client'].regions;
+    $('#select_client').select2({
+      data: db_clients,
+      minimumResultsForSearch: Infinity,
+      width: '120px'
+    }).on('select2:select', function (e) {
+      const data = e.params.data;
+      console.log("select2 client data:", data);
+      // localStorage['client'] = data;
+      chrome.runtime.sendMessage("eghnkhmmkhnnikhimnpoppchdoapnnam", {method: "clientUpdated", key: "client", value: data}, function(resp) {
+        console.log("message send!");
+        console.log("response:". resp);
+      });
+      // chrome.storage.sync.set({'client': data}, function() {
+      //   console.log('Value is set to ', data);
+      // });
+    });
+    $('#select_region').select2({
+      data: regions,
+      minimumResultsForSearch: Infinity,
+      width: '120px'
+    });
+    // $('#select_Accept').select2({
+    // 	data : ExampleUserData.accepted,
+    // 	minimumResultsForSearch: Infinity,
+    // 	width : '120px'
+    // });
+    $('#select_Submit').select2({
+      data: ExampleUserData.submitted,
+      width: '120px'
+    });
 
-		$('#btn_Cancel').on('click', function() {
-			clearFields();
-		})
+    $('#btn_Submit').on('click', function () {
+      var comment = $('#textarea_Comment').val().trim();
+      var author = $('#inp_author').val().trim();
+      var userId = author === window.Asc.plugin.info.userName ? window.Asc.plugin.info.userId : "";
+      if (!author) {
+        userId = window.Asc.plugin.info.userId;
+        author = window.Asc.plugin.info.userName;
+      }
+      if (!comment) {
+        alert("Error! The comment text can't be empty.")
+        return;
+      }
+      let userData = {
+        probCat: {
+          id: $('#select_Category').find(':selected').val(),
+          text: $('#select_Category').find(':selected').text()
+        },
+        severity: {
+          id: $('#select_Severity').find(':selected').val(),
+          text: $('#select_Severity').find(':selected').text()
+        },
+        submitted: {id: $('#select_Submit').find(':selected').val(), text: $('#select_Submit').find(':selected').text()}
+      };
+      clearFields();
+      window.Asc.plugin.executeMethod("AddComment", [{
+        Text: comment,
+        UserName: author,
+        UserId: userId,
+        UserData: JSON.stringify(userData)
+      }], function (comment) {
+        console.log(comment)
+      });
+    });
 
-		$('#btn_Delete').on('click', function() {
-			let arrRem = [];
-			let arrReply = [];
-			$.each($("input:checked"), function(){
-				if ($(this).attr("data-type") === "reply") {
-					arrReply.push({id : $(this).parent().parent().parent()[0].id, text : $($(this).parent().find('.user-message')[0]).text(), author : $($(this).parent().find('.user-name')[0]).text()})
-				} else {
-					var id = $(this).parent().parent()[0].id;
-					arrRem.push(id);
-				}
-			});
-			removeReply(arrReply);
-			removeComments(arrRem);
-			window.Asc.plugin.executeMethod("RemoveComments",[arrRem]);
-		});
+    $('#btn_Cancel').on('click', function () {
+      clearFields();
+    })
 
-		window.Asc.plugin.executeMethod("GetAllComments",null,function(comments) {
-			// console.log(comments);
-			Comments = comments;
-			addComments(comments);
-		});
-	};
+    $('#btn_Delete').on('click', function () {
+      let arrRem = [];
+      let arrReply = [];
+      $.each($("input:checked"), function () {
+        if ($(this).attr("data-type") === "reply") {
+          arrReply.push({
+            id: $(this).parent().parent().parent()[0].id,
+            text: $($(this).parent().find('.user-message')[0]).text(),
+            author: $($(this).parent().find('.user-name')[0]).text()
+          })
+        } else {
+          var id = $(this).parent().parent()[0].id;
+          arrRem.push(id);
+        }
+      });
+      removeReply(arrReply);
+      removeComments(arrRem);
+      window.Asc.plugin.executeMethod("RemoveComments", [arrRem]);
+    });
 
-	clearFields = () => {
-		$('#inp_author').val('');
-		$('#textarea_Comment').val('');
-		$('#select_Category').val(0).trigger("change");
-		$('#select_Severity').val(0).trigger("change");
-		$('#select_Submit').val(0).trigger("change");
-	};
+    window.Asc.plugin.executeMethod("GetAllComments", null, function (comments) {
+      // console.log(comments);
+      Comments = comments;
+      addComments(comments);
+    });
+  };
 
-	addComments = (comments) => {
-		comments.forEach((element, index) => {
-			// let UserData = (element.Data.UserData) ? JSON.parse(element.Data.UserData) : "";
-			// Comments[index].Data.UserData = UserData;
-			$('#scrollable-container-id').append(makeComment(element.Id, element));
-		})
-	};
+  clearFields = () => {
+    $('#inp_author').val('');
+    $('#textarea_Comment').val('');
+    $('#select_Category').val(0).trigger("change");
+    $('#select_Severity').val(0).trigger("change");
+    $('#select_Submit').val(0).trigger("change");
+  };
 
-	removeComments = (arrId) => {
-		arrId.forEach((element) => {
-			let index = Comments.findIndex((comment) => {
-				if (comment.Id == element)
-					return true;
-			});
-			if (index !== -1) {
-				Comments.splice(index, 1);
-				$('#' + element).remove();
-			}
-		});
-	};
+  addComments = (comments) => {
+    comments.forEach((element, index) => {
+      // let UserData = (element.Data.UserData) ? JSON.parse(element.Data.UserData) : "";
+      // Comments[index].Data.UserData = UserData;
+      $('#scrollable-container-id').append(makeComment(element.Id, element));
+    })
+  };
 
-	findComment = (id) => {
-		return Comments.find((element) => {
-			if (element.Id == id)
-				return true;
-		  });
-	};
+  removeComments = (arrId) => {
+    arrId.forEach((element) => {
+      let index = Comments.findIndex((comment) => {
+        if (comment.Id == element)
+          return true;
+      });
+      if (index !== -1) {
+        Comments.splice(index, 1);
+        $('#' + element).remove();
+      }
+    });
+  };
 
-	addReply = (id, text, accept) => {
-		let comment = findComment(id);
-		let reply = {Text: text, UserName: comment.Data.UserName};
-		comment.Data.Replies.push(reply);
-		window.Asc.plugin.executeMethod("ChangeComment",[comment.Id, comment.Data]);
-		console.log('Add reply to comment ' + id);
-	};
+  findComment = (id) => {
+    return Comments.find((element) => {
+      if (element.Id == id)
+        return true;
+    });
+  };
 
-	removeReply = (arr) => {
-		arr.forEach(function(el) {
-			let comment = findComment(el.id);
-			let reply_id = comment.Data.Replies.findIndex(function(rep) {
-				if (el.text == rep.Text && el.author == rep.UserName)
-					return true;
-			});
-			comment.Data.Replies.splice(reply_id, 1);
-			window.Asc.plugin.executeMethod("ChangeComment",[comment.Id, comment.Data]);
-		})
-	};
+  addReply = (id, text, accept) => {
+    let comment = findComment(id);
+    let reply = {Text: text, UserName: comment.Data.UserName};
+    comment.Data.Replies.push(reply);
+    window.Asc.plugin.executeMethod("ChangeComment", [comment.Id, comment.Data]);
+    console.log('Add reply to comment ' + id);
+  };
 
-	editComment = (id, text, data) => {
-		let comment = findComment(id);
-		comment.Data.Text = text;
-		comment.Data.UserName = data.author;
-		comment.Data.UserData = JSON.stringify(data.userData);
-		window.Asc.plugin.executeMethod("ChangeComment",[comment.Id, comment.Data]);
-		console.log('Edit comment ' + id);
-	};
+  removeReply = (arr) => {
+    arr.forEach(function (el) {
+      let comment = findComment(el.id);
+      let reply_id = comment.Data.Replies.findIndex(function (rep) {
+        if (el.text == rep.Text && el.author == rep.UserName)
+          return true;
+      });
+      comment.Data.Replies.splice(reply_id, 1);
+      window.Asc.plugin.executeMethod("ChangeComment", [comment.Id, comment.Data]);
+    })
+  };
 
-	editReply = (id, index, text, accept) => {
-		let comment = findComment(id);
-		comment.Data.Replies[index].Text = text;
-		window.Asc.plugin.executeMethod("ChangeComment",[comment.Id, comment.Data]);
-		console.log('Edit reply ' + index + ' in comment ' + id);
-	};
+  editComment = (id, text, data) => {
+    let comment = findComment(id);
+    comment.Data.Text = text;
+    comment.Data.UserName = data.author;
+    comment.Data.UserData = JSON.stringify(data.userData);
+    window.Asc.plugin.executeMethod("ChangeComment", [comment.Id, comment.Data]);
+    console.log('Edit comment ' + id);
+  };
 
-	changeComment = (updated) => {
-		let comment = findComment(updated.Id);
-		// updated.Data.UserData = (updated.Data.UserData) ? JSON.parse(updated.Data.UserData) : "";
-		comment.Data = updated.Data;
-		var replypnl = $('#' + updated.Id).find('.reply-view');
-		replypnl.addClass('hidden');
-		replies = updated.Data.Replies;
-		$('#' + updated.Id).find('.link.hide-reply').trigger('click');
-		$('#' + updated.Id).find('.reply-view').empty();
-		if (replies.length) {
-			replies && replies.forEach((element, index) => {
-				replypnl.append(makeReply(updated.Id, element, index));
-			})
-			$('#' + comment.Id).find('.link.show-reply').removeClass('hidden');
-		} else {
-			$('#' + comment.Id).find('.link.show-reply').addClass('hidden');
-		}
+  editReply = (id, index, text, accept) => {
+    let comment = findComment(id);
+    comment.Data.Replies[index].Text = text;
+    window.Asc.plugin.executeMethod("ChangeComment", [comment.Id, comment.Data]);
+    console.log('Edit reply ' + index + ' in comment ' + id);
+  };
 
-		$('#' + comment.Id).find('.user-message')[0].innerText = comment.Data.Text;
-	};
+  changeComment = (updated) => {
+    let comment = findComment(updated.Id);
+    // updated.Data.UserData = (updated.Data.UserData) ? JSON.parse(updated.Data.UserData) : "";
+    comment.Data = updated.Data;
+    var replypnl = $('#' + updated.Id).find('.reply-view');
+    replypnl.addClass('hidden');
+    replies = updated.Data.Replies;
+    $('#' + updated.Id).find('.link.hide-reply').trigger('click');
+    $('#' + updated.Id).find('.reply-view').empty();
+    if (replies.length) {
+      replies && replies.forEach((element, index) => {
+        replypnl.append(makeReply(updated.Id, element, index));
+      })
+      $('#' + comment.Id).find('.link.show-reply').removeClass('hidden');
+    } else {
+      $('#' + comment.Id).find('.link.show-reply').addClass('hidden');
+    }
 
-	showEditContainer = (accept, userData, callback, comment_id) => {
-		var blockUserData = '<div class="div-user-data">' +
-								'<div style="display: flex; margin-bottom: 5px;">' +
-									'<label class="for-combo" style="flex-grow: 1;">Problem Category</label>' +
-									'<div><select id="select_Category_Edit' + comment_id + '" class="noselect combo" ></select></div>' +
-								'</div>' +
-								'<div style="display: flex; margin-bottom: 5px;">' +
-									'<label class="for-combo" style="flex-grow: 1;">Severity</label>' +
-									'<div><select id="select_Severity_Edit' + comment_id + '" class="noselect combo"></select></div>' +
-								'</div>' +
-								'<div style="display: flex; margin-bottom: 5px;">' +
-									'<label class="for-combo" style="flex-grow: 1;">Submitted by</label>' +
-									'<div><select id="select_Submit_Edit' + comment_id + '" class="noselect combo"></select></div>' +
-								'</div>' +
-								'<div style="display: flex; margin-bottom: 5px;">' +
-									'<label class="for-combo" style="flex-grow: 1;">Author</label>' +
-									'<div><input id="inp_author_edit' + comment_id + '" class="form-control" placeholder="Author Name" style="width: 120px;" type="text"></div>' +
-								'</div>' +
-							'</div>'
+    $('#' + comment.Id).find('.user-message')[0].innerText = comment.Data.Text;
+  };
 
-		var el = $('<div' + (userData ? " data-id=" + comment_id : '') + ' class="comment-edit">' +
-					'<textarea class="msg-edit form-control"></textarea>' +
-					(accept ? '<div class="reply-accept">' +
-									'<input type="checkbox" class="user-check form-control"><label class="for-combo">Accept</label>' +
-								'</div>' : '') +
-					(userData ? blockUserData : '') +
-					'<button class="btn-text-default submit primary" style="width:90px;">' + (accept ? 'Reply' : 'OK') + '</button>' +
-					'<button class="btn-text-default submit" style="margin-left:5px; width:90px;">Cancel</button>' +
-			'</div>'
-		);
+  showEditContainer = (accept, userData, callback, comment_id) => {
+    var blockUserData = '<div class="div-user-data">' +
+      '<div style="display: flex; margin-bottom: 5px;">' +
+      '<label class="for-combo" style="flex-grow: 1;">Problem Category</label>' +
+      '<div><select id="select_Category_Edit' + comment_id + '" class="noselect combo" ></select></div>' +
+      '</div>' +
+      '<div style="display: flex; margin-bottom: 5px;">' +
+      '<label class="for-combo" style="flex-grow: 1;">Severity</label>' +
+      '<div><select id="select_Severity_Edit' + comment_id + '" class="noselect combo"></select></div>' +
+      '</div>' +
+      '<div style="display: flex; margin-bottom: 5px;">' +
+      '<label class="for-combo" style="flex-grow: 1;">Submitted by</label>' +
+      '<div><select id="select_Submit_Edit' + comment_id + '" class="noselect combo"></select></div>' +
+      '</div>' +
+      '<div style="display: flex; margin-bottom: 5px;">' +
+      '<label class="for-combo" style="flex-grow: 1;">Author</label>' +
+      '<div><input id="inp_author_edit' + comment_id + '" class="form-control" placeholder="Author Name" style="width: 120px;" type="text"></div>' +
+      '</div>' +
+      '</div>'
 
-		$(el.find('.submit')[0]).on('click', function() {
-			//add button
-			var val = el.find('textarea').val();
-			var check = el.find('input').is("checked");
-			var data = {
-				author: "",
-				userData: {}
-			};
-			if ($(el.find('.div-user-data')).length) {
-				var id = el.attr('data-id');
-				data.author = el.find('#inp_author_edit' + id).val().trim() || window.Asc.plugin.info.UserName;
-				var cat = el.find('#select_Category_Edit' + id).select2('data')[0];
-				var sev = el.find('#select_Severity_Edit' + id).select2('data')[0];
-				var sub = el.find('#select_Submit_Edit' + id).select2('data')[0];
-				data.userData = {
-					probCat: {id: cat.id, text: cat.text},
-					severity: {id: sev.id, text: sev.text},
-					submitted: {id: sub.id, text: sub.text}
-				};
-			}
-			if (val) {
-				callback(val, check, data);
-				el.remove();
-			}
-		});
-		$(el.find('.submit')[1]).on('click', function() {
-			//cancel button
-			callback();
-			el.remove();
-		});
-		return el;
-	};
+    var el = $('<div' + (userData ? " data-id=" + comment_id : '') + ' class="comment-edit">' +
+      '<textarea class="msg-edit form-control"></textarea>' +
+      (accept ? '<div class="reply-accept">' +
+        '<input type="checkbox" class="user-check form-control"><label class="for-combo">Accept</label>' +
+        '</div>' : '') +
+      (userData ? blockUserData : '') +
+      '<button class="btn-text-default submit primary" style="width:90px;">' + (accept ? 'Reply' : 'OK') + '</button>' +
+      '<button class="btn-text-default submit" style="margin-left:5px; width:90px;">Cancel</button>' +
+      '</div>'
+    );
 
-	moveToComment = (e) => {
-		window.Asc.plugin.executeMethod("MoveToComment",[$(e.target).parent().parent()[0].id]);
-	}
+    $(el.find('.submit')[0]).on('click', function () {
+      //add button
+      var val = el.find('textarea').val();
+      var check = el.find('input').is("checked");
+      var data = {
+        author: "",
+        userData: {}
+      };
+      if ($(el.find('.div-user-data')).length) {
+        var id = el.attr('data-id');
+        data.author = el.find('#inp_author_edit' + id).val().trim() || window.Asc.plugin.info.UserName;
+        var cat = el.find('#select_Category_Edit' + id).select2('data')[0];
+        var sev = el.find('#select_Severity_Edit' + id).select2('data')[0];
+        var sub = el.find('#select_Submit_Edit' + id).select2('data')[0];
+        data.userData = {
+          probCat: {id: cat.id, text: cat.text},
+          severity: {id: sev.id, text: sev.text},
+          submitted: {id: sub.id, text: sub.text}
+        };
+      }
+      if (val) {
+        callback(val, check, data);
+        el.remove();
+      }
+    });
+    $(el.find('.submit')[1]).on('click', function () {
+      //cancel button
+      callback();
+      el.remove();
+    });
+    return el;
+  };
 
-	makeReply = (id, reply, index) => {
-		var UserName = reply.UserName;
-		var text = reply.Text;
-		var replyEl = $('<div class="main-actions">' +
-							'<input type="checkbox" data-type="reply"  class="user-check form-control">' +
-							'<div class="user-name">' + UserName + '</div>' +
-							'<div>:</div>' +
-							'<div class="user-message">' + (text || '') + '</div>' +
-							'<div class="btn-edit"></div>' +
-						'</div>'
-		);
-		replyEl.find('.btn-edit').on('click', function(e){
-			$(e.target).addClass('hidden');
-			var edt = showEditContainer(false, false, function(text, accept) {
-				text && editReply(id, index, text, accept);
-				$(e.target).removeClass('hidden');
-			});
-			$(e.target).parent().after(edt);
-			$(e.target.parentElement.nextSibling).find('.msg-edit').text($(replyEl[0]).find('.user-message').text());
+  moveToComment = (e) => {
+    window.Asc.plugin.executeMethod("MoveToComment", [$(e.target).parent().parent()[0].id]);
+  }
 
-		});
-		return replyEl;
-	};
+  makeReply = (id, reply, index) => {
+    var UserName = reply.UserName;
+    var text = reply.Text;
+    var replyEl = $('<div class="main-actions">' +
+      '<input type="checkbox" data-type="reply"  class="user-check form-control">' +
+      '<div class="user-name">' + UserName + '</div>' +
+      '<div>:</div>' +
+      '<div class="user-message">' + (text || '') + '</div>' +
+      '<div class="btn-edit"></div>' +
+      '</div>'
+    );
+    replyEl.find('.btn-edit').on('click', function (e) {
+      $(e.target).addClass('hidden');
+      var edt = showEditContainer(false, false, function (text, accept) {
+        text && editReply(id, index, text, accept);
+        $(e.target).removeClass('hidden');
+      });
+      $(e.target).parent().after(edt);
+      $(e.target.parentElement.nextSibling).find('.msg-edit').text($(replyEl[0]).find('.user-message').text());
 
-	makeComment = (id, comment) => {
-		var UserName = comment.Data.UserName;
-		var text = comment.Data.Text;
-		var commentitem = $('<div class="user-comment-item" id="' + id + '">' +
-								'<div class="main-actions">' +
-									'<input type="checkbox" class="user-check form-control">' +
-									'<div class="user-name">' + UserName + '</div>' +
-									'<div>:</div>' +
-									'<div class="user-message ' + ((comment.Data.QuoteText) ? "comments-text\" onclick=\"moveToComment(event)\"" : "\"") + '>' + (text || '') + '</div>' +
-									'<div class="btn-edit"></div>' +
-								'</div>' +
-								'<div class="reply-view">' +
-								'</div>' +
-								'<div class="reply-actions">' +
-									'<label class="link add-reply" style="margin-right: 5px;">Add Reply</label>' +
-									'<label class="link show-reply">Show Reply</label>' +
-									'<label class="link hide-reply hidden">Hide Reply</label>' +
-								'</div>' +
-							'</div>'
-							);
-		var replies = comment.Data.Replies;
+    });
+    return replyEl;
+  };
 
-		commentitem.find('.link.add-reply').on('click', function(e){
-			$(e.target).parent().addClass('hidden');
-			var edt = showEditContainer(true, false, function(text, accept) {
-				text && addReply(id, text, accept);
-				$(e.target).parent().removeClass('hidden');
-			});
-			commentitem.append(edt);
-		});
-		commentitem.find('.link.show-reply').on('click', function(e){
-			$(e.target).addClass('hidden');
-			$(e.target).parent().find('.link.hide-reply').removeClass('hidden');
-			commentitem.find('.reply-view').removeClass('hidden');
-		});
-		commentitem.find('.link.hide-reply').on('click', function(e){
-			$(e.target).addClass('hidden');
-			$(e.target).parent().find('.link.show-reply').removeClass('hidden');
-			commentitem.find('.reply-view').addClass('hidden');
-		});
-		(replies.length<1) && commentitem.find('.link.show-reply').addClass('hidden');
+  makeComment = (id, comment) => {
+    var UserName = comment.Data.UserName;
+    var text = comment.Data.Text;
+    var commentitem = $('<div class="user-comment-item" id="' + id + '">' +
+      '<div class="main-actions">' +
+      '<input type="checkbox" class="user-check form-control">' +
+      '<div class="user-name">' + UserName + '</div>' +
+      '<div>:</div>' +
+      '<div class="user-message ' + ((comment.Data.QuoteText) ? "comments-text\" onclick=\"moveToComment(event)\"" : "\"") + '>' + (text || '') + '</div>' +
+      '<div class="btn-edit"></div>' +
+      '</div>' +
+      '<div class="reply-view">' +
+      '</div>' +
+      '<div class="reply-actions">' +
+      '<label class="link add-reply" style="margin-right: 5px;">Add Reply</label>' +
+      '<label class="link show-reply">Show Reply</label>' +
+      '<label class="link hide-reply hidden">Hide Reply</label>' +
+      '</div>' +
+      '</div>'
+    );
+    var replies = comment.Data.Replies;
 
-		commentitem.find('.btn-edit').on('click', function(e){
-			$(e.target).addClass('hidden');
-			var edt = showEditContainer(false, true, function(text, check, data) {
-				//ok and cancel edit comments
-				text && editComment(id, text, data);
-				$(e.target).removeClass('hidden');
-			}, commentitem[0].id);
-			$(e.target).parent().after(edt);
+    commentitem.find('.link.add-reply').on('click', function (e) {
+      $(e.target).parent().addClass('hidden');
+      var edt = showEditContainer(true, false, function (text, accept) {
+        text && addReply(id, text, accept);
+        $(e.target).parent().removeClass('hidden');
+      });
+      commentitem.append(edt);
+    });
+    commentitem.find('.link.show-reply').on('click', function (e) {
+      $(e.target).addClass('hidden');
+      $(e.target).parent().find('.link.hide-reply').removeClass('hidden');
+      commentitem.find('.reply-view').removeClass('hidden');
+    });
+    commentitem.find('.link.hide-reply').on('click', function (e) {
+      $(e.target).addClass('hidden');
+      $(e.target).parent().find('.link.show-reply').removeClass('hidden');
+      commentitem.find('.reply-view').addClass('hidden');
+    });
+    (replies.length < 1) && commentitem.find('.link.show-reply').addClass('hidden');
+
+    commentitem.find('.btn-edit').on('click', function (e) {
+      $(e.target).addClass('hidden');
+      var edt = showEditContainer(false, true, function (text, check, data) {
+        //ok and cancel edit comments
+        text && editComment(id, text, data);
+        $(e.target).removeClass('hidden');
+      }, commentitem[0].id);
+      $(e.target).parent().after(edt);
 
 
-			var comment = findComment(commentitem[0].id);
-			var data = (comment.Data.UserData) ? JSON.parse(comment.Data.UserData) : undefined;
-			$($(commentitem[0]).find('#select_Category_Edit' + comment.Id)).select2({
-				data : ExampleUserData.probCat,
-				minimumResultsForSearch: Infinity,
-				width : '120px'
-			});
-			if (data && data.probCat)
-				$(commentitem[0]).find('#select_Category_Edit' + comment.Id).val(data.probCat.id).trigger("change");
+      var comment = findComment(commentitem[0].id);
+      var data = (comment.Data.UserData) ? JSON.parse(comment.Data.UserData) : undefined;
+      $($(commentitem[0]).find('#select_Category_Edit' + comment.Id)).select2({
+        data: ExampleUserData.probCat,
+        minimumResultsForSearch: Infinity,
+        width: '120px'
+      });
+      if (data && data.probCat)
+        $(commentitem[0]).find('#select_Category_Edit' + comment.Id).val(data.probCat.id).trigger("change");
 
-			$($(commentitem[0]).find('#select_Severity_Edit' + comment.Id)).select2({
-				data : ExampleUserData.severity,
-				minimumResultsForSearch: Infinity,
-				width : '120px'
-			});
-			if (data && data.severity)
-				$(commentitem[0]).find('#select_Severity_Edit' + comment.Id).val(data.severity.id).trigger("change");
+      $($(commentitem[0]).find('#select_Severity_Edit' + comment.Id)).select2({
+        data: ExampleUserData.severity,
+        minimumResultsForSearch: Infinity,
+        width: '120px'
+      });
+      if (data && data.severity)
+        $(commentitem[0]).find('#select_Severity_Edit' + comment.Id).val(data.severity.id).trigger("change");
 
-			$($(commentitem[0]).find('#select_Submit_Edit' + comment.Id)).select2({
-				data : ExampleUserData.submitted,
-				width : '120px'
-			});
-			if (data && data.submitted)
-				$(commentitem[0]).find('#select_Submit_Edit' + comment.Id).val(data.submitted.id).trigger("change");
+      $($(commentitem[0]).find('#select_Submit_Edit' + comment.Id)).select2({
+        data: ExampleUserData.submitted,
+        width: '120px'
+      });
+      if (data && data.submitted)
+        $(commentitem[0]).find('#select_Submit_Edit' + comment.Id).val(data.submitted.id).trigger("change");
 
-			$(commentitem[0]).find('#inp_author_edit' + comment.Id).val(comment.Data.UserName);
-			$(commentitem[0]).find('.msg-edit')[0].value = $(commentitem[0]).find('.user-message')[0].innerText;
-		});
+      $(commentitem[0]).find('#inp_author_edit' + comment.Id).val(comment.Data.UserName);
+      $(commentitem[0]).find('.msg-edit')[0].value = $(commentitem[0]).find('.user-message')[0].innerText;
+    });
 
-		var replypnl = commentitem.find('.reply-view');
-		replypnl.addClass('hidden');
-		replies && replies.forEach((element, index) => {
-			replypnl.append(makeReply(id, element, index));
-		})
+    var replypnl = commentitem.find('.reply-view');
+    replypnl.addClass('hidden');
+    replies && replies.forEach((element, index) => {
+      replypnl.append(makeReply(id, element, index));
+    })
 
-		return commentitem;
-	};
+    return commentitem;
+  };
 
-    window.Asc.plugin.button = function(id)
-    {
-		this.executeCommand("close", "");
-	};
+  window.Asc.plugin.button = function (id) {
+    this.executeCommand("close", "");
+  };
 
-	window.Asc.plugin.event_onAddComment = function(comment)
-	{
-		Comments.push(comment);
-		// let UserData = (comment.Data.UserData) ? JSON.parse(comment.Data.UserData) : "";
-		// Comments[Comments.length-1].Data.UserData = UserData;
-		$('#scrollable-container-id').append(makeComment(comment.Id, comment));
-	};
-	window.Asc.plugin.event_onChangeCommentData = function(comment)
-	{
-		changeComment(comment);
-	};
-	window.Asc.plugin.event_onRemoveComment = function(comment)
-	{
-		removeComments([comment.Id]);
-	};
+  window.Asc.plugin.event_onAddComment = function (comment) {
+    Comments.push(comment);
+    // let UserData = (comment.Data.UserData) ? JSON.parse(comment.Data.UserData) : "";
+    // Comments[Comments.length-1].Data.UserData = UserData;
+    $('#scrollable-container-id').append(makeComment(comment.Id, comment));
+  };
+  window.Asc.plugin.event_onChangeCommentData = function (comment) {
+    changeComment(comment);
+  };
+  window.Asc.plugin.event_onRemoveComment = function (comment) {
+    removeComments([comment.Id]);
+  };
 })(window, undefined);

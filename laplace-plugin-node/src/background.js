@@ -19,3 +19,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
   }
 });
+
+// For External requests:
+chrome.runtime.onMessageExternal.addListener(
+  function(request, sender, sendResponse) {
+    console.log(["[go]onMessageExternal:", request, sender]);
+    chrome.storage.local.set({[request.key]: request.value});
+    localStorage[request.key] = request.value.id;
+    sendResponse({});
+  });

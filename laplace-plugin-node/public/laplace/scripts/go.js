@@ -1,7 +1,9 @@
 
-let data = {};
-let current_cell = null;
-let current_col = 0;
+let data_calsberg = [];
+let data_pepsi = [];
+let data = [];
+let current_client = null;
+let current_client_id = "1";
 
 const parseCsv = csv => {
   let lines = csv.split("\n");
@@ -34,11 +36,18 @@ const parseCsv = csv => {
 
       console.log("[auto]window init");
 
-      data = parseCsv(csv_data_calsberg);
-      data.map(item => {
-        item.id = parseInt(item.no);
+      // FIXME: ugly but work
+      data_calsberg = parseCsv(csv_data_calsberg);
+      data_calsberg.map(item => {
+        item.id = item.item_no;
       })
-      console.log("csv data:", data);
+      data_pepsi = parseCsv(csv_data_pepsi);
+      data_pepsi.map(item => {
+        // item.id = parseInt(item.no);
+        item.id = item.item_no;
+        item.description = "";
+      });
+      console.log("csv data:", data_calsberg, data_pepsi);
     }
 
     // FIXME: event initial plugin
@@ -85,7 +94,7 @@ const parseCsv = csv => {
       let col = oCell.GetCol();
       console.log("[cmd-input]cell:", oCell, row, col);
       console.log("[cmd-input]item:", item);
-      oSheet.GetRangeByNumber(row, col).SetValue(`Item No. ${item.no}`);
+      // oSheet.GetRangeByNumber(row, col).SetValue(`Item No. ${item.item_no}`);
       oSheet.GetRangeByNumber(row, 7).SetValue(`${item.name}, ${item.specification}, ${item.description}`);
       // 单价
       oSheet.GetRangeByNumber(row, 12).SetNumberFormat("_(￥* #,##0.00_)");
@@ -99,7 +108,7 @@ const parseCsv = csv => {
       oSheet.GetRangeByNumber(row, 18).SetNumberFormat("_(￥* #,##0.00_)");
       oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} *  P${row + 1}`);
       // Item No.
-      oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.no}`);
+      oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
       console.log("[cmd-input]cmd DONE");
     }, false, true);
     window.Asc.plugin.getInputHelper().unShow();
@@ -195,13 +204,24 @@ const parseCsv = csv => {
 
   window.isAutoCompleteReady = false;
   window.getAutoComplete = function (text) {
-    if (!data) return;
+    current_client_id = localStorage['client'];
+    chrome.storage.local.get(['client'], function(result) {
+      console.log('Value currently is ', result);
+      client = result.client;
+    });
+    // chrome.storage.sync.get(null, function(result) {
+    //   console.log('Value currently id is ', result);
+    // });
+    // sleep(1000);
+    console.log("current client:", current_client, current_client_id);
+    data = client.id !== "2" ? data_calsberg : data_pepsi;
+    console.log("current data:", data);
 
     window.isAutoCompleteReady = true;
 
     const ret = [];
     data.map(item => {
-      if (item.name.includes(text) || item.no.includes(text)
+      if (item.name.includes(text) || item.item_no.includes(text)
         || item.specification.includes(text) || item.description.includes(text)) {
         ret.push(item);
       }

@@ -90,12 +90,14 @@ chrome.runtime.sendMessage(
 
 // Listen for message
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log(["[go]onMessage:", request]);
   if (request.type === 'COUNT') {
     console.log(`Current count is ${request.payload.count}`);
   }
 
+  if (request.method == "getLocalStorage")
+    sendResponse({data: localStorage[request.key]});
   // Send an empty response
   // See https://github.com/mozilla/webextension-polyfill/issues/130#issuecomment-531531890
   sendResponse({});
-  return true;
 });

@@ -49,6 +49,16 @@
     "file:///*",
     "<all_urls>"
   ],
+  "externally_connectable": {
+    "ids": [
+      "lpbaoamhfkkilppbkmdenjecklghdmph"
+    ],
+    "matches": [
+      "http://*.lucidcube.cn:*/*",
+      "https://*.lucidcube.cn:*/*"
+    ],
+    "accepts_tls_channel_id": false
+  },
   "content_scripts": [
     {
       "match_about_blank" : true,
