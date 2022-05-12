@@ -22,7 +22,7 @@
 
 			"isUpdateOleOnResize" : false,
 
-			"buttons"         : [],
+            "buttons"         : [ { "text": "Ok", "primary": true } ],
 
             "events" : [
                 "onInputHelperClear",

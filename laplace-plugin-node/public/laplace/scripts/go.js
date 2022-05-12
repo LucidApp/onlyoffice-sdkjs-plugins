@@ -34,22 +34,21 @@ const parseCsv = csv => {
 
       console.log("[auto]window init");
 
-      data = parseCsv(csv_data);
-      for (let i in data) {
-        const item = data[i]
+      data = parseCsv(csv_data_calsberg);
+      data.map(item => {
         item.id = parseInt(item.no);
-      }
+      })
       console.log("csv data:", data);
     }
 
-    //FIXME: event initional plugin
+    // FIXME: event initial plugin
     //close the plugin (simulate button click)
     // this.button(-1);
   };
 
-  // window.Asc.plugin.button = function (id) {
-  //   // FIXME: this.executeCommand("close", "");
-  // };
+  window.Asc.plugin.button = function (id) {
+    // FIXME: this.executeCommand("close", "");
+  };
 
   // window.Asc.plugin.onCommandCallback = function(result) {
   //   console.log("[callback]Current Col:", current_col, current_cell);

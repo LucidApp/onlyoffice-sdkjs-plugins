@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Laplace Plugin Node",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "QIN Office Extension",
   "icons": {
     "16": "icons/icon_16.png",
@@ -33,8 +33,8 @@
     "laplace/resources/img/icon.png",
     "laplace/resources/img/icon@2x.png",
     "laplace/scripts/go.js",
-    "laplace/scripts/dictionary.js",
-    "laplace/data/db0.js",
+    "laplace/data/db_calsberg.js",
+    "laplace/data/db_pepsi.js",
     "laplace/vendor/jQuery/jquery-ui-1.11.4.css",
     "laplace/vendor/jQuery/jquery-ui-1.11.4.js",
     "laplace/vendor/jQuery/jquery-v2.2.2-min.js"
