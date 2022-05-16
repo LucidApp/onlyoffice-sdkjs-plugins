@@ -1,7 +1,10 @@
 
 let data_calsberg = [];
 let data_pepsi = [];
+let data_pepsi_v0 = []
 let data = [];
+let search_keys = [];
+let client = {};
 let current_client = null;
 let current_client_id = "1";
 
@@ -47,7 +50,12 @@ const parseCsv = csv => {
         item.id = item.item_no;
         item.description = "";
       });
-      console.log("csv data:", data_calsberg, data_pepsi);
+      data_pepsi_v0 = parseCsv(csv_data_pepsi_v0);
+      data_pepsi_v0.map(item => {
+        item.id = item.item_no;
+        item.description = "";
+      });
+      console.log("csv data:", data_calsberg, data_pepsi, data_pepsi_v0);
     }
 
     // FIXME: event initial plugin
@@ -64,10 +72,10 @@ const parseCsv = csv => {
   //   console.log("[callback]result:", result);
   // };
   //
-  // window.Asc.plugin.event_onTargetPositionChanged = function(data) {
-  //   window.Asc.plugin.executeMethod("GetCurrentContentControl");
-  //   console.log("[event]onTargetPositionChanged:", data, this);
-  // };
+  window.Asc.plugin.event_onTargetPositionChanged = function(data) {
+    window.Asc.plugin.executeMethod("GetCurrentContentControl");
+    console.log("[event]onTargetPositionChanged:", data, this);
+  };
   //
   // window.Asc.plugin.event_onClick = function(isSelectionUse) {
   //   window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function(obj) {
@@ -115,11 +123,14 @@ const parseCsv = csv => {
   };
 
   window.Asc.plugin.event_onInputHelperClear = function () {
+    console.log("[event]onInputHelperClear...");
+    search_keys = [];
     window.Asc.plugin.currentText = "";
     window.Asc.plugin.getInputHelper().unShow();
   };
 
   window.Asc.plugin.event_onInputHelperInput = function (data) {
+    console.log("[event]onInputHelperInput:", data, data.add);
     if (data.add)
       window.Asc.plugin.currentText += data.text;
     else
@@ -153,13 +164,13 @@ const parseCsv = csv => {
     // console.log("Current Col:", current_col, current_cell);
 
     // correct by space
-    var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");
-    if (lastIndexSpace >= 0) {
-      if (lastIndexSpace == (window.Asc.plugin.currentText.length - 1))
-        window.Asc.plugin.currentText = "";
-      else
-        window.Asc.plugin.currentText = window.Asc.plugin.currentText.substr(lastIndexSpace + 1);
-    }
+    // var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");
+    // if (lastIndexSpace >= 0) {
+    //   if (lastIndexSpace == (window.Asc.plugin.currentText.length - 1))
+    //     window.Asc.plugin.currentText = "";
+    //   else
+    //     window.Asc.plugin.currentText = window.Asc.plugin.currentText.substr(lastIndexSpace + 1);
+    // }
 
     if (window.Asc.plugin.currentText.length < 2) {
       window.Asc.plugin.getInputHelper().unShow();
@@ -204,7 +215,11 @@ const parseCsv = csv => {
 
   window.isAutoCompleteReady = false;
   window.getAutoComplete = function (text) {
-    current_client_id = localStorage['client'];
+    // current_client_id = localStorage['client'];
+    let search_keys = [];
+    search_keys.push(...(text.split(" ")));
+    // key_words += keys;
+    console.log("_search_keys:", text, "|", search_keys);
     chrome.storage.local.get(['client'], function(result) {
       console.log('Value currently is ', result);
       client = result.client;
@@ -212,17 +227,29 @@ const parseCsv = csv => {
     // chrome.storage.sync.get(null, function(result) {
     //   console.log('Value currently id is ', result);
     // });
-    // sleep(1000);
-    console.log("current client:", current_client, current_client_id);
-    data = client.id !== "2" ? data_calsberg : data_pepsi;
+    // console.log("current client:", current_client, current_client_id);
+    // data = client && client.id && client.id === "2" ? data_pepsi_v0 : data_calsberg;
+    data = data_pepsi_v0;
     console.log("current data:", data);
 
     window.isAutoCompleteReady = true;
 
     const ret = [];
+
     data.map(item => {
-      if (item.name.includes(text) || item.item_no.includes(text)
-        || item.specification.includes(text) || item.description.includes(text)) {
+      item.is_target = false;
+      item.is_missed = false;
+      search_keys.map(key => {
+        if (item.name.includes(key)
+          || item.item_no.includes(key)
+          || item.specification.includes(key)
+          || item.description.includes(key)) {
+          item.is_target = true;
+        } else {
+          item.is_missed = true;
+        }
+      });
+      if (item.is_target && !item.is_missed) {
         ret.push(item);
       }
     });

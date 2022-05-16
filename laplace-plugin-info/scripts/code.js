@@ -120,7 +120,7 @@
       removeReply(arrReply);
       removeComments(arrRem);
       window.Asc.plugin.executeMethod("RemoveComments", [arrRem]);
-    });
+    });ww
 
     window.Asc.plugin.executeMethod("GetAllComments", null, function (comments) {
       // console.log(comments);
