@@ -8,6 +8,9 @@ let client = {};
 let current_client = null;
 let current_client_id = "1";
 
+let current_col;
+let current_cell;
+
 const parseCsv = csv => {
   let lines = csv.split("\n");
   const header = lines[0].split(",")
@@ -67,11 +70,11 @@ const parseCsv = csv => {
     // FIXME: this.executeCommand("close", "");
   };
 
-  // window.Asc.plugin.onCommandCallback = function(result) {
-  //   console.log("[callback]Current Col:", current_col, current_cell);
-  //   console.log("[callback]result:", result);
-  // };
-  //
+  window.Asc.plugin.onCommandCallback = function(result) {
+    console.log("[callback]Current Col:", current_col, current_cell);
+    console.log("[callback]result:", result);
+  };
+
   window.Asc.plugin.event_onTargetPositionChanged = function(data) {
     window.Asc.plugin.executeMethod("GetCurrentContentControl");
     console.log("[event]onTargetPositionChanged:", data, this);
@@ -140,28 +143,29 @@ const parseCsv = csv => {
     //   console.log("[auto]content_id:", data);
     // });
     //
-    // this.callCommand(function() {
-    //   let oSheet = Api.GetActiveSheet();
-    //   let oCell = oSheet.GetActiveCell();
-    //   console.log('[cmd]scope:', Asc.scope);
-    //   console.log('[cmd]cell:', oCell);
-    //   let row = oCell.GetRow();
-    //   let col = oCell.GetCol();
-    //   current_cell = oCell;
-    //   current_col = col;
-    //   console.log('[cmd]cell position:', row, col);
-    //   console.log('[cmd]current:', current_cell, current_col);
-    //   Asc.scope.cell = oCell;
-    //   Asc.scope.col = col;
-    //   return oCell;
-    // }, false, false,
-    //   function (result, error) {
-    //     console.log("[in-callback]Current Col:", current_col, current_cell);
-    //     console.log("[in-callback]result:", result, error, this);
-    //     console.log("[in-callback]scope:", Asc.scope);
-    //   }
-    // );
-    // console.log("Current Col:", current_col, current_cell);
+    this.callCommand(function(aParam) {
+      let oSheet = Api.GetActiveSheet();
+      let oCell = oSheet.GetActiveCell();
+      console.log('[cmd]param:', aParam);
+      console.log('[cmd]scope:', Asc.scope);
+      console.log('[cmd]cell:', oCell);
+      let row = oCell.GetRow();
+      let col = oCell.GetCol();
+      // current_cell = oCell;
+      // current_col = col;
+      Asc.scope.cell = oCell;
+      Asc.scope.col = col;
+      console.log('[cmd]cell position:', row, col);
+      // console.log('[cmd]current:', current_cell, current_col);
+      return oCell;
+    }, false, false,
+      function (result, error) {
+        console.log("[in-callback]Current Col:", current_col, current_cell);
+        console.log("[in-callback]result:", result, error, this);
+        console.log("[in-callback]scope:", Asc.scope);
+      }
+    );
+    console.log("Current Col:", current_col, current_cell);
 
     // correct by space
     // var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");
