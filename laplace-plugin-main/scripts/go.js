@@ -79,14 +79,14 @@ const parseCsv = csv => {
     window.Asc.plugin.executeMethod("GetCurrentContentControl");
     console.log("[event]onTargetPositionChanged:", data, this);
   };
-
+  //
   // window.Asc.plugin.event_onClick = function(isSelectionUse) {
   //   window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function(obj) {
   //     window.Asc.plugin.currentContentControl = obj;
   //     console.log("[event]onClick:", isSelectionUse, obj, this);
   //   });
   // };
-
+  //
   // window.Asc.plugin.onMethodReturn = function(data) {
   //   console.log("[event]onMethodReturn:", data, this);
   // };
@@ -224,10 +224,12 @@ const parseCsv = csv => {
     search_keys.push(...(text.split(" ")));
     // key_words += keys;
     console.log("_search_keys:", text, "|", search_keys);
-
-    // chrome.storage.local.get(['client'], function(result) {
-    //   console.log('Value currently is ', result);
-    //   client = result.client;
+    chrome.storage.local.get(['client'], function(result) {
+      console.log('Value currently is ', result);
+      client = result.client;
+    });
+    // chrome.storage.sync.get(null, function(result) {
+    //   console.log('Value currently id is ', result);
     // });
     // console.log("current client:", current_client, current_client_id);
     // data = client && client.id && client.id === "2" ? data_pepsi_v0 : data_calsberg;
