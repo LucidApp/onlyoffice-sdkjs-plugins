@@ -27,10 +27,11 @@
 
   window.Asc.plugin.init = function () {
     console.log("[ext] code.js init");
-    if (localStorage['client'] && localStorage['client'].id > 0) {
+    if (localStorage.getItem('client_id')
+      && parseInt(localStorage.getItem('client_id')) > 0) {
 
     } else {
-      localStorage['client'] = db_clients[0];
+      localStorage.setItem('client_id', db_clients[0].id);
     }
     let regions = localStorage['client'].regions;
     $('#select_client').select2({
@@ -40,11 +41,11 @@
     }).on('select2:select', function (e) {
       const data = e.params.data;
       console.log("select2 client data:", data);
-      // localStorage['client'] = data;
-      chrome.runtime.sendMessage("eghnkhmmkhnnikhimnpoppchdoapnnam", {method: "clientUpdated", key: "client", value: data}, function(resp) {
-        console.log("message send!");
-        console.log("response:". resp);
-      });
+      localStorage.setItem('client_id', data.id);
+      // chrome.runtime.sendMessage("eghnkhmmkhnnikhimnpoppchdoapnnam", {method: "clientUpdated", key: "client", value: data}, function(resp) {
+      //   console.log("message send!");
+      //   console.log("response:". resp);
+      // });
       // chrome.storage.sync.set({'client': data}, function() {
       //   console.log('Value is set to ', data);
       // });

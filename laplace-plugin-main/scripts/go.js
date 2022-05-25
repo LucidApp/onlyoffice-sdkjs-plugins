@@ -143,29 +143,27 @@ const parseCsv = csv => {
     //   console.log("[auto]content_id:", data);
     // });
 
-    this.callCommand(function(aParam) {
+    this.callCommand(function() {
       let oSheet = Api.GetActiveSheet();
       let oCell = oSheet.GetActiveCell();
-      console.log('[cmd]param:', aParam);
       console.log('[cmd]scope:', Asc.scope);
       console.log('[cmd]cell:', oCell);
       let row = oCell.GetRow();
       let col = oCell.GetCol();
-      // current_cell = oCell;
-      // current_col = col;
-      Asc.scope.cell = oCell;
-      Asc.scope.col = col;
+      localStorage.setItem('current_cell_row', row);
+      localStorage.setItem('current_cell_col', col);
       console.log('[cmd]cell position:', row, col);
       // console.log('[cmd]current:', current_cell, current_col);
       return oCell;
     }, false, false,
       function (result, error) {
+        current_col = localStorage.getItem('current_cell_col');
         console.log("[in-callback]Current Col:", current_col, current_cell);
         console.log("[in-callback]result:", result, error, this);
-        console.log("[in-callback]scope:", Asc.scope);
       }
     );
-    console.log("Current Col:", current_col, current_cell);
+    console.log("Current Col:", current_col, current_cell,
+      localStorage, localStorage['current_cell_col']);
 
     // correct by space
     // var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");

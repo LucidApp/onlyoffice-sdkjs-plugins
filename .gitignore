@@ -4,9 +4,11 @@ node_modules
 # production
 *-dist
 build
+*.*.gz
 
 # misc
 .idea
 .DS_Store
+
 
 npm-debug.log*

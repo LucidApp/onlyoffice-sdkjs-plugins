@@ -155,16 +155,29 @@ const parseCsv = csv => {
       // current_col = col;
       Asc.scope.cell = oCell;
       Asc.scope.col = col;
+      if (localStorage) localStorage['current_col'] = col;
+      if (chrome.storage) chrome.storage.local.set({'current_col': col});
       console.log('[cmd]cell position:', row, col);
       // console.log('[cmd]current:', current_cell, current_col);
       return oCell;
     }, false, false,
       function (result, error) {
-        console.log("[in-callback]Current Col:", current_col, current_cell);
-        console.log("[in-callback]result:", result, error, this);
+        console.log("[in-callback]Current Col:", current_col, current_cell, localStorage);
+        console.log("[in-callback]result:", result, error, this, chrome.storage);
         console.log("[in-callback]scope:", Asc.scope);
       }
     );
+    if (localStorage) {
+      console.log('localStorage:', localStorage);
+      current_col = localStorage['current_col'];
+    }
+    if (chrome.storage) {
+      console.log('chrome.storage:', chrome.storage);
+      chrome.storage.local.get(['current_col'], function(result) {
+        console.log('chrome.storage.local -> current_col', result);
+        current_col = result.current_col;
+      });
+    }
     console.log("Current Col:", current_col, current_cell);
 
     // correct by space
@@ -225,10 +238,10 @@ const parseCsv = csv => {
     // key_words += keys;
     console.log("_search_keys:", text, "|", search_keys);
 
-    // chrome.storage.local.get(['client'], function(result) {
-    //   console.log('Value currently is ', result);
-    //   client = result.client;
-    // });
+    chrome.storage.local.get(['client'], function(result) {
+      console.log('Value currently is ', result);
+      client = result.client;
+    });
     // console.log("current client:", current_client, current_client_id);
     // data = client && client.id && client.id === "2" ? data_pepsi_v0 : data_calsberg;
     data = data_pepsi_v0;
