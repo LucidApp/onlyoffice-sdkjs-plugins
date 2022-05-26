@@ -223,9 +223,15 @@ const parseCsv = csv => {
 
   window.isAutoCompleteReady = false;
   window.getAutoComplete = function (text) {
-    // let search_keys = [];
-    search_keys.push(...(text.split(" ")));
-    console.log("_search_keys:", text, "|", search_keys);
+    text.split(" ").map(t => {
+      if (t.length < 1) return;
+      for (let key of keys_set) {
+        if (t.includes(key)) keys_set.delete(key);
+      }
+      keys_set.add(t);
+    });
+    // search_keys.push(...(text.split(" ")));
+    console.debug("_keys_set:", text, "|", keys_set);
     // chrome.storage.local.get(['client'], function(result) {
     //   console.log('Value currently is ', result);
     //   client = result.client;
@@ -249,18 +255,19 @@ const parseCsv = csv => {
       item.hit_count = 0;
       item.is_target = false;
       item.is_missed = false;
-      search_keys.map(key => {
-        if (item.name.includes(key)
-          || item.item_no.includes(key)
-          || item.specification.includes(key)
-          || item.description.includes(key)) {
+      let search_string = item.name + (item.alias || "") +  (item.specification || "") + (item.description || "");
+      // console.debug("search_string:", search_string);
+      for (let key of keys_set) {
+        if (search_string.includes(key)
+          || item.item_no.includes(key)) {
           item.hit_count++;
           item.is_target = true;
         } else {
           item.is_missed = true;
         }
-      });
-      if ((item.is_target && !item.is_missed) || item.hit_count >= 1) {
+      }
+      if ((item.is_target && !item.is_missed)
+        || (item.hit_count >= Math.floor(keys_set.size / 2) && item.hit_count >= 1)) {
         ret.push(item);
       }
     });
