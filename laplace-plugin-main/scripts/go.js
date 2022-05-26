@@ -3,9 +3,9 @@
  */
 let data_calsberg = [];
 let data_pepsi = [];
-let data_pepsi_v0 = []
 let data = [];
 let search_keys = [];
+let keys_set = new Set();
 let client = {};
 
 let current_col;
@@ -30,8 +30,6 @@ const parseCsv = csv => {
 
   window.Asc.plugin.init = function (text) {
     console.log("[auto]plugin init");
-    // Asc.scope.cell = current_cell;
-    // Asc.scope.col = 333;
     if (!window.isInit) {
       window.isInit = true;
 
@@ -51,14 +49,14 @@ const parseCsv = csv => {
       data_pepsi.map(item => {
         // item.id = parseInt(item.no);
         item.id = item.item_no;
-        item.description = "";
       });
-      data_pepsi_v0 = parseCsv(csv_data_pepsi_v0);
-      data_pepsi_v0.map(item => {
-        item.id = item.item_no;
-        item.description = "";
-      });
-      console.log("csv data:", data_calsberg, data_pepsi, data_pepsi_v0);
+      // data_pepsi_v0 = parseCsv(csv_data_pepsi_v0);
+      // data_pepsi_v0.map(item => {
+      //   item.id = item.item_no;
+      //   item.description = "";
+      // });
+      data = data_calsberg;
+      console.log("csv data:", data_calsberg, data_pepsi);
     }
 
     // FIXME: event initial plugin
@@ -76,17 +74,17 @@ const parseCsv = csv => {
   };
 
   window.Asc.plugin.event_onTargetPositionChanged = function (data) {
-    window.Asc.plugin.executeMethod("GetCurrentContentControl");
     console.log("[event]onTargetPositionChanged:", data, this);
+    window.Asc.plugin.executeMethod("GetCurrentContentControl");
   };
-  //
+
   // window.Asc.plugin.event_onClick = function(isSelectionUse) {
   //   window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function(obj) {
   //     window.Asc.plugin.currentContentControl = obj;
   //     console.log("[event]onClick:", isSelectionUse, obj, this);
   //   });
   // };
-  //
+
   // window.Asc.plugin.onMethodReturn = function(data) {
   //   console.log("[event]onMethodReturn:", data, this);
   // };
@@ -128,16 +126,21 @@ const parseCsv = csv => {
   window.Asc.plugin.event_onInputHelperClear = function () {
     console.log("[event]onInputHelperClear...");
     search_keys = [];
+    keys_set.clear();
     window.Asc.plugin.currentText = "";
     window.Asc.plugin.getInputHelper().unShow();
   };
 
   window.Asc.plugin.event_onInputHelperInput = function (data) {
-    console.log("[event]onInputHelperInput:", data, data.add);
+    console.debug("[event]onInputHelperInput:", data, data.add);
     if (data.add)
       window.Asc.plugin.currentText += data.text;
     else
       window.Asc.plugin.currentText = data.text;
+
+    // data.text.map(t => {
+    //   keys_set.add(t);
+    // });
 
     // window.Asc.plugin.executeMethod("GetCurrentContentControl", null, function (data) {
     //   console.log("[auto]content_id:", data);
@@ -150,20 +153,22 @@ const parseCsv = csv => {
         console.log('[cmd]cell:', oCell);
         let row = oCell.GetRow();
         let col = oCell.GetCol();
+        let oText= oCell.GetText();
+        let oValue= oCell.GetValue();
         localStorage.setItem('current_cell_row', row);
         localStorage.setItem('current_cell_col', col);
-        console.log('[cmd]cell position:', row, col);
-        // console.log('[cmd]current:', current_cell, current_col);
-        return oCell;
+        localStorage.setItem('current_cell_text', oText);
+        localStorage.setItem('current_cell_value', oValue);
+        console.log('[cmd]cell position:', row, col, '|', oText, ',', oValue);
       }, false, false,
       function (result, error) {
         current_col = localStorage.getItem('current_cell_col');
+        console.log("[in-callback]localStorage:", localStorage);
         console.log("[in-callback]Current Col:", current_col, current_cell);
         console.log("[in-callback]result:", result, error, this);
       }
     );
-    console.log("Current Col:", current_col, current_cell,
-      localStorage, localStorage['current_cell_col']);
+    console.log("Current Col:", current_col, current_cell, localStorage);
 
     // correct by space
     // var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");
@@ -218,9 +223,8 @@ const parseCsv = csv => {
 
   window.isAutoCompleteReady = false;
   window.getAutoComplete = function (text) {
-    let search_keys = [];
+    // let search_keys = [];
     search_keys.push(...(text.split(" ")));
-    // key_words += keys;
     console.log("_search_keys:", text, "|", search_keys);
     // chrome.storage.local.get(['client'], function(result) {
     //   console.log('Value currently is ', result);
@@ -234,12 +238,6 @@ const parseCsv = csv => {
       case '2':
         data = data_pepsi;
         break;
-      case '3':
-        data = data_pepsi_v0;
-        break;
-      default:
-        data = data_calsberg;
-        break;
     }
     console.log("current data:", data);
 
@@ -248,6 +246,7 @@ const parseCsv = csv => {
     const ret = [];
 
     data.map(item => {
+      item.hit_count = 0;
       item.is_target = false;
       item.is_missed = false;
       search_keys.map(key => {
@@ -255,12 +254,13 @@ const parseCsv = csv => {
           || item.item_no.includes(key)
           || item.specification.includes(key)
           || item.description.includes(key)) {
+          item.hit_count++;
           item.is_target = true;
         } else {
           item.is_missed = true;
         }
       });
-      if (item.is_target && !item.is_missed) {
+      if ((item.is_target && !item.is_missed) || item.hit_count >= 1) {
         ret.push(item);
       }
     });

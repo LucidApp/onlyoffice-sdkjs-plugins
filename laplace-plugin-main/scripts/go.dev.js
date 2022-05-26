@@ -1,9 +1,8 @@
 /**
- * Laplace Plugin Main
+ * Laplace Plugin Main v0.5
  */
 let data_calsberg = [];
 let data_pepsi = [];
-let data_pepsi_v0 = []
 let data = [];
 let search_keys = [];
 let client = {};
@@ -30,8 +29,6 @@ const parseCsv = csv => {
 
   window.Asc.plugin.init = function (text) {
     console.log("[auto]plugin init");
-    // Asc.scope.cell = current_cell;
-    // Asc.scope.col = 333;
     if (!window.isInit) {
       window.isInit = true;
 
@@ -51,14 +48,14 @@ const parseCsv = csv => {
       data_pepsi.map(item => {
         // item.id = parseInt(item.no);
         item.id = item.item_no;
-        item.description = "";
       });
-      data_pepsi_v0 = parseCsv(csv_data_pepsi_v0);
-      data_pepsi_v0.map(item => {
-        item.id = item.item_no;
-        item.description = "";
-      });
-      console.log("csv data:", data_calsberg, data_pepsi, data_pepsi_v0);
+      // data_pepsi_v0 = parseCsv(csv_data_pepsi_v0);
+      // data_pepsi_v0.map(item => {
+      //   item.id = item.item_no;
+      //   item.description = "";
+      // });
+      data = data_calsberg;
+      console.log("csv data:", data_calsberg, data_pepsi);
     }
 
     // FIXME: event initial plugin
@@ -70,14 +67,14 @@ const parseCsv = csv => {
     // FIXME: this.executeCommand("close", "");
   };
 
-  window.Asc.plugin.onCommandCallback = function(result) {
+  window.Asc.plugin.onCommandCallback = function (result) {
     console.log("[callback]Current Col:", current_col, current_cell);
     console.log("[callback]result:", result);
   };
 
-  window.Asc.plugin.event_onTargetPositionChanged = function(data) {
-    window.Asc.plugin.executeMethod("GetCurrentContentControl");
+  window.Asc.plugin.event_onTargetPositionChanged = function (data) {
     console.log("[event]onTargetPositionChanged:", data, this);
+    window.Asc.plugin.executeMethod("GetCurrentContentControl");
   };
   //
   // window.Asc.plugin.event_onClick = function(isSelectionUse) {
@@ -97,7 +94,7 @@ const parseCsv = csv => {
     console.log("[auto]inputHelper_onSelectItem", t, item);
 
     Asc.scope.item = item;
-    this.callCommand(function (){
+    this.callCommand(function () {
       const oSheet = Api.GetActiveSheet();
       const oCell = oSheet.GetActiveCell();
       const item = Asc.scope.item;
@@ -133,7 +130,7 @@ const parseCsv = csv => {
   };
 
   window.Asc.plugin.event_onInputHelperInput = function (data) {
-    console.log("[event]onInputHelperInput:", data, data.add);
+    console.debug("[event]onInputHelperInput:", data, data.add);
     if (data.add)
       window.Asc.plugin.currentText += data.text;
     else
@@ -143,27 +140,29 @@ const parseCsv = csv => {
     //   console.log("[auto]content_id:", data);
     // });
 
-    this.callCommand(function() {
+    this.callCommand(function () {
         let oSheet = Api.GetActiveSheet();
         let oCell = oSheet.GetActiveCell();
         console.log('[cmd]scope:', Asc.scope);
         console.log('[cmd]cell:', oCell);
         let row = oCell.GetRow();
         let col = oCell.GetCol();
+        let oText= oCell.GetText();
+        let oValue= oCell.GetValue();
         localStorage.setItem('current_cell_row', row);
         localStorage.setItem('current_cell_col', col);
-        console.log('[cmd]cell position:', row, col);
-        // console.log('[cmd]current:', current_cell, current_col);
-        return oCell;
+        localStorage.setItem('current_cell_text', oText);
+        localStorage.setItem('current_cell_value', oValue);
+        console.log('[cmd]cell position:', row, col, '|', oText, ',', oValue);
       }, false, false,
       function (result, error) {
         current_col = localStorage.getItem('current_cell_col');
+        console.log("[in-callback]localStorage:", localStorage);
         console.log("[in-callback]Current Col:", current_col, current_cell);
         console.log("[in-callback]result:", result, error, this);
       }
     );
-    console.log("Current Col:", current_col, current_cell,
-      localStorage, localStorage['current_cell_col']);
+    console.log("Current Col:", current_col, current_cell, localStorage);
 
     // correct by space
     // var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");
@@ -233,12 +232,6 @@ const parseCsv = csv => {
         break;
       case '2':
         data = data_pepsi;
-        break;
-      case '3':
-        data = data_pepsi_v0;
-        break;
-      default:
-        data = data_calsberg;
         break;
     }
     console.log("current data:", data);
