@@ -14,13 +14,5 @@ const db_clients = [
       id: 2,
       text: '贵阳',
     }],
-  },
-  {
-    id: 3,
-    text: '百事_v0',
-    regions: [{
-      id: 3,
-      text: '贵阳',
-    }],
   }
 ]

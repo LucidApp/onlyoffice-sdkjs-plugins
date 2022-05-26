@@ -1,4 +1,6 @@
-
+/**
+ * Laplace Plugin Main v0.5
+ */
 let data_calsberg = [];
 let data_pepsi = [];
 let data_pepsi_v0 = []
@@ -68,12 +70,12 @@ const parseCsv = csv => {
     // FIXME: this.executeCommand("close", "");
   };
 
-  window.Asc.plugin.onCommandCallback = function(result) {
+  window.Asc.plugin.onCommandCallback = function (result) {
     console.log("[callback]Current Col:", current_col, current_cell);
     console.log("[callback]result:", result);
   };
 
-  window.Asc.plugin.event_onTargetPositionChanged = function(data) {
+  window.Asc.plugin.event_onTargetPositionChanged = function (data) {
     window.Asc.plugin.executeMethod("GetCurrentContentControl");
     console.log("[event]onTargetPositionChanged:", data, this);
   };
@@ -95,7 +97,7 @@ const parseCsv = csv => {
     console.log("[auto]inputHelper_onSelectItem", t, item);
 
     Asc.scope.item = item;
-    this.callCommand(function (){
+    this.callCommand(function () {
       const oSheet = Api.GetActiveSheet();
       const oCell = oSheet.GetActiveCell();
       const item = Asc.scope.item;
@@ -141,27 +143,27 @@ const parseCsv = csv => {
     //   console.log("[auto]content_id:", data);
     // });
 
-    // this.callCommand(function() {
-    //   let oSheet = Api.GetActiveSheet();
-    //   let oCell = oSheet.GetActiveCell();
-    //   console.log('[cmd]scope:', Asc.scope);
-    //   console.log('[cmd]cell:', oCell);
-    //   let row = oCell.GetRow();
-    //   let col = oCell.GetCol();
-    //   localStorage.setItem('current_cell_row', row);
-    //   localStorage.setItem('current_cell_col', col);
-    //   console.log('[cmd]cell position:', row, col);
-    //   // console.log('[cmd]current:', current_cell, current_col);
-    //   return oCell;
-    // }, false, false,
-    //   function (result, error) {
-    //     current_col = localStorage.getItem('current_cell_col');
-    //     console.log("[in-callback]Current Col:", current_col, current_cell);
-    //     console.log("[in-callback]result:", result, error, this);
-    //   }
-    // );
-    // console.log("Current Col:", current_col, current_cell,
-    //   localStorage, localStorage['current_cell_col']);
+    this.callCommand(function () {
+        let oSheet = Api.GetActiveSheet();
+        let oCell = oSheet.GetActiveCell();
+        console.log('[cmd]scope:', Asc.scope);
+        console.log('[cmd]cell:', oCell);
+        let row = oCell.GetRow();
+        let col = oCell.GetCol();
+        localStorage.setItem('current_cell_row', row);
+        localStorage.setItem('current_cell_col', col);
+        console.log('[cmd]cell position:', row, col);
+        // console.log('[cmd]current:', current_cell, current_col);
+        return oCell;
+      }, false, false,
+      function (result, error) {
+        current_col = localStorage.getItem('current_cell_col');
+        console.log("[in-callback]Current Col:", current_col, current_cell);
+        console.log("[in-callback]result:", result, error, this);
+      }
+    );
+    console.log("Current Col:", current_col, current_cell,
+      localStorage, localStorage['current_cell_col']);
 
     // correct by space
     // var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");
@@ -172,12 +174,13 @@ const parseCsv = csv => {
     //     window.Asc.plugin.currentText = window.Asc.plugin.currentText.substr(lastIndexSpace + 1);
     // }
 
-    if (window.Asc.plugin.currentText.length < 2) {
-      window.Asc.plugin.getInputHelper().unShow();
-      return;
-    }
+    // if (window.Asc.plugin.currentText.length < 2) {
+    //   window.Asc.plugin.getInputHelper().unShow();
+    //   return;
+    // }
 
     let variants = window.getAutoComplete(window.Asc.plugin.currentText);
+    console.log('variants:', variants);
     if (variants.length <= 0) {
       window.Asc.plugin.getInputHelper().unShow();
     } else {
@@ -186,7 +189,7 @@ const parseCsv = csv => {
         const item = variants[i];
         items.push({
           id: item.id,
-          text: `${item.id}. ${item.name}, ${item.specification}, ${item.description} ,￥${item.price}`
+          text: `${item.id}. ${item.name}, ${item.specification}, ${item.description} ,<b style="color:red;">￥${item.price}</b>`
         });
       }
 

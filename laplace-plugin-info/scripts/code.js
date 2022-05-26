@@ -1,4 +1,6 @@
-
+/**
+ * Laplace Plugin Info v0.5
+ */
 (function (window, undefined) {
   console.log("[ext] start");
   var Comments = null;
