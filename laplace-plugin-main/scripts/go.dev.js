@@ -5,6 +5,7 @@ let data_calsberg = [];
 let data_pepsi = [];
 let data = [];
 let search_keys = [];
+let keys_set = new Set();
 let client = {};
 
 let current_col;
@@ -72,18 +73,18 @@ const parseCsv = csv => {
     console.log("[callback]result:", result);
   };
 
-  window.Asc.plugin.event_onTargetPositionChanged = function (data) {
-    console.log("[event]onTargetPositionChanged:", data, this);
-    window.Asc.plugin.executeMethod("GetCurrentContentControl");
-  };
-  //
+  // window.Asc.plugin.event_onTargetPositionChanged = function (data) {
+    // console.log("[event]onTargetPositionChanged:", data, this);
+    // window.Asc.plugin.executeMethod("GetCurrentContentControl");
+  // };
+
   // window.Asc.plugin.event_onClick = function(isSelectionUse) {
   //   window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function(obj) {
   //     window.Asc.plugin.currentContentControl = obj;
   //     console.log("[event]onClick:", isSelectionUse, obj, this);
   //   });
   // };
-  //
+
   // window.Asc.plugin.onMethodReturn = function(data) {
   //   console.log("[event]onMethodReturn:", data, this);
   // };
@@ -93,6 +94,7 @@ const parseCsv = csv => {
     const item = data.map(i => i).find(i => i.id === t.id);
     console.log("[auto]inputHelper_onSelectItem", t, item);
 
+    // FIXME: Checking
     Asc.scope.item = item;
     this.callCommand(function () {
       const oSheet = Api.GetActiveSheet();
@@ -102,6 +104,8 @@ const parseCsv = csv => {
       let col = oCell.GetCol();
       console.log("[cmd-input]cell:", oCell, row, col);
       console.log("[cmd-input]item:", item);
+      // 标准名
+      oSheet.GetRangeByNumber(row, 6).SetValue(`${item.name}`);
       // 描述
       oSheet.GetRangeByNumber(row, 7).SetValue(`${item.name}, ${item.specification}, ${item.description}`);
       // 单价
@@ -117,14 +121,22 @@ const parseCsv = csv => {
       oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} *  P${row + 1}`);
       // Item No.
       oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
+      // Select Next Row
+      oSheet.GetRangeByNumber(row + 1, 6).Select();
       console.log("[cmd-input]cmd DONE");
-    }, false, true);
+    }, false, true, function() {
+      console.debug("cell fill done.");
+    });
+    // window.dispatchEvent(new KeyboardEvent('keydown', {'key':'a'} ));
+    // window.dispatchEvent(new KeyboardEvent('keyup', {'key':'a'} ));
+    // window.Asc.plugin.executeMethod("InputText", [item.name, window.Asc.plugin.currentText]);
     window.Asc.plugin.getInputHelper().unShow();
   };
 
   window.Asc.plugin.event_onInputHelperClear = function () {
     console.log("[event]onInputHelperClear...");
     search_keys = [];
+    keys_set.clear();
     window.Asc.plugin.currentText = "";
     window.Asc.plugin.getInputHelper().unShow();
   };
@@ -136,10 +148,7 @@ const parseCsv = csv => {
     else
       window.Asc.plugin.currentText = data.text;
 
-    // window.Asc.plugin.executeMethod("GetCurrentContentControl", null, function (data) {
-    //   console.log("[auto]content_id:", data);
-    // });
-
+    // FIXME: Checking
     this.callCommand(function () {
         let oSheet = Api.GetActiveSheet();
         let oCell = oSheet.GetActiveCell();
@@ -217,10 +226,15 @@ const parseCsv = csv => {
 
   window.isAutoCompleteReady = false;
   window.getAutoComplete = function (text) {
-    let search_keys = [];
-    search_keys.push(...(text.split(" ")));
-    // key_words += keys;
-    console.log("_search_keys:", text, "|", search_keys);
+    text.split(" ").map(t => {
+      if (t.length < 1) return;
+      for (let key of keys_set) {
+        if (t.includes(key)) keys_set.delete(key);
+      }
+      keys_set.add(t);
+    });
+    // search_keys.push(...(text.split(" ")));
+    console.debug("_keys_set:", text, "|", keys_set);
     // chrome.storage.local.get(['client'], function(result) {
     //   console.log('Value currently is ', result);
     //   client = result.client;
@@ -241,19 +255,22 @@ const parseCsv = csv => {
     const ret = [];
 
     data.map(item => {
+      item.hit_count = 0;
       item.is_target = false;
       item.is_missed = false;
-      search_keys.map(key => {
-        if (item.name.includes(key)
-          || item.item_no.includes(key)
-          || item.specification.includes(key)
-          || item.description.includes(key)) {
+      let search_string = item.name + (item.alias || "") +  (item.specification || "") + (item.description || "");
+      // console.debug("search_string:", search_string);
+      for (let key of keys_set) {
+        if (search_string.includes(key)
+          || item.item_no.includes(key)) {
+          item.hit_count++;
           item.is_target = true;
         } else {
           item.is_missed = true;
         }
-      });
-      if (item.is_target && !item.is_missed) {
+      }
+      if ((item.is_target && !item.is_missed)
+        || (item.hit_count >= Math.floor(keys_set.size / 2) && item.hit_count >= 1)) {
         ret.push(item);
       }
     });
