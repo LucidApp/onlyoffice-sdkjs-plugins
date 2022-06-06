@@ -1,29 +1,27 @@
 /**
  * Laplace Plugin Main v0.5
  */
-let data_calsberg = [];
-let data_pepsi = [];
-let data = [];
-let search_keys = [];
-let keys_set = new Set();
-let client = {};
-
-let current_col;
-let current_cell;
-
-const parseCsv = csv => {
-  let lines = csv.split("\n");
-  const header = lines[0].split(",")
-  lines.shift(); // get rid of definitions
-  return lines.map(line => {
-    const bits = line.split(",");
-    let obj = {};
-    header.forEach((h, i) => obj[h] = bits[i]); // or use reduce here
-    return obj;
-  })
-};
-
 (function (window, undefined) {
+  let data_calsberg = [];
+  let data_pepsi = [];
+  let data = [];
+  let keys_set = new Set();
+
+  let current_col;
+  let current_cell;
+
+  const parseCsv = csv => {
+    let lines = csv.split("\n");
+    const header = lines[0].split(",")
+    lines.shift(); // get rid of definitions
+    return lines.map(line => {
+      const bits = line.split(",");
+      let obj = {};
+      header.forEach((h, i) => obj[h] = bits[i]); // or use reduce here
+      return obj;
+    })
+  };
+
   console.log("[go]START!");
 
   window.isInit = false;
@@ -36,8 +34,6 @@ const parseCsv = csv => {
       window.Asc.plugin.currentText = "";
       window.Asc.plugin.createInputHelper();
       window.Asc.plugin.getInputHelper().createWindow();
-      window.Asc.plugin.executeMethod("GetCurrentContentControl");
-
       console.log("[auto]window init");
 
       // FIXME: ugly but work
@@ -58,10 +54,6 @@ const parseCsv = csv => {
       data = data_calsberg;
       console.log("csv data:", data_calsberg, data_pepsi);
     }
-
-    // FIXME: event initial plugin
-    //close the plugin (simulate button click)
-    // this.button(-1);
   };
 
   window.Asc.plugin.button = function (id) {
@@ -73,10 +65,10 @@ const parseCsv = csv => {
     console.log("[callback]result:", result);
   };
 
-  // window.Asc.plugin.event_onTargetPositionChanged = function (data) {
-    // console.log("[event]onTargetPositionChanged:", data, this);
-    // window.Asc.plugin.executeMethod("GetCurrentContentControl");
-  // };
+  window.Asc.plugin.event_onTargetPositionChanged = function (data) {
+    console.log("[event]onTargetPositionChanged:", data, this);
+    window.Asc.plugin.executeMethod("GetCurrentContentControl");
+  };
 
   // window.Asc.plugin.event_onClick = function(isSelectionUse) {
   //   window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function(obj) {
@@ -94,7 +86,6 @@ const parseCsv = csv => {
     const item = data.map(i => i).find(i => i.id === t.id);
     console.log("[auto]inputHelper_onSelectItem", t, item);
 
-    // FIXME: Checking
     Asc.scope.item = item;
     this.callCommand(function () {
       const oSheet = Api.GetActiveSheet();
@@ -135,7 +126,6 @@ const parseCsv = csv => {
 
   window.Asc.plugin.event_onInputHelperClear = function () {
     console.log("[event]onInputHelperClear...");
-    search_keys = [];
     keys_set.clear();
     window.Asc.plugin.currentText = "";
     window.Asc.plugin.getInputHelper().unShow();
@@ -148,30 +138,28 @@ const parseCsv = csv => {
     else
       window.Asc.plugin.currentText = data.text;
 
-    // FIXME: Checking
-    this.callCommand(function () {
-        let oSheet = Api.GetActiveSheet();
-        let oCell = oSheet.GetActiveCell();
-        console.log('[cmd]scope:', Asc.scope);
-        console.log('[cmd]cell:', oCell);
-        let row = oCell.GetRow();
-        let col = oCell.GetCol();
-        let oText= oCell.GetText();
-        let oValue= oCell.GetValue();
-        localStorage.setItem('current_cell_row', row);
-        localStorage.setItem('current_cell_col', col);
-        localStorage.setItem('current_cell_text', oText);
-        localStorage.setItem('current_cell_value', oValue);
-        console.log('[cmd]cell position:', row, col, '|', oText, ',', oValue);
-      }, false, false,
-      function (result, error) {
-        current_col = localStorage.getItem('current_cell_col');
-        console.log("[in-callback]localStorage:", localStorage);
-        console.log("[in-callback]Current Col:", current_col, current_cell);
-        console.log("[in-callback]result:", result, error, this);
-      }
-    );
-    console.log("Current Col:", current_col, current_cell, localStorage);
+    // FIXME: May Cause File Save & Co-Editing Issues.
+    // this.callCommand(function () {
+    //     let oSheet = Api.GetActiveSheet();
+    //     let oCell = oSheet.GetActiveCell();
+    //     console.log('[cmd]cell:', oCell);
+    //     let row = oCell.GetRow();
+    //     let col = oCell.GetCol();
+    //     let oValue= oCell.GetValue();
+    //     // localStorage.setItem('current_cell_row', row);
+    //     // localStorage.setItem('current_cell_col', col);
+    //     // localStorage.setItem('current_cell_value', oValue);
+    //     // console.log('[cmd]cell position:', row, col, '|', oText, ',', oValue);
+    //   }, false, false,
+    //   function (result, error) {
+    //     // current_col = localStorage.getItem('current_cell_col');
+    //     // console.log("[in-callback]localStorage:", localStorage);
+    //     console.log("[in-callback]Current Col:", current_col, current_cell);
+    //     console.log("[in-callback]result:", result, error, this);
+    //   }
+    // );
+    // console.log("Current Col:", current_col, current_cell, localStorage);
+    //
 
     // correct by space
     // var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");
@@ -233,22 +221,21 @@ const parseCsv = csv => {
       }
       keys_set.add(t);
     });
-    // search_keys.push(...(text.split(" ")));
     console.debug("_keys_set:", text, "|", keys_set);
     // chrome.storage.local.get(['client'], function(result) {
     //   console.log('Value currently is ', result);
     //   client = result.client;
     // });
-    let client_id = localStorage.getItem('client_id');
-    switch (client_id) {
-      case '1':
-        data = data_calsberg;
-        break;
-      case '2':
-        data = data_pepsi;
-        break;
-    }
-    console.log("current data:", data);
+    // let client_id = localStorage.getItem('client_id');
+    // switch (client_id) {
+    //   case '1':
+    //     data = data_calsberg;
+    //     break;
+    //   case '2':
+    //     data = data_pepsi;
+    //     break;
+    // }
+    // console.log("current data:", data);
 
     window.isAutoCompleteReady = true;
 

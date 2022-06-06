@@ -138,7 +138,7 @@
     else
       window.Asc.plugin.currentText = data.text;
 
-    // FIXME: Checking
+    // FIXME: May Cause File Save & Co-Editing Issues.
     // this.callCommand(function () {
     //     let oSheet = Api.GetActiveSheet();
     //     let oCell = oSheet.GetActiveCell();
@@ -221,7 +221,6 @@
       }
       keys_set.add(t);
     });
-    // search_keys.push(...(text.split(" ")));
     console.debug("_keys_set:", text, "|", keys_set);
     // chrome.storage.local.get(['client'], function(result) {
     //   console.log('Value currently is ', result);
