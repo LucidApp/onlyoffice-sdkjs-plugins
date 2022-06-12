@@ -509,12 +509,10 @@ Brand Promotion,507,钛金板,,tc4钛合金板材tiAI4V,Event,Event creative and
 Brand Promotion,508,304不锈钢镀钛框架,,304不锈钢厚度60C，宽度1.5cm方管在720摄氏度镀钛工艺,Event,Event creative and manage fee & Event execution fee,Material,Steel,304不锈钢镀钛框架,304不锈钢厚度60C，宽度1.5cm方管在720摄氏度镀钛工艺,,kg,585,564.53,544.77
 Brand Promotion,509,支撑货架,,40*40镀锌方管,Event,Event creative and manage fee & Event execution fee,Material,Steel,支撑货架,40*40镀锌方管,,unit,36,34.74,33.52
 Brand Promotion,510,304不锈钢长合页排铰,,304不锈钢,Event,Event creative and manage fee & Event execution fee,Material,Steel,304不锈钢长合页排铰,304不锈钢,,unit,49.5,47.77,46.1
-Brand Promotion,511,金属条烤金属色包边,,"金属条烤金属色包边
-(L15000*W1000)*2",Event,Event creative and manage fee & Event execution fee,Material,Steel,金属条烤金属色包边,(L15000*W1000)*2,,m,108,104.22,100.57
+Brand Promotion,511,金属条烤金属色包边,,"金属条烤金属色包边(L15000*W1000)*2",Event,Event creative and manage fee & Event execution fee,Material,Steel,金属条烤金属色包边,(L15000*W1000)*2,,m,108,104.22,100.57
 Brand Promotion,512,金属方管烤金属色,,"25mm+15mm金属方管烤金属色 L1500*W2200*2+W2200*2",Event,Event creative and manage fee & Event execution fee,Material,Steel,25mm+15mm金属方管烤金属色,L1500*W2200*2+W2200*2,,m,108,104.22,100.57
 Brand Promotion,513,金属圆管烤金属色,,"10mm金属圆管烤金属色 2000*2+1500*2",Event,Event creative and manage fee & Event execution fee,Material,Steel,10mm金属圆管烤金属色,2000*2+1500*2,,m,108,104.22,100.57
-Brand Promotion,514,金属方管烤金属色,,"25mm+15mm金属方管烤金属漆
-(L450+W1100)*2",Event,Event creative and manage fee & Event execution fee,Material,Steel,25mm+15mm金属方管烤金属漆,(L450+W1100)*2,,m,90,86.85,83.81
+Brand Promotion,514,金属方管烤金属色,,"25mm+15mm金属方管烤金属漆(L450+W1100)*2",Event,Event creative and manage fee & Event execution fee,Material,Steel,25mm+15mm金属方管烤金属漆,(L450+W1100)*2,,m,90,86.85,83.81
 Brand Promotion,515,铝合金网,,6菱形铝合金网+喷塑,Event,Event creative and manage fee & Event execution fee,Material,Steel,铝合金网,6菱形铝合金网+喷塑,,元/平方,198,191.07,184.38
 Brand Promotion,516,钢网,,1.2mm 厚 201 材质钢网,Event,Event creative and manage fee & Event execution fee,Material,Steel,钢网,钢网，1.2mm 厚 201 材质钢网,国标产品,元/平米,315,303.98,293.34
 Brand Promotion,517,钢网,,1.5mm 厚 201 材质钢网,Event,Event creative and manage fee & Event execution fee,Material,Steel,钢网,钢网，1.5mm 厚 201 材质钢网,国标产品,元/平米,315,303.98,293.34
