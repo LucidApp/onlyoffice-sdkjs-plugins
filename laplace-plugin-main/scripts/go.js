@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.5
+ * Laplace Plugin Main v0.6
  */
 (function (window, undefined) {
   let data_calsberg = [];
