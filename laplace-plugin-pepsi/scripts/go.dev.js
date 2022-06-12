@@ -115,9 +115,8 @@
       // Select Next Row
       oSheet.GetRangeByNumber(row + 1, 6).Select();
       console.log("[cmd-input]cmd DONE");
-      return row;
-    }, false, true, function(res, error) {
-      console.debug("cell fill done.", res, error);
+    }, false, true, function() {
+      console.debug("cell fill done.");
     });
     // window.dispatchEvent(new KeyboardEvent('keydown', {'key':'a'} ));
     // window.dispatchEvent(new KeyboardEvent('keyup', {'key':'a'} ));
@@ -186,7 +185,7 @@
         const item = variants[i];
         items.push({
           id: item.id,
-          text: `${item.id}. ${item.name}${item.alias.length > 0 ? "(" + item.alias + ")" : ""}, ${item.desc} ,<b style="color:red;">￥${item.price}</b>`
+          text: `${item.id}. ${item.name}, ${item.specification}, ${item.description} ,<b style="color:red;">￥${item.price}</b>`
         });
       }
 
@@ -246,7 +245,7 @@
       item.hit_count = 0;
       item.is_target = false;
       item.is_missed = false;
-      let search_string = item.name + (item.alias || "") + (item.desc || "");
+      let search_string = item.name + (item.alias || "") +  (item.specification || "") + (item.description || "");
       // console.debug("search_string:", search_string);
       for (let key of keys_set) {
         if (search_string.includes(key)

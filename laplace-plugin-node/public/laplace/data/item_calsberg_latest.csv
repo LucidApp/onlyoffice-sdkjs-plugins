@@ -1,4 +1,4 @@
-﻿const csv_data_calsberg = `name,alias,desc,item_no,category,sub_category_l1,sub_category_l2,sub_category_l3,sub_category,item_name,specification,description,unit,price_2021,price,price_2023
+﻿name,alias,desc,item_no,category,sub_category_l1,sub_category_l2,sub_category_l3,sub_category,item_name,specification,description,unit,price_2021,price,price_2023
 飞行队,,北上广深，175cm以上,001,Brand Promotion,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,"北上广深，税前工资(含社保、意外险等）
 ","2年以上渠道产品推广经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞175cm
 Weight：52-60KG",per person/ day,540,521.1,502.86
@@ -849,4 +849,4 @@ Logo霓虹灯,,LED 灯带& 金属,747,Brand Promotion,Event,Event creative and m
 铁架面漆,喷漆,PU面漆喷两遍,751,Brand Promotion,Event,Event creative and manage fee & Event execution fee,Material,Printing,铁架面漆,PU面漆喷两遍,,kg,40.5,39.08,37.71
 木质底漆,喷漆,PU底漆喷两遍,752,Brand Promotion,Event,Event creative and manage fee & Event execution fee,Material,Printing,木质底漆,PU底漆喷两遍,,kg,27,26.06,25.14
 木质面漆,喷漆,PU面漆喷两遍,753,Brand Promotion,Event,Event creative and manage fee & Event execution fee,Material,Printing,木质面漆,PU面漆喷两遍,,kg,36,34.74,33.52
-服务费,,服务费,754,Brand Promotion,Event,Event creative and manage fee & Event execution fee,service Fee,service Fee,服务费,服务费,,per case,10%,10%,10%`;
+服务费,,服务费,754,Brand Promotion,Event,Event creative and manage fee & Event execution fee,service Fee,service Fee,服务费,服务费,,per case,10%,10%,10%

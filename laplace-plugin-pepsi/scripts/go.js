@@ -37,22 +37,12 @@
       console.log("[auto]window init");
 
       // FIXME: ugly but work
-      data_calsberg = parseCsv(csv_data_calsberg);
-      data_calsberg.map(item => {
-        item.id = item.item_no;
-      })
       data_pepsi = parseCsv(csv_data_pepsi);
       data_pepsi.map(item => {
         // item.id = parseInt(item.no);
         item.id = item.item_no;
       });
-      // data_pepsi_v0 = parseCsv(csv_data_pepsi_v0);
-      // data_pepsi_v0.map(item => {
-      //   item.id = item.item_no;
-      //   item.description = "";
-      // });
-      data = data_calsberg;
-      console.log("csv data:", data_calsberg, data_pepsi);
+      data = data_pepsi;
     }
   };
 
