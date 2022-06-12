@@ -5,7 +5,14 @@
   let data_calsberg = [];
   let data_pepsi = [];
   let data = [];
+  let client = "";
   let keys_set = new Set();
+
+  const calsberg_keyword = ["嘉士伯", "calsberg"];
+  const pepsi_keywords = ["百事", "pepsi"];
+  const dingjin_keywords = ["顶津", "dingjing", "康水"];
+  const dingyi_keywords = ["顶益", "dingyi", "康面"];
+  const jinglongyu_keywords = ["金龙鱼", "jinglongyu"];
 
   let current_col;
   let current_cell;
@@ -22,7 +29,7 @@
     })
   };
 
-  console.log("[go]START!");
+  console.log("[go]START!", window.location.pathname, window.location.href, window.location);
 
   window.isInit = false;
 
@@ -34,7 +41,7 @@
       window.Asc.plugin.currentText = "";
       window.Asc.plugin.createInputHelper();
       window.Asc.plugin.getInputHelper().createWindow();
-      console.log("[auto]window init");
+      console.log("[auto]window init", window.Asc.plugin.info);
 
       // FIXME: ugly but work
       data_calsberg = parseCsv(csv_data_calsberg);
@@ -51,8 +58,25 @@
       //   item.id = item.item_no;
       //   item.description = "";
       // });
-      data = data_calsberg;
-      console.log("csv data:", data_calsberg, data_pepsi);
+      const { documentTitle } = window.Asc.plugin.info;
+      if (pepsi_keywords.some(kw => documentTitle.includes(kw))) client = "pepsi";
+      else if (calsberg_keyword.some(kw => documentTitle.includes(kw))) client = "calsberg";
+      else client = "calsberg";
+      switch (client) {
+        case "calsberg":
+          data = data_calsberg;
+          break;
+        case "pepsi":
+          data = data_pepsi;
+          break;
+        case "dingjin":
+        case "dingyi":
+        case "jinlongyu":
+        default:
+          data = data_calsberg;
+          break;
+      }
+      console.log("csv data:", documentTitle, data);
     }
   };
 
@@ -85,40 +109,72 @@
     if (!t) return;
     const item = data.map(i => i).find(i => i.id === t.id);
     console.log("[auto]inputHelper_onSelectItem", t, item);
-
     Asc.scope.item = item;
-    this.callCommand(function () {
-      const oSheet = Api.GetActiveSheet();
-      const oCell = oSheet.GetActiveCell();
-      const item = Asc.scope.item;
-      let row = oCell.GetRow();
-      let col = oCell.GetCol();
-      console.log("[cmd-input]cell:", oCell, row, col);
-      console.log("[cmd-input]item:", item);
-      // 标准名
-      oSheet.GetRangeByNumber(row, 6).SetValue(`${item.name}`);
-      // 描述
-      oSheet.GetRangeByNumber(row, 7).SetValue(`${item.name}, ${item.specification}, ${item.description}`);
-      // 单价
-      oSheet.GetRangeByNumber(row, 12).SetNumberFormat("_(￥* #,##0.00_)");
-      oSheet.GetRangeByNumber(row, 12).SetValue(item.price);
-      // 单位
-      oSheet.GetRangeByNumber(row, 13).SetValue(item.unit);
-      // 年度议价
-      oSheet.GetRangeByNumber(row, 16).SetNumberFormat("_(￥* #,##0.00_)");
-      oSheet.GetRangeByNumber(row, 16).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
-      // 总价
-      oSheet.GetRangeByNumber(row, 18).SetNumberFormat("_(￥* #,##0.00_)");
-      oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} *  P${row + 1}`);
-      // Item No.
-      oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
-      // Select Next Row
-      oSheet.GetRangeByNumber(row + 1, 6).Select();
-      console.log("[cmd-input]cmd DONE");
-      return row;
-    }, false, true, function(res, error) {
-      console.debug("cell fill done.", res, error);
-    });
+
+    if (client === "pepsi") {
+      this.callCommand(function () {
+        const oSheet = Api.GetActiveSheet();
+        const oCell = oSheet.GetActiveCell();
+        const item = Asc.scope.item;
+        let row = oCell.GetRow();
+        let col = oCell.GetCol();
+        // 标准名
+        oSheet.GetRangeByNumber(row, 5).SetValue(`${item.name}`);
+        // 代码
+        oSheet.GetRangeByNumber(row, 6).SetValue(`${item.code}`);
+        // Item No.
+        oSheet.GetRangeByNumber(row, 7).SetValue(`${item.item_no}`);
+        // 项目
+        oSheet.GetRangeByNumber(row, 8).SetValue(`${item.specification}`);
+        // 材料说明
+        oSheet.GetRangeByNumber(row, 9).SetValue(`${item.description}`);
+        // 单价
+        oSheet.GetRangeByNumber(row, 14).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, 14).SetValue(item.price);
+        // 单位
+        oSheet.GetRangeByNumber(row, 15).SetValue(item.unit);
+        // 总价
+        oSheet.GetRangeByNumber(row, 19).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, 19).SetValue(`=N${row + 1} * O${row + 1} * S${row + 1}`);
+        // Select Next Row
+        oSheet.GetRangeByNumber(row + 1, 5).Select();
+        console.log("[cmd-input]pepsi DONE");
+      }, false, true);
+    } else if (client === "calsberg") {
+      this.callCommand(function () {
+        const oSheet = Api.GetActiveSheet();
+        const oCell = oSheet.GetActiveCell();
+        const item = Asc.scope.item;
+        let row = oCell.GetRow();
+        let col = oCell.GetCol();
+        console.log("[cmd-input]cell:", oCell, row, col);
+        console.log("[cmd-input]item:", item);
+        // 标准名
+        oSheet.GetRangeByNumber(row, 6).SetValue(`${item.name}`);
+        // 描述
+        oSheet.GetRangeByNumber(row, 7).SetValue(`${item.name}, ${item.specification}, ${item.description}`);
+        // 单价
+        oSheet.GetRangeByNumber(row, 12).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, 12).SetValue(item.price);
+        // 单位
+        oSheet.GetRangeByNumber(row, 13).SetValue(item.unit);
+        // 年度议价
+        oSheet.GetRangeByNumber(row, 16).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, 16).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
+        // 总价
+        oSheet.GetRangeByNumber(row, 18).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} *  P${row + 1}`);
+        // Item No.
+        oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
+        // Select Next Row
+        oSheet.GetRangeByNumber(row + 1, 6).Select();
+        console.log("[cmd-input]cmd DONE");
+        localStorage.setItem('current_cell_row', row);
+      }, false, true, function(res, error) {
+        console.debug("cell fill done.", res, error, this, localStorage);
+      });
+    }
+
     // window.dispatchEvent(new KeyboardEvent('keydown', {'key':'a'} ));
     // window.dispatchEvent(new KeyboardEvent('keyup', {'key':'a'} ));
     // window.Asc.plugin.executeMethod("InputText", [item.name, window.Asc.plugin.currentText]);
