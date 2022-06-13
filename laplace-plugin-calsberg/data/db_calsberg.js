@@ -1,41 +1,41 @@
 ﻿const csv_data_calsberg =`category,item_no,name,alias,desc,sub_category_l1,sub_category_l2,sub_category_l3,sub_category,item_name,specification,description,unit,price_2021,price,price_2023
-Brand Promotion,1,飞行队,,北上广深，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,"北上广深，税前工资(含社保、意外险等）,"2年以上渠道产品推广经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞175cm Weight：52-60KG",per person/ day,540,521.1,502.86
-Brand Promotion,2,飞行队,,北上广深，170cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,"北上广深，税前工资(含社保、意外险等）","1年以上渠道产品推广经验，形象气质佳，工作态度积极，沟通能力强，且身高＞170cm Weight：50-58KG",per person/ day,460,443.9,428.36
-Brand Promotion,3,飞行队,,北上广深，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,"北上广深，税前工资(含社保、意外险等）","有渠道产品推销广经验，形象气质佳，工作态度积极，且身高＞165cm Weight：48-56KG",per person/ day,415,400.48,386.46
-Brand Promotion,4,飞行队,,省会，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,其他省会城市，税前工资(含社保、意外险等）,"2年以上渠道产品推广经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞175cm Weight：52-60KG ",per person/ day,400,386,372.49
-Brand Promotion,5,飞行队,,省会，170cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,其他省会城市，税前工资(含社保、意外险等）,"1年以上渠道产品推广经验，形象气质佳，工作态度积极，沟通能力强，且身高＞170cm Weight：50-58KG",per person/ day,295,284.68,274.71
-Brand Promotion,6,飞行队,,省会，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,其他省会城市，税前工资(含社保、意外险等）,"有渠道产品推销广经验，形象气质佳，工作态度积极，且身高＞165cm Weight：48-56KG",per person/ day,230,221.95,214.18
-Brand Promotion,7,飞行队,,二三线城市，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,二三线城市，税前工资(社保、意外险等）,"2年以上渠道产品推广经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞175cm Weight：52-60KG ",per person/ day,315,303.98,293.34
-Brand Promotion,8,飞行队,,二三线城市，170cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,二三线城市，税前工资(社保、意外险等）,"1年以上渠道产品推广经验，形象气质佳，工作态度积极，沟通能力强，且身高＞170cm Weight：50-58KG",per person/ day,254,245.11,236.53
-Brand Promotion,9,飞行队,,二三线城市，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,二三线城市，税前工资(社保、意外险等）,"有渠道产品推销广经验，形象气质佳，工作态度积极，且身高＞165cm Weight：48-56KG",per person/ day,170.2,164.24,158.49
+Brand Promotion,1,飞行队,,北上广深，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,北上广深，税前工资(含社保、意外险等）,2年以上渠道产品推广经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞175cm Weight：52-60KG,per person/ day,540,521.1,502.86
+Brand Promotion,2,飞行队,,北上广深，170cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,北上广深，税前工资(含社保、意外险等）,1年以上渠道产品推广经验，形象气质佳，工作态度积极，沟通能力强，且身高＞170cm Weight：50-58KG,per person/ day,460,443.9,428.36
+Brand Promotion,3,飞行队,,北上广深，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,北上广深，税前工资(含社保、意外险等）,有渠道产品推销广经验，形象气质佳，工作态度积极，且身高＞165cm Weight：48-56KG,per person/ day,415,400.48,386.46
+Brand Promotion,4,飞行队,,省会，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,其他省会城市，税前工资(含社保、意外险等）,2年以上渠道产品推广经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞175cm Weight：52-60KG ,per person/ day,400,386,372.49
+Brand Promotion,5,飞行队,,省会，170cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,其他省会城市，税前工资(含社保、意外险等）,1年以上渠道产品推广经验，形象气质佳，工作态度积极，沟通能力强，且身高＞170cm Weight：50-58KG,per person/ day,295,284.68,274.71
+Brand Promotion,6,飞行队,,省会，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,其他省会城市，税前工资(含社保、意外险等）,有渠道产品推销广经验，形象气质佳，工作态度积极，且身高＞165cm Weight：48-56KG,per person/ day,230,221.95,214.18
+Brand Promotion,7,飞行队,,二三线城市，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,二三线城市，税前工资(社保、意外险等）,2年以上渠道产品推广经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞175cm Weight：52-60KG ,per person/ day,315,303.98,293.34
+Brand Promotion,8,飞行队,,二三线城市，170cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,二三线城市，税前工资(社保、意外险等）,1年以上渠道产品推广经验，形象气质佳，工作态度积极，沟通能力强，且身高＞170cm Weight：50-58KG,per person/ day,254,245.11,236.53
+Brand Promotion,9,飞行队,,二三线城市，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Flying team,飞行队,二三线城市，税前工资(社保、意外险等）,有渠道产品推销广经验，形象气质佳，工作态度积极，且身高＞165cm Weight：48-56KG,per person/ day,170.2,164.24,158.49
 Brand Promotion,10,督导,,飞行队督导,Event,Event creative and manage fee & Event execution fee,People,Flying team,督导,飞行队督导,负责飞行队随队管理及执行工作，包括应急情况处理、管理品牌大使、协助推广、拍照、沟通、礼品分发、回馈数据等,per person/day,200,193,186.25
-Brand Promotion,11,促销员,,北上广深，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,"北上广深，税前工资(含奖金、社保、意外险等）工作 8 小时","2年以上产品促销经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞165cm Weight：50-58KG",per person/ day,285,275.03,265.4
-Brand Promotion,12,促销员,,北上广深，160cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,"北上广深，税前工资(含奖金、社保、意外险等）工作 8 小时","1年以上产品促销经验，形象气质佳，工作态度积极，沟通能力强，身高＞160cm Weight：48-56KG",per person/ day,239,230.64,222.56
-Brand Promotion,13,促销员,,省会，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,"其他省会城市，税前工资(含奖金、社保、意外险等）工作 8 小时","2年以上产品促销经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞165cm Weight：50-58KG",per person/ day,219.5,211.82,204.4
-Brand Promotion,14,促销员,,省会，160cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,"其他省会城市，税前工资(含奖金、社保、意外险等）工作 8 小时","1年以上产品促销经验，形象气质佳，工作态度积极，沟通能力强，身高＞160cm Weight：48-56KG",per person/day,165.6,159.8,154.21
-Brand Promotion,15,促销员,,二三线城市，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,"二三线城市，税前工资(含奖金、社保、意外险等）工作 8 小时","2年以上产品促销经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞165cm Weight：50-58KG",per person/ day,186,179.49,173.21
-Brand Promotion,16,促销员,,二三线城市，160cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,"二三线城市，税前工资(含奖金、社保、意外险等）工作 8 小时","1年以上产品促销经验，形象气质佳，工作态度积极，沟通能力强，身高＞160cm Weight：48-56KG",per person/day,138,133.17,128.51
-Brand Promotion,17,礼仪,,北上广深，178cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,"北上广深，税前工资工作4小时","2年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，突发情况应对能力强,身高＞178cm（经过专业礼仪培训、或礼仪类院校毕业) Weight：56-64KG 提供证书",per person/show (4 hours),850,820.25,791.54
-Brand Promotion,18,礼仪,,北上广深，173cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,"北上广深，税前工资 工作4小时","1年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞173cm（经过专业礼仪培训、或礼仪类院校毕业) Weight：54-62KG ",per person/show (4 hours),700,675.5,651.86
-Brand Promotion,19,礼仪,,北上广深，168cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,"北上广深，税前工资 工作4小时","有礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞168cm（经过专业礼仪培训、或礼仪类院校毕业) Weight：52-60KG ",per person/show (4 hours),550,530.75,512.17
-Brand Promotion,20,礼仪,,省会， 178cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,"省会城市， 税前工资 工作4小时","2年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，突发情况应对能力强,身高＞178cm （经过专业礼仪培训、或礼仪类院校毕业) Weight：56-64KG ",per person/show (4 hours),650,627.25,605.3
-Brand Promotion,21,礼仪,,省会， 173cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,"省会城市， 税前工资 工作4小时","1年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞173cm Weight：54-62KG ",per person/show (4 hours),495.5,478.16,461.42
-Brand Promotion,22,礼仪,,省会， 168cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,"省会城市， 税前工资 工作4小时","有礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞168cm（经过专业礼仪培训、或礼仪类院校毕业) Weight：52-60KG ",per person/show (4 hours),368,355.12,342.69
-Brand Promotion,23,礼仪,,二三线城市，178cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,"二三线城市， 税前工资工作4小时","2年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，突发情况应对能力强,身高＞178cm（经过专业礼仪培训、或礼仪类院校毕业) Weight：56-64KG ",per person/show (4 hours),540,521.1,502.86
-Brand Promotion,24,礼仪,,二三线城市，173cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,"二三线城市， 税前工资工作4小时","1年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞173cm （经过专业礼仪培训、或礼仪类院校毕业) Weight：54-62KG ",per person/show (4 hours),390,376.35,363.18
-Brand Promotion,25,礼仪,,二三线城市，168cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,"二三线城市， 税前工资 工作4小时","有礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞168cm （经过专业礼仪培训、或礼仪类院校毕业) Weight：52-60KG ",per person/show (4 hours),340,328.1,316.62
-Brand Promotion,26,模特,,男模特，中籍，185cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,中籍,"2年以上模特经验，形象气质佳，有一定的走秀经验，身高＞185cm Weight：60-68KG ",per person/show (4 hours),1225,1182.13,1140.75
-Brand Promotion,27,模特,,男模特，中籍，180cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,中籍,"1年以上模特经验，形象气质佳且身高＞180cm Weight：58-66KG",per person/show (4 hours),1018,982.37,947.99
-Brand Promotion,28,模特,,男模特，中籍，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,中籍,"有模特经验，形象气质佳，且身高＞175cm Weight：56-64KG",per person/show (4 hours),736,710.24,685.38
-Brand Promotion,29,模特,,女模特，中籍，180cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,中籍,"2年以上模特经验，形象气质佳，有一定的走秀经验，身高＞180cm Weight：58-66KG ",per person/show (4 hours),1218,1175.37,1134.23
-Brand Promotion,30,模特,,女模特，中籍，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,中籍,"1年以上模特经验，形象气质佳且身高＞175cm Weight：56-64KG",per person/show (4 hours),1018,982.37,947.99
-Brand Promotion,31,模特,,女模特，中籍，170cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,中籍,"有模特经验，形象气质佳，且身高＞170cm Weight：54-62KG",per person/show (4 hours),738,712.17,687.24
-Brand Promotion,32,模特,,男模特，外籍，185cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,外籍,"2年以上模特经验，形象气质佳，有一定的走秀经验，身高＞185cm Weight：60-68KG ",per person/show (4 hours),1500,1447.5,1396.84
-Brand Promotion,33,模特,,男模特，外籍，180cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,外籍,"1年以上模特经验，形象气质佳且身高＞180cm Weight：58-66KG",per person/show (4 hours),1200,1158,1117.47
-Brand Promotion,34,模特,,男模特，外籍，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,外籍,"有模特经验，形象气质佳，且身高＞175cm Weight：56-64KG",per person/show (4 hours),800,772,744.98
-Brand Promotion,35,模特,,女模特，外籍，180cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,外籍,"2年以上模特经验，形象气质佳，有一定的走秀经验，身高＞180cm Weight：58-66KG ",per person/show (4 hours),1500,1447.5,1396.84
-Brand Promotion,36,模特,,女模特，外籍，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,外籍,"1年以上模特经验，形象气质佳且身高＞175cm Weight：56-64KG",per person/show (4 hours),1200,1158,1117.47
-Brand Promotion,37,模特,,女模特，外籍，170cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,外籍,"有模特经验，形象气质佳，且身高＞170cm Weight：54-62KG",per person/show (4 hours),800,772,744.98
+Brand Promotion,11,促销员,,北上广深，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,北上广深，税前工资(含奖金、社保、意外险等）工作 8 小时,2年以上产品促销经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞165cm Weight：50-58KG,per person/ day,285,275.03,265.4
+Brand Promotion,12,促销员,,北上广深，160cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,北上广深，税前工资(含奖金、社保、意外险等）工作 8 小时,1年以上产品促销经验，形象气质佳，工作态度积极，沟通能力强，身高＞160cm Weight：48-56KG,per person/ day,239,230.64,222.56
+Brand Promotion,13,促销员,,省会，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,其他省会城市，税前工资(含奖金、社保、意外险等）工作 8 小时,2年以上产品促销经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞165cm Weight：50-58KG,per person/ day,219.5,211.82,204.4
+Brand Promotion,14,促销员,,省会，160cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,其他省会城市，税前工资(含奖金、社保、意外险等）工作 8 小时,1年以上产品促销经验，形象气质佳，工作态度积极，沟通能力强，身高＞160cm Weight：48-56KG,per person/day,165.6,159.8,154.21
+Brand Promotion,15,促销员,,二三线城市，165cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,二三线城市，税前工资(含奖金、社保、意外险等）工作 8 小时,2年以上产品促销经验，形象气质佳，工作态度积极，性格大方开朗，沟通能力强，身高＞165cm Weight：50-58KG,per person/ day,186,179.49,173.21
+Brand Promotion,16,促销员,,二三线城市，160cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,促销员,二三线城市，税前工资(含奖金、社保、意外险等）工作 8 小时,1年以上产品促销经验，形象气质佳，工作态度积极，沟通能力强，身高＞160cm Weight：48-56KG,per person/day,138,133.17,128.51
+Brand Promotion,17,礼仪,,北上广深，178cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,北上广深，税前工资工作4小时,2年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，突发情况应对能力强,身高＞178cm（经过专业礼仪培训、或礼仪类院校毕业) Weight：56-64KG 提供证书,per person/show (4 hours),850,820.25,791.54
+Brand Promotion,18,礼仪,,北上广深，173cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,北上广深，税前工资 工作4小时,1年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞173cm（经过专业礼仪培训、或礼仪类院校毕业) Weight：54-62KG ,per person/show (4 hours),700,675.5,651.86
+Brand Promotion,19,礼仪,,北上广深，168cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,北上广深，税前工资 工作4小时,有礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞168cm（经过专业礼仪培训、或礼仪类院校毕业) Weight：52-60KG ,per person/show (4 hours),550,530.75,512.17
+Brand Promotion,20,礼仪,,省会， 178cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,省会城市， 税前工资 工作4小时,2年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，突发情况应对能力强,身高＞178cm （经过专业礼仪培训、或礼仪类院校毕业) Weight：56-64KG ,per person/show (4 hours),650,627.25,605.3
+Brand Promotion,21,礼仪,,省会， 173cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,省会城市， 税前工资 工作4小时,1年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞173cm Weight：54-62KG ,per person/show (4 hours),495.5,478.16,461.42
+Brand Promotion,22,礼仪,,省会， 168cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,省会城市， 税前工资 工作4小时,有礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞168cm（经过专业礼仪培训、或礼仪类院校毕业) Weight：52-60KG ,per person/show (4 hours),368,355.12,342.69
+Brand Promotion,23,礼仪,,二三线城市，178cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,二三线城市， 税前工资工作4小时,2年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，突发情况应对能力强,身高＞178cm（经过专业礼仪培训、或礼仪类院校毕业) Weight：56-64KG ,per person/show (4 hours),540,521.1,502.86
+Brand Promotion,24,礼仪,,二三线城市，173cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,二三线城市， 税前工资工作4小时,1年以上礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞173cm （经过专业礼仪培训、或礼仪类院校毕业) Weight：54-62KG ,per person/show (4 hours),390,376.35,363.18
+Brand Promotion,25,礼仪,,二三线城市，168cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,礼仪,二三线城市， 税前工资 工作4小时,有礼仪经验，形象气质佳，工作态度积极，性格大方开朗，身高＞168cm （经过专业礼仪培训、或礼仪类院校毕业) Weight：52-60KG ,per person/show (4 hours),340,328.1,316.62
+Brand Promotion,26,模特,,男模特，中籍，185cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,中籍,2年以上模特经验，形象气质佳，有一定的走秀经验，身高＞185cm Weight：60-68KG ,per person/show (4 hours),1225,1182.13,1140.75
+Brand Promotion,27,模特,,男模特，中籍，180cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,中籍,1年以上模特经验，形象气质佳且身高＞180cm Weight：58-66KG,per person/show (4 hours),1018,982.37,947.99
+Brand Promotion,28,模特,,男模特，中籍，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,中籍,有模特经验，形象气质佳，且身高＞175cm Weight：56-64KG,per person/show (4 hours),736,710.24,685.38
+Brand Promotion,29,模特,,女模特，中籍，180cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,中籍,2年以上模特经验，形象气质佳，有一定的走秀经验，身高＞180cm Weight：58-66KG ,per person/show (4 hours),1218,1175.37,1134.23
+Brand Promotion,30,模特,,女模特，中籍，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,中籍,1年以上模特经验，形象气质佳且身高＞175cm Weight：56-64KG,per person/show (4 hours),1018,982.37,947.99
+Brand Promotion,31,模特,,女模特，中籍，170cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,中籍,有模特经验，形象气质佳，且身高＞170cm Weight：54-62KG,per person/show (4 hours),738,712.17,687.24
+Brand Promotion,32,模特,,男模特，外籍，185cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,外籍,2年以上模特经验，形象气质佳，有一定的走秀经验，身高＞185cm Weight：60-68KG ,per person/show (4 hours),1500,1447.5,1396.84
+Brand Promotion,33,模特,,男模特，外籍，180cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,外籍,1年以上模特经验，形象气质佳且身高＞180cm Weight：58-66KG,per person/show (4 hours),1200,1158,1117.47
+Brand Promotion,34,模特,,男模特，外籍，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台男模特,外籍,有模特经验，形象气质佳，且身高＞175cm Weight：56-64KG,per person/show (4 hours),800,772,744.98
+Brand Promotion,35,模特,,女模特，外籍，180cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,外籍,2年以上模特经验，形象气质佳，有一定的走秀经验，身高＞180cm Weight：58-66KG ,per person/show (4 hours),1500,1447.5,1396.84
+Brand Promotion,36,模特,,女模特，外籍，175cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,外籍,1年以上模特经验，形象气质佳且身高＞175cm Weight：56-64KG,per person/show (4 hours),1200,1158,1117.47
+Brand Promotion,37,模特,,女模特，外籍，170cm以上,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,舞台女模特,外籍,有模特经验，形象气质佳，且身高＞170cm Weight：54-62KG,per person/show (4 hours),800,772,744.98
 Brand Promotion,38,司仪,主持人,兼职电视台主持，有一定的知名度,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,司仪,兼职电视台主持，当地主持圈有一定的知名度,具有3年以上商演主持经验，形象气质佳，工作态度积极，沟通能力强，突发情况应对能力强，有部分艺人合作经验,per person/show,3250,3136.25,3026.48
 Brand Promotion,39,司仪,主持人,专业的商演主持,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,司仪,专业的商演主持,具有3年以上商演主持经验，形象气质佳，工作态度积极，沟通能力强，突发情况应对能力强,per person/show,1840,1775.6,1713.45
 Brand Promotion,40,司仪,主持人,普通的商演主持,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,司仪,普通的商演主持,具有1年以上商演主持经验，形象气质佳，工作态度积极，沟通能力强,per person/show,1080,1042.2,1005.72
@@ -89,7 +89,7 @@ Brand Promotion,87,调音师,,专业调音师，大型活动,Event,Event creativ
 Brand Promotion,88,灯光师,,普通灯光师,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,灯光师,普通灯光师（无证）,从业1年以上，能够操作国产调光台，拥有小型路演项目调光经验。,per person/day,368,355.12,342.69
 Brand Promotion,89,灯光师,,专业灯光师,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,灯光师,专业灯光师（5年及以上相关从业经验）,从业3年以上，能够操作MA2以上调音台，对中大型活动拥有丰富的经验。拥有二级舞美灯光师职业资格证以上。,per person/day,920,887.8,856.73
 Brand Promotion,90,保安,,普通保安，二三线城市,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,保安-普通保安,二三线城市，税前工资(含社保、意外险等）,有1年以上安保经验，身高165以上、,per person/day,322,310.73,299.85
-Brand Promotion,91,保安,,特保，北上广深及省会城市,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,保安-特保,"北上广深及省会城市, 税前工资(含社保、意外险等）",有1年以上安保经验，身高165以上、,per person/day,460,443.9,428.36
+Brand Promotion,91,保安,,特保，北上广深及省会城市,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,保安-特保,北上广深及省会城市, 税前工资(含社保、意外险等）,有1年以上安保经验，身高165以上、,per person/day,460,443.9,428.36
 Brand Promotion,92,艺人保镖,,艺人保镖,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,艺人保镖,普通艺人保镖,有3年以上安保经验，熟悉艺人活动流程，能熟练处理艺人及粉丝之间的关系，身高根据艺人方需求提供。,per person/hour,414,399.51,385.53
 Brand Promotion,93,造型师,,普通造型师,Event,Event creative and manage fee & Event execution fee,People,Styling designer,造型师,普通造型师,2年以上造型工作经验，能根据品牌调性提供造型建议并实施。,per person/day,644,621.46,599.71
 Brand Promotion,94,化妆师,,非明星妆化师,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,化妆师,非明星妆化师,2年以上造型工作经验，能根据品牌调性及演出人员本身特点提供化妆建议并实施。,per person/day,552,532.68,514.04
@@ -102,20 +102,20 @@ Brand Promotion,100,住宿补贴,,省会城市,Event,Event creative and manage f
 Brand Promotion,101,住宿补贴,,二三线城市,Event,Event creative and manage fee & Event execution fee,People,Travel allowance,住宿补贴,二三线城市,按实际差旅天数计算,per person /per night,138,133.17,128.51
 Brand Promotion,102,市内交通补贴,车补、交通费,按实际差旅天数计算,Event,Event creative and manage fee & Event execution fee,People,Travel allowance,市内交通补贴,不分城市等级,按实际差旅天数计算,per person/day,46,44.39,42.84
 Brand Promotion,103,餐费补贴,餐补、餐费,按实际差旅天数计算,Event,Event creative and manage fee & Event execution fee,people,Travel allowance,餐费补贴,不分城市等级,按实际差旅天数计算,per person/day,46,44.39,42.84
-Brand Promotion,104,小面包车/2.5m小货车/4.5m货车/5.2m货车,,"小面包车/2.5m小货车/4.5m货车/5.2m货车 60公里以内同城运输",Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,小面包车/2.5m小货车/4.5m货车/5.2m货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,276,266.34,257.02
-Brand Promotion,105,6.8m 货车,,"6.8m 货车 60公里以内同城运输",Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,6.8m 货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,552,532.68,514.04
-Brand Promotion,106,7.2m 货车,,"7.2m 货车 60公里以内同城运输",Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,7.2m 货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,736,710.24,685.38
-Brand Promotion,107,8.0m 货车,,"8.0m 货车 60公里以内同城运输",Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,8.0m 货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,920,887.8,856.73
-Brand Promotion,108,9.6m 货车,,"9.6m 货车 60公里以内同城运输",Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,9.6m 货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,1380,1331.7,1285.09
-Brand Promotion,109,15m 货车,,"15m 货车 60公里以内同城运输",Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,15m 货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,1840,1775.6,1713.45
+Brand Promotion,104,小面包车/2.5m小货车/4.5m货车/5.2m货车,,小面包车/2.5m小货车/4.5m货车/5.2m货车 60公里以内同城运输,Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,小面包车/2.5m小货车/4.5m货车/5.2m货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,276,266.34,257.02
+Brand Promotion,105,6.8m 货车,,6.8m 货车 60公里以内同城运输,Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,6.8m 货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,552,532.68,514.04
+Brand Promotion,106,7.2m 货车,,7.2m 货车 60公里以内同城运输,Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,7.2m 货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,736,710.24,685.38
+Brand Promotion,107,8.0m 货车,,8.0m 货车 60公里以内同城运输,Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,8.0m 货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,920,887.8,856.73
+Brand Promotion,108,9.6m 货车,,9.6m 货车 60公里以内同城运输,Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,9.6m 货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,1380,1331.7,1285.09
+Brand Promotion,109,15m 货车,,15m 货车 60公里以内同城运输,Event,Event creative and manage fee & Event execution fee,Logistics,Intracity ,15m 货车,60公里以内同城运输,包含车况良好车辆、邮费、路桥费、司机费用,per run,1840,1775.6,1713.45
 Brand Promotion,110,面包车,,7座（含）以内面包车,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,7座（含）以内面包车,车况功能正常,包含车辆使用费、保险费、停车费按年度缴纳的路桥费及出现正常磨损后的维修费用，包含司机费用不含餐费、油费、驾驶过程中的路桥费,车/天,600,579,558.74
 Brand Promotion,111,商务车,,商务车,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,商务车,车况功能正常,包含车辆使用费、保险费、停车费按年度缴纳的路桥费及出现正常磨损后的维修费用，包含司机费用不含餐费、油费、驾驶过程中的路桥费,车/天,600,579,558.74
-Brand Promotion,112,小面包车/2.5m小货车/4.5m货车/5.2m货车,,"小面包车/2.5m小货车/4.5m货车/5.2m货车 超过60公里范围",Event,Event creative and manage fee & Event execution fee,Logistics,logistics,小面包车/2.5m小货车/4.5m货车/5.2m货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,km,4,3.86,3.72
-Brand Promotion,113,6.8m 货车,,"6.8m 货车 超过60公里范围",Event,Event creative and manage fee & Event execution fee,Logistics,logistics,6.8m 货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,6.8m size truck,5.5,5.31,5.12
-Brand Promotion,114,7.2m 货车,,"7.2m 货车 超过60公里范围",Event,Event creative and manage fee & Event execution fee,Logistics,logistics,7.2m 货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,7.2m size truck,5.52,5.33,5.14
-Brand Promotion,115,8.0m 货车,,"8.0m 货车 超过60公里范围",Event,Event creative and manage fee & Event execution fee,Logistics,logistics,8.0m 货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,8.0m size truck,7.5,7.24,6.98
-Brand Promotion,116,9.6m 货车,,"9.6m 货车 超过60公里范围",Event,Event creative and manage fee & Event execution fee,Logistics,logistics,9.6m 货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,9.6m size truck,7.8,7.53,7.26
-Brand Promotion,117,15m 货车,,"15m 货车 超过60公里范围",Event,Event creative and manage fee & Event execution fee,Logistics,logistics,15m 货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,15m size truck,12.5,12.06,11.64
+Brand Promotion,112,小面包车/2.5m小货车/4.5m货车/5.2m货车,,小面包车/2.5m小货车/4.5m货车/5.2m货车 超过60公里范围,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,小面包车/2.5m小货车/4.5m货车/5.2m货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,km,4,3.86,3.72
+Brand Promotion,113,6.8m 货车,,6.8m 货车 超过60公里范围,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,6.8m 货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,6.8m size truck,5.5,5.31,5.12
+Brand Promotion,114,7.2m 货车,,7.2m 货车 超过60公里范围,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,7.2m 货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,7.2m size truck,5.52,5.33,5.14
+Brand Promotion,115,8.0m 货车,,8.0m 货车 超过60公里范围,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,8.0m 货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,8.0m size truck,7.5,7.24,6.98
+Brand Promotion,116,9.6m 货车,,9.6m 货车 超过60公里范围,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,9.6m 货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,9.6m size truck,7.8,7.53,7.26
+Brand Promotion,117,15m 货车,,15m 货车 超过60公里范围,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,15m 货车,超过60公里范围,包含车况良好车辆、邮费、路桥费、司机费用/ 公里,15m size truck,12.5,12.06,11.64
 Brand Promotion,118,舞台改装车,舞台车、路演车、小篷车,5.2m舞台改装车,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,5.2m舞台改装车,车况功能正常,拥有合法改装手续（行驶证与车辆一致），包含基本保险费、停车费及按年缴路桥费,月/辆,38000,36670,35386.55
 Brand Promotion,119,舞台改装车,舞台车、路演车、小篷车,7.6m舞台改装车,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,7.6m舞台改装车,车况功能正常,拥有合法改装手续（行驶证与车辆一致），包含基本保险费、停车费及按年缴路桥费,月/辆,51500,49697.5,47958.09
 Brand Promotion,120,路演车,舞台车、路演车、小篷车,10米长大型路演车,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,10米长大型路演车,车况功能正常,拥有合法改装手续（行驶证与车辆一致），包含基本保险费、停车费及按年缴路桥费,月/辆,65000,62725,60529.63
@@ -229,7 +229,7 @@ Brand Promotion,227,吉他音箱,,律动、斗牛士、马歇尔同级别品牌,
 Brand Promotion,228,bass音箱,,律动、斗牛士、马歇尔同级别品牌,Event,Event creative and manage fee & Event execution fee,Equipment,Instrument Device,bass音箱,表面无破损，功能正常,律动、斗牛士、马歇尔同级别品牌,unit,303.6,292.97,282.72
 Brand Promotion,229,手鼓,,标准8寸非洲鼓,Event,Event creative and manage fee & Event execution fee,Equipment,Instrument Device,手鼓,标准8寸非洲鼓,7成新及以上,元/个,358.2,345.66,333.56
 Brand Promotion,230,贝斯,,,Event,Event creative and manage fee & Event execution fee,Equipment,Instrument Device,贝斯,表面无破损，功能正常,握威、芬达、斗牛士等同级别品牌,unit,230,221.95,214.18
-Brand Promotion,231,探照灯,,"色 温：6500°K ",Event,Event creative and manage fee & Event execution fee,AVL,Lighting,探照灯,表面无破损，功能正常,"色 温：6500°K 旋 转：水平常规旋转为0-145度,俯仰0°-80°",unit,920,887.8,856.73
+Brand Promotion,231,探照灯,,色 温：6500°K ,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,探照灯,表面无破损，功能正常,色 温：6500°K 旋 转：水平常规旋转为0-145度,俯仰0°-80°,unit,920,887.8,856.73
 Brand Promotion,232,回光灯,,2000W及以上，色温3000K 及以上,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,回光灯,表面无破损，功能正常,2000W及以上，色温3000K 及以上,unit,64.4,62.15,59.97
 Brand Promotion,233,AC灯,,符合CCC标准,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,AC灯,表面无破损，功能正常,符合CCC标准,unit,64.4,62.15,59.97
 Brand Promotion,234,八眼灯,观众灯,捷创、灿宏等同级别品牌，色温: 3200K及以上,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,八眼灯,表面无破损，功能正常,捷创、灿宏等同级别品牌，色温: 3200K及以上,unit,184,177.56,171.35
@@ -244,9 +244,9 @@ Brand Promotion,242,三色基灯,,国产品牌，2400W,Event,Event creative and 
 Brand Promotion,243,三色基灯,,进口品牌，2400W,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,三色基灯,表面无破损，功能正常,进口品牌，2400W,set,138,133.17,128.51
 Brand Promotion,244,单色激光灯,,国产品牌，3w,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,单色激光灯,表面无破损，功能正常,国产品牌，3w,set,276,266.34,257.02
 Brand Promotion,245,单色激光灯,,进口品牌,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,单色激光灯,表面无破损，功能正常,进口品牌,set,300,289.5,279.37
-Brand Promotion,246,全色激光灯,,"国产品牌,5w",Event,Event creative and manage fee & Event execution fee,AVL,Lighting,全色激光灯,表面无破损，功能正常,"国产品牌,5w",set,322,310.73,299.85
-Brand Promotion,247,全色激光灯,,"进口品牌,5W",Event,Event creative and manage fee & Event execution fee,AVL,Lighting,全色激光灯,表面无破损，功能正常,"进口品牌,5W",set,350,337.75,325.93
-Brand Promotion,248,闪光灯,,"国产品牌,600w",Event,Event creative and manage fee & Event execution fee,AVL,Lighting,闪光灯,表面无破损，功能正常,"国产品牌,600w",set,138,133.17,128.51
+Brand Promotion,246,全色激光灯,,国产品牌,5w,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,全色激光灯,表面无破损，功能正常,国产品牌,5w,set,322,310.73,299.85
+Brand Promotion,247,全色激光灯,,进口品牌,5W,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,全色激光灯,表面无破损，功能正常,进口品牌,5W,set,350,337.75,325.93
+Brand Promotion,248,闪光灯,,国产品牌,600w,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,闪光灯,表面无破损，功能正常,国产品牌,600w,set,138,133.17,128.51
 Brand Promotion,249,闪光灯,,进口品牌，600w及以上,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,闪光灯,表面无破损，功能正常,进口品牌，600w及以上,set,138,133.17,128.51
 Brand Promotion,250,电脑灯,,1200W 国产品牌,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,电脑灯,国产品牌,1200W,set,169.28,163.36,157.64
 Brand Promotion,251,电脑灯,,1200W进口品牌,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,电脑灯,进口品牌,1200W,set,184,177.56,171.35
@@ -258,9 +258,9 @@ Brand Promotion,256,电脑灯片,logo灯片,金属/玻璃LOGO灯片,Event,Event 
 Brand Promotion,257,频闪灯,,1000W,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,频闪灯,表面无破损，功能正常,1000W,unit,92,88.78,85.67
 Brand Promotion,258,观众灯,,国产品牌,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,观众灯,表面无破损，功能正常,国产品牌,unit,184,177.56,171.35
 Brand Promotion,259,追光灯,,国产，2500W,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,追光灯,表面无破损，功能正常,国产，2500W,unit,368,355.12,342.69
-Brand Promotion,260,补光灯,,摄影、直播、采访专用补光灯,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,补光灯（带脚架）,表面无破损，功能正常,"摄影、直播、采访专用补光灯 普通国产品牌即可",set,73.6,71.02,68.54
+Brand Promotion,260,补光灯,,摄影、直播、采访专用补光灯,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,补光灯（带脚架）,表面无破损，功能正常,摄影、直播、采访专用补光灯 普通国产品牌即可,set,73.6,71.02,68.54
 Brand Promotion,261,线槽,线槽板、压线槽,普通国产品牌即可,Event,Event creative and manage fee & Event execution fee,Equipment,Equipment,线槽,表面无破损，功能正常,2组以上线槽,set,4.14,4,3.86
-Brand Promotion,262,电脑摇头小BEAM,,"首选：彩熠280   ",Event,Event creative and manage fee & Event execution fee,AVL,Lighting,电脑摇头小BEAM,表面无破损，功能正常,"首选：彩熠280   ",unit,230,221.95,214.18
+Brand Promotion,262,电脑摇头小BEAM,,首选：彩熠280   ,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,电脑摇头小BEAM,表面无破损，功能正常,首选：彩熠280   ,unit,230,221.95,214.18
 Brand Promotion,263,电脑摇头图案灯,logo灯,首选：彩熠SPOT2500,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,电脑摇头图案灯,表面无破损，功能正常,首选：彩熠SPOT2500,unit,552,532.68,514.04
 Brand Promotion,264,电脑大光束,,首选：彩熠SPOT2500,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,电脑大光束,表面无破损，功能正常,首选：彩熠SPOT2500,unit,460,443.9,428.36
 Brand Promotion,265,电缆,,国标产品,Event,Event creative and manage fee & Event execution fee,Equipment,Equipment,电缆,表面无破损，功能正常,国标产品,m,9.2,8.88,8.57
@@ -269,7 +269,7 @@ Brand Promotion,267,散光灯,,国产品牌,Event,Event creative and manage fee 
 Brand Promotion,268,摇头光束灯,光束灯,300W,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,摇头光束灯,表面无破损，功能正常,300W,set,230,221.95,214.18
 Brand Promotion,269,摇头光束灯,光束灯,400W,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,摇头光束灯,表面无破损，功能正常,400W,unit,349.6,337.36,325.56
 Brand Promotion,270,天幕效果灯,,国产品牌,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,天幕效果灯,表面无破损，功能正常,国产品牌,unit,92,88.78,85.67
-Brand Promotion,271,品牌墙射灯（夜晚）,,飞利浦LED导轨射灯科锐cob轨道灯35w ,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,品牌墙射灯（夜晚）,表面无破损，功能正常,"飞利浦LED导轨射灯科锐cob轨道灯35w   ",unit,73.6,71.02,68.54
+Brand Promotion,271,品牌墙射灯（夜晚）,,飞利浦LED导轨射灯科锐cob轨道灯35w ,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,品牌墙射灯（夜晚）,表面无破损，功能正常,飞利浦LED导轨射灯科锐cob轨道灯35w   ,unit,73.6,71.02,68.54
 Brand Promotion,272,信号连接线,,信号连接线,Event,Event creative and manage fee & Event execution fee,Equipment,Equipment,信号连接线,表面无破损，功能正常,信号连接线,unit,3.404,3.28,3.17
 Brand Promotion,273,LOGO灯片,,国标产品，根据品牌需求定制,Event,Event creative and manage fee & Event execution fee,Equipment,Equipment,LOGO灯片,表面无破损，功能正常,国标产品，根据品牌需求定制,unit,96.7564,93.37,90.1
 Brand Promotion,274,LED PAR灯,帕灯、趴灯,室内首选：彩熠354,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,LED PAR灯,表面无破损，功能正常,室内首选：彩熠354,unit,86.7928,83.76,80.82
@@ -277,7 +277,7 @@ Brand Promotion,275,LED PAR灯,帕灯、趴灯,户外首选：彩熠354,Event,Ev
 Brand Promotion,276,4眼观众灯,观众灯,800W 首选：MONO魔龙 ,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,4眼观众灯,800W,首选：MONO魔龙 ,unit,128.8,124.29,119.94
 Brand Promotion,277,筒灯,,220V，12W,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,筒灯,220V，12W,,元/个,72,69.48,67.05
 Brand Promotion,278,灯光架,站灯架、灯架,40*40规格，3米高,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,灯光架,租赁，单立柱灯光架包黑色绒布,40*40规格，3米高,元/套,270,260.55,251.43
-Brand Promotion,279,洗墙灯,,"户外防水防晒24V,36W及以上，七彩颜色",Event,Event creative and manage fee & Event execution fee,AVL,Lighting,洗墙灯,户外防水防晒24V,36W及以上，七彩颜色,元/个,31.5,30.4,29.33
+Brand Promotion,279,洗墙灯,,户外防水防晒24V,36W及以上，七彩颜色,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,洗墙灯,户外防水防晒24V,36W及以上，七彩颜色,元/个,31.5,30.4,29.33
 Brand Promotion,280,钢木结构舞台,舞台板, ,Event,Event creative and manage fee & Event execution fee,Material,Fabrication,钢木结构舞台,舞台高度100-150cm，防火台面,国标产品,m²,44.16,42.61,41.12
 Brand Promotion,281,钢木结构舞台,舞台板,舞台高度150-200cm，防火台面,Event,Event creative and manage fee & Event execution fee,Material,Fabrication,钢木结构舞台,舞台高度150-200cm，防火台面,国标产品,m²,44.16,42.61,41.12
 Brand Promotion,282,发光舞台,,舞台高度30cm，防火台面,Event,Event creative and manage fee & Event execution fee,Material,Fabrication,发光舞台,舞台高度30cm，防火台面,国标产品,m²,36.8,35.51,34.27
@@ -324,23 +324,23 @@ Brand Promotion,322,普通喷绘,,玉龙布 打印精度4pass ,Event,Event creat
 Brand Promotion,323,高精度喷绘,,苏龙布550克 打印精度6pass,Event,Event creative and manage fee & Event execution fee,Material,Printing,高精度喷绘,苏龙布550克,打印精度6pass,㎡,15.64,15.09,14.56
 Brand Promotion,324,苏龙内打灯布,,（高精度）440克 打印精度6pass,Event,Event creative and manage fee & Event execution fee,Material,Printing,苏龙内打灯布,（高精度）440克,打印精度6pass,㎡,15.64,15.09,14.56
 Brand Promotion,325,黑白布,,克重:340G  打印精度6pass,Event,Event creative and manage fee & Event execution fee,Material,Printing,黑白布,克重:340G ,打印精度6pass,㎡,20.7828,20.06,19.35
-Brand Promotion,326,相纸写真,写真,"220g相纸写真,裱光膜/哑膜 打印精度1200dpi 4pass",Event,Event creative and manage fee & Event execution fee,Material,Printing,相纸写真,"220g相纸写真,裱光膜/哑膜",打印精度1200dpi 4pass,㎡,21.16,20.42,19.7
-Brand Promotion,327,写真灯片,,"背喷灯箱片,裱光膜/哑膜",Event,Event creative and manage fee & Event execution fee,Material,Printing,写真灯片,"背喷灯箱片,裱光膜/哑膜",打印精度1200dpi 4pass,㎡,30.36,29.3,28.27
-Brand Promotion,328,可移背胶写真,,"110g背胶写真,裱光膜/哑膜",Event,Event creative and manage fee & Event execution fee,Material,Printing,可移背胶写真,"110g背胶写真,裱光膜/哑膜",打印精度1200dpi 4pass,㎡,25.944,25.04,24.16
+Brand Promotion,326,相纸写真,写真,220g相纸写真,裱光膜/哑膜 打印精度1200dpi 4pass,Event,Event creative and manage fee & Event execution fee,Material,Printing,相纸写真,220g相纸写真,裱光膜/哑膜,打印精度1200dpi 4pass,㎡,21.16,20.42,19.7
+Brand Promotion,327,写真灯片,,背喷灯箱片,裱光膜/哑膜,Event,Event creative and manage fee & Event execution fee,Material,Printing,写真灯片,背喷灯箱片,裱光膜/哑膜,打印精度1200dpi 4pass,㎡,30.36,29.3,28.27
+Brand Promotion,328,可移背胶写真,,110g背胶写真,裱光膜/哑膜,Event,Event creative and manage fee & Event execution fee,Material,Printing,可移背胶写真,110g背胶写真,裱光膜/哑膜,打印精度1200dpi 4pass,㎡,25.944,25.04,24.16
 Brand Promotion,329,单孔透,单透,120g背胶写真，裱光膜/哑膜,Event,Event creative and manage fee & Event execution fee,Material,Printing,单孔透,120g背胶写真，裱光膜/哑膜,打印精度1200dpi  4pass,㎡,34.04,32.85,31.7
 Brand Promotion,330,透明贴,,120g背胶写真，裱光膜/哑膜,Event,Event creative and manage fee & Event execution fee,Material,Printing,透明贴,120g背胶写真，裱光膜/哑膜,打印精度1200dpi  4pass,㎡,44.16,42.61,41.12
 Brand Promotion,331,反光材料,,国产背胶莹光材料，户外写真,Event,Event creative and manage fee & Event execution fee,Material,Printing,反光材料,国产背胶莹光材料，户外写真,打印精度1200dpi  4pass,㎡,32.2,31.07,29.99
 Brand Promotion,332,平板彩喷,UV打印,在任何具有平面的材料高精喷画,Event,Event creative and manage fee & Event execution fee,Material,Printing,平板彩喷,在任何具有平面的材料高精喷画,打印精度1200dpi  4pass,㎡,41.86,40.39,38.98
-Brand Promotion,333,写真画面,,覆纸塑板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆纸塑板(单面),"110g背胶写真,裱光膜/哑膜,3mm纸塑板",打印精度1200dpi 4pass,㎡,34.96,33.74,32.56
-Brand Promotion,334,写真画面,,覆3mmPVC板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆3mmPVC板(单面),"110g背胶写真,裱光膜/哑膜,3mmPVC板",打印精度1200dpi 4pass,㎡,29.9,28.85,27.84
-Brand Promotion,335,写真画面,,覆5mmPVC板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆5mmPVC板(单面),"110g背胶写真,裱光膜/哑膜,5mmPVC板",打印精度1200dpi 4pass,㎡,31.096,30.01,28.96
-Brand Promotion,336,写真画面,,覆KT板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆KT板(单面),"110g背胶写真,裱光膜/哑膜,5mmKT板",打印精度1200dpi 4pass,㎡,28.52,27.52,26.56
-Brand Promotion,337,写真画面,,超卡板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆超卡板(单面),"110g背胶写真,裱光膜/哑膜,5mm超卡板",打印精度1200dpi 4pass,㎡,34.04,32.85,31.7
-Brand Promotion,338,写真画面,,覆亮板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆亮板(单面),"110g背胶写真,裱光膜/哑膜,5mm亮板",打印精度1200dpi 4pass,㎡,26.68,25.75,24.85
-Brand Promotion,339,户外写真,,覆纸塑板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,户外写真画面覆纸塑板(单面),"110g户外背胶写真,裱光膜/哑膜,3mm纸塑板",打印精度1200dpi 4pass,㎡,42.32,40.84,39.41
-Brand Promotion,340,户外写真,,覆5mmPVC板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,户外写真画面覆5mmPVC板(单面),"110g背胶写真,裱光膜/哑膜,5mmPVC板",打印精度1200dpi 4pass,㎡,31.096,30.01,28.96
-Brand Promotion,341,户外写真,,覆超卡板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,户外写真画面覆超卡板(单面),"110g户外背胶写真,裱光膜/哑膜,5mm超卡板",打印精度1200dpi 4pass,㎡,41.4,39.95,38.55
-Brand Promotion,342,户外写真,,覆亮板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,户外写真画面覆亮板(单面),"110g户外背胶写真,裱光膜/哑膜,5mm亮板",打印精度1200dpi 4pass,㎡,34.04,32.85,31.7
+Brand Promotion,333,写真画面,,覆纸塑板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆纸塑板(单面),110g背胶写真,裱光膜/哑膜,3mm纸塑板,打印精度1200dpi 4pass,㎡,34.96,33.74,32.56
+Brand Promotion,334,写真画面,,覆3mmPVC板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆3mmPVC板(单面),110g背胶写真,裱光膜/哑膜,3mmPVC板,打印精度1200dpi 4pass,㎡,29.9,28.85,27.84
+Brand Promotion,335,写真画面,,覆5mmPVC板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆5mmPVC板(单面),110g背胶写真,裱光膜/哑膜,5mmPVC板,打印精度1200dpi 4pass,㎡,31.096,30.01,28.96
+Brand Promotion,336,写真画面,,覆KT板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆KT板(单面),110g背胶写真,裱光膜/哑膜,5mmKT板,打印精度1200dpi 4pass,㎡,28.52,27.52,26.56
+Brand Promotion,337,写真画面,,超卡板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆超卡板(单面),110g背胶写真,裱光膜/哑膜,5mm超卡板,打印精度1200dpi 4pass,㎡,34.04,32.85,31.7
+Brand Promotion,338,写真画面,,覆亮板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,写真画面覆亮板(单面),110g背胶写真,裱光膜/哑膜,5mm亮板,打印精度1200dpi 4pass,㎡,26.68,25.75,24.85
+Brand Promotion,339,户外写真,,覆纸塑板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,户外写真画面覆纸塑板(单面),110g户外背胶写真,裱光膜/哑膜,3mm纸塑板,打印精度1200dpi 4pass,㎡,42.32,40.84,39.41
+Brand Promotion,340,户外写真,,覆5mmPVC板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,户外写真画面覆5mmPVC板(单面),110g背胶写真,裱光膜/哑膜,5mmPVC板,打印精度1200dpi 4pass,㎡,31.096,30.01,28.96
+Brand Promotion,341,户外写真,,覆超卡板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,户外写真画面覆超卡板(单面),110g户外背胶写真,裱光膜/哑膜,5mm超卡板,打印精度1200dpi 4pass,㎡,41.4,39.95,38.55
+Brand Promotion,342,户外写真,,覆亮板(单面),Event,Event creative and manage fee & Event execution fee,Material,Printing,户外写真画面覆亮板(单面),110g户外背胶写真,裱光膜/哑膜,5mm亮板,打印精度1200dpi 4pass,㎡,34.04,32.85,31.7
 Brand Promotion,343,堆箱插牌,插卡,8mmPVC结皮板+UV画面,Event,Event creative and manage fee & Event execution fee,Material,Painting,堆箱插牌,8mmPVC结皮板+UV画面,,平方,270,260.55,251.43
 Brand Promotion,344,车贴,,精喷，130g,Event,Event creative and manage fee & Event execution fee,Material,Printing,车贴,精喷，130g,打印精度6pass,㎡,28.52,27.52,26.56
 Brand Promotion,345,地贴,,加厚4.8m*3m,Event,Event creative and manage fee & Event execution fee,Material,Painting,地贴,加厚4.8m*3m,,米,58.5,56.45,54.48
@@ -350,7 +350,7 @@ Brand Promotion,348,车贴+斜纹防滑地贴,,精喷，140g,Event,Event creativ
 Brand Promotion,349,pvc地胶,,耐磨层0.12mm  厚度2.0mm,Event,Event creative and manage fee & Event execution fee,Material,Accessory,pvc地胶,耐磨层0.12mm  厚度2.0mm,打印精度4pass,平米,110,106.15,102.43
 Brand Promotion,350,软膜,,白色软膜,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,软膜,白色软膜,打印精度1200dpi 4pass,元/平方,67.5,65.14,62.86
 Brand Promotion,351,磨砂帖,,磨砂纹理,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,磨砂帖,磨砂纹理,打印精度1200dpi 4pass,元/平方,22.5,21.71,20.95
-Brand Promotion,352,UV透明贴,,"120g背胶写真，裱光膜/哑膜 打印精度1200dpi  4pass",Event,Event creative and manage fee & Event execution fee,Material,Font production,UV透明贴,"120g背胶写真，裱光膜/哑膜 打印精度1200dpi  4pass","120g背胶写真，裱光膜/哑膜 打印精度1200dpi  4pass",㎡,198,191.07,184.38
+Brand Promotion,352,UV透明贴,,120g背胶写真，裱光膜/哑膜 打印精度1200dpi  4pass,Event,Event creative and manage fee & Event execution fee,Material,Font production,UV透明贴,120g背胶写真，裱光膜/哑膜 打印精度1200dpi  4pass,120g背胶写真，裱光膜/哑膜 打印精度1200dpi  4pass,㎡,198,191.07,184.38
 Brand Promotion,353,灯箱画面软膜,,户外高清打印灯箱软膜,Event,Event creative and manage fee & Event execution fee,Material,Light Box,灯箱画面软膜,户外高清打印灯箱软膜,,㎡,36,34.74,33.52
 Brand Promotion,354,防滑地胶,,PVC,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,防滑地胶,PVC,,平方米,51.3,49.5,47.77
 Brand Promotion,355,木纹贴纸,,欧风牌、海尔牌、科尔曼或同等级别品牌，0.2mm/0.4mm，普通表面,Event,Event creative and manage fee & Event execution fee,Material,Accessory,木纹贴纸,欧风牌、海尔牌、科尔曼或同等级别品牌，0.2mm/0.4mm，普通表面,欧风牌、海尔牌、科尔曼或同等级别品牌，0.2mm/0.4mm，普通表面,㎡,13.8,13.32,12.85
@@ -397,9 +397,9 @@ Brand Promotion,395,抽奖券,,157g铜版纸,Event,Event creative and manage fee
 Brand Promotion,396,抽奖券,,157g铜版纸,Event,Event creative and manage fee & Event execution fee,Material,Printing,抽奖券,157g铜版纸,,元/张,0.252,0.24,0.23
 Brand Promotion,397,立牌,,立式指示牌 不锈钢,Event,Event creative and manage fee & Event execution fee,Material,Functional material,立牌,立式指示牌 不锈钢,,个,28,27.02,26.07
 Brand Promotion,398,台卡,,亚克力,Event,Event creative and manage fee & Event execution fee,Material,Functional material,台卡,亚克力,,个,8,7.72,7.45
-Brand Promotion,399,圣诞树,,"1.5-2m, 含挂饰、配件",Event,Event creative and manage fee & Event execution fee,Material,Atmosphere Material,圣诞树（含装饰）,"1.5-2m, 含挂饰、配件","1.5-2m, 含挂饰、配件",set,110.4,106.54,102.81
-Brand Promotion,400,圣诞树,,"3m, 含挂饰、配件",Event,Event creative and manage fee & Event execution fee,Material,Atmosphere Material,圣诞树（含装饰）,"3m, 含挂饰、配件","3m, 含挂饰、配件",set,460,443.9,428.36
-Brand Promotion,401,圣诞树,,"5m, 含挂饰、配件",Event,Event creative and manage fee & Event execution fee,Material,Atmosphere Material,圣诞树（含装饰）,"5m, 含挂饰、配件","5m, 含挂饰、配件",set,500,482.5,465.61
+Brand Promotion,399,圣诞树,,1.5-2m, 含挂饰、配件,Event,Event creative and manage fee & Event execution fee,Material,Atmosphere Material,圣诞树（含装饰）,1.5-2m, 含挂饰、配件,1.5-2m, 含挂饰、配件,set,110.4,106.54,102.81
+Brand Promotion,400,圣诞树,,3m, 含挂饰、配件,Event,Event creative and manage fee & Event execution fee,Material,Atmosphere Material,圣诞树（含装饰）,3m, 含挂饰、配件,3m, 含挂饰、配件,set,460,443.9,428.36
+Brand Promotion,401,圣诞树,,5m, 含挂饰、配件,Event,Event creative and manage fee & Event execution fee,Material,Atmosphere Material,圣诞树（含装饰）,5m, 含挂饰、配件,5m, 含挂饰、配件,set,500,482.5,465.61
 Brand Promotion,402,便携式农药喷雾器,,国产喷雾器,Event,Event creative and manage fee & Event execution fee,Material,Atmosphere Material,便携式农药喷雾器,国产喷雾器,国标产品,unit,138,133.17,128.51
 Brand Promotion,403,木制栅栏 ,,各色木质栅栏,Event,Event creative and manage fee & Event execution fee,Material,Functional material,木制栅栏 ,各色木质栅栏,40cm以内高，艰巨不大于15cm,m,6.44,6.21,6
 Brand Promotion,404,全铝合金伸缩雨棚,,铝合金伸缩臂、横杆、齿轮等  宝利专用雨篷布+单色丝印,Event,Event creative and manage fee & Event execution fee,Material,Functional material,全铝合金伸缩雨棚,铝合金伸缩臂、横杆、齿轮等  宝利专用雨篷布+单色丝印,铝合金伸缩臂、横杆、齿轮等  宝利专用雨篷布+单色丝印,㎡,47.84,46.17,44.55
@@ -408,11 +408,11 @@ Brand Promotion,406,工作人员T恤,工作服,工作人员T恤,Event,Event crea
 Brand Promotion,407,定制PG服装,,定制服装（含服装、裙子、鞋子）常见普通材质,Event,Event creative and manage fee & Event execution fee,Equipment,Equipment,定制PG服装,定制服装（含服装、裙子、鞋子）常见普通材质,按品牌需要定制,套,600,579,558.74
 Brand Promotion,408,单面超薄灯箱,,单面超薄灯箱,Event,Event creative and manage fee & Event execution fee,Material,Light Box,单面超薄灯箱,倒光板/不锈钢/灯管/灯片/辅料,4公分西铝型材，壁厚为1.8毫米厚，导光板为8毫米国产亚克力激光雕刻打点，光源为台湾晶元芯片，5050灯珠，一米90珠,㎡,350,337.75,325.93
 Brand Promotion,409,双面超薄灯箱,,双面超薄灯箱,Event,Event creative and manage fee & Event execution fee,Material,Light Box,双面超薄灯箱（小铝双面超薄灯箱）,倒光板/不锈钢/灯管/灯片/辅料,4公分双面可翻起西铝型材，壁厚为1.8毫米厚，导光板为8毫米国产亚克力激光雕刻打点，内置钢化玻璃定型，不让灯箱翘角，保持水平垂直，光源为台湾晶元芯片，5050灯珠，一米90珠,㎡,478.4,461.66,445.5
-Brand Promotion,410,吸塑灯箱,,长方形吸塑灯箱/正方形吸塑灯箱/圆形/椭圆形/圆形弧面吸塑灯箱,Event,Event creative and manage fee & Event execution fee,Material,Light Box,吸塑灯箱（长方形吸塑灯箱/正方形吸塑灯箱/圆形/椭圆形/圆形弧面吸塑灯箱）,倒光板/不锈钢/灯管/灯片/辅料,"重钢热镀锌方管焊接主框架规格为30*30,壁厚2.5厚，光源为台湾晶元芯片，5050灯珠，一米90珠，面板为3毫米公爵亚克力国产板，激光雕刻，大型吸塑机塑形吸塑，100丝普通不锈钢50*30直角包边",㎡,533.6,514.92,496.9
-Brand Promotion,411,亚克力灯箱,,"平面异形亚克力灯箱（含画面,UV，热转印或丝印）5mm封板，3-5mm亚克力，LED光源",Event,Event creative and manage fee & Event execution fee,Material,Light Box,亚克力灯箱,"平面异形亚克力灯箱（含画面,UV，热转印或丝印）5mm封板，3-5mm亚克力，LED光源","平面异形亚克力灯箱（含画面,UV，热转印或丝印）5mm封板，3-5mm亚克力，LED光源",㎡,720,694.8,670.48
+Brand Promotion,410,吸塑灯箱,,长方形吸塑灯箱/正方形吸塑灯箱/圆形/椭圆形/圆形弧面吸塑灯箱,Event,Event creative and manage fee & Event execution fee,Material,Light Box,吸塑灯箱（长方形吸塑灯箱/正方形吸塑灯箱/圆形/椭圆形/圆形弧面吸塑灯箱）,倒光板/不锈钢/灯管/灯片/辅料,重钢热镀锌方管焊接主框架规格为30*30,壁厚2.5厚，光源为台湾晶元芯片，5050灯珠，一米90珠，面板为3毫米公爵亚克力国产板，激光雕刻，大型吸塑机塑形吸塑，100丝普通不锈钢50*30直角包边,㎡,533.6,514.92,496.9
+Brand Promotion,411,亚克力灯箱,,平面异形亚克力灯箱（含画面,UV，热转印或丝印）5mm封板，3-5mm亚克力，LED光源,Event,Event creative and manage fee & Event execution fee,Material,Light Box,亚克力灯箱,平面异形亚克力灯箱（含画面,UV，热转印或丝印）5mm封板，3-5mm亚克力，LED光源,平面异形亚克力灯箱（含画面,UV，热转印或丝印）5mm封板，3-5mm亚克力，LED光源,㎡,720,694.8,670.48
 Brand Promotion,412,亚克力发光灯箱调节器,,能进行亚克力灯箱发光色温调节,Event,Event creative and manage fee & Event execution fee,Material,Light Box,亚克力发光灯箱调节器,国标产品,能进行亚克力灯箱发光色温调节,个,270,260.55,251.43
-Brand Promotion,413,卡布灯箱,,铝合金边框+日上LED灯条或同等级别品牌+国产软膜,Event,Event creative and manage fee & Event execution fee,Material,Light Box,卡布灯箱,铝合金边框+日上LED灯条或同等级别品牌+国产软膜,"室内,打印精度 720dpi",㎡,41.86,40.39,38.98
-Brand Promotion,414,拉布灯箱,,铝合金边框+日上LED灯条或同等级别品牌+刀刮布UV,Event,Event creative and manage fee & Event execution fee,Material,Light Box,拉布灯箱,铝合金边框+日上LED灯条或同等级别品牌+刀刮布UV,"单次打印,打印精度720dpi",㎡,41.86,40.39,38.98
+Brand Promotion,413,卡布灯箱,,铝合金边框+日上LED灯条或同等级别品牌+国产软膜,Event,Event creative and manage fee & Event execution fee,Material,Light Box,卡布灯箱,铝合金边框+日上LED灯条或同等级别品牌+国产软膜,室内,打印精度 720dpi,㎡,41.86,40.39,38.98
+Brand Promotion,414,拉布灯箱,,铝合金边框+日上LED灯条或同等级别品牌+刀刮布UV,Event,Event creative and manage fee & Event execution fee,Material,Light Box,拉布灯箱,铝合金边框+日上LED灯条或同等级别品牌+刀刮布UV,单次打印,打印精度720dpi,㎡,41.86,40.39,38.98
 Brand Promotion,415,软膜灯箱,,铝合金边框+飞利浦LED灯条或同等级别品牌+软膜UV打印,Event,Event creative and manage fee & Event execution fee,Material,Light Box,软膜灯箱,铝合金边框+飞利浦LED灯条或同等级别品牌+软膜UV打印,打印精度1200dpi 4pass,平方,725,699.63,675.14
 Brand Promotion,416,X展架,,1.6*0.6M/1.8*0.6M 全铝合金架子,Event,Event creative and manage fee & Event execution fee,Material,Display Rack,X展架,1.6*0.6M/1.8*0.6M 全铝合金架子,1.6*0.6M/1.8*0.6M 全铝合金架子,unit,30.268,29.21,28.19
 Brand Promotion,417,L架,,1.6*0.6M/1.8*0.8M  全铝合金架子,Event,Event creative and manage fee & Event execution fee,Material,Display Rack,L架（1.6*0.6m） 高度可以调节,1.6*0.6M/1.8*0.8M  全铝合金架子,1.6*0.6M/1.8*0.8M  全铝合金架子,unit,23.92,23.08,22.27
@@ -423,7 +423,7 @@ Brand Promotion,421,易拉宝,,1.6*0.6M/1.8*0.6M 全铝合金架子,Event,Event 
 Brand Promotion,422,铁质伸缩画架,,1.6*0.6M/1.8*0.6M 伸缩铁架,Event,Event creative and manage fee & Event execution fee,Material,Accessory,铁质伸缩画架,1.6*0.6M/1.8*0.6M 伸缩铁架,铁架厚度不低于1mm,个,156.6666667,151.18,145.89
 Brand Promotion,423,旗杆,,落地旗杆配旗帜布画面,Event,Event creative and manage fee & Event execution fee,Material,Accessory,旗杆,落地旗杆配旗帜布画面,旗杆高度3m以内，画面不小于40cm*120cm,套,432,416.88,402.29
 Brand Promotion,424,道旗,,5m注水道旗,Event,Event creative and manage fee & Event execution fee,Material,Accessory,道旗,5m注水道旗,,套,189,182.39,176
-Brand Promotion,425,刀旗,,"5米铝合金注水刀旗+旗帜布3.5*1.2 （含画面）",Event,Event creative and manage fee & Event execution fee,Material,Accessory,刀旗（含画面）,5米铝合金注水刀旗+旗帜布3.5*1.2,铝合金厚度不低于1.5mm,元/套,405,390.83,377.15
+Brand Promotion,425,刀旗,,5米铝合金注水刀旗+旗帜布3.5*1.2 （含画面）,Event,Event creative and manage fee & Event execution fee,Material,Accessory,刀旗（含画面）,5米铝合金注水刀旗+旗帜布3.5*1.2,铝合金厚度不低于1.5mm,元/套,405,390.83,377.15
 Brand Promotion,426,门型展架,,铁质门型架 （含PVC胶片）,Event,Event creative and manage fee & Event execution fee,Material,Display Rack,门型展架（含PVC胶片）,铁质门型架,,套,85.5,82.51,79.62
 Brand Promotion,427,A型展架,,60cm*90cm，铁质加厚，双面白板,Event,Event creative and manage fee & Event execution fee,Material,Display Rack,A型展架,60cm*90cm，铁质加厚，双面白板,铁质厚度不低于1.2mm,个,126,121.59,117.33
 Brand Promotion,428,丽屏展架,,1.6*0.6M/1.8*0.8M 重量不低于10公斤,Event,Event creative and manage fee & Event execution fee,Material,Display Rack,丽屏展架,1.6*0.6M/1.8*0.8M 重量不低于10公斤,1.6*0.6M/1.8*0.8M 重量不低于10公斤,个,245,236.43,228.15
@@ -446,7 +446,7 @@ Brand Promotion,444,无边框发光字,,铝合金围边,Event,Event creative and
 Brand Promotion,445,mini发光字,,2厘米亚克力,Event,Event creative and manage fee & Event execution fee,Material,Font Production,mini发光字,2厘米亚克力，内置蓝景2835模组光源，发光面板为2毫米亿亿亚克力雕刻，线为鸽牌红黑软线,2厘米亚克力，内置蓝景2835模组光源，发光面板为2毫米亿亿亚克力雕刻，线为鸽牌红黑软线,m,6.34,6.12,5.9
 Brand Promotion,446,塑边发光字,,专用塑料胶边围边,Event,Event creative and manage fee & Event execution fee,Material,Font Production,塑边发光字,专用塑料胶边围边，内置蓝景2835模组光源，发光面板为2毫米亿亿亚克力雕刻，线为鸽牌红黑软线,专用塑料胶边围边，内置蓝景2835模组光源，发光面板为2毫米亿亿亚克力雕刻，线为鸽牌红黑软线,cm,3.68,3.55,3.43
 Brand Promotion,447,pvc字,,8mmPVC板激光雕刻,Event,Event creative and manage fee & Event execution fee,Material,Font Production,pvc字,8mmPVC板激光雕刻,8mmPVC板激光雕刻,元/厘米,2.7,2.61,2.51
-Brand Promotion,448,雕刻做漆,,"雕刻做漆1cm/1.5cm/2cmPVC 最长边＜50cm",Event,Event creative and manage fee & Event execution fee,Material,Painting,雕刻做漆1cm/1.5cm/2cmPVC,最长边＜50cm,按品牌需求雕刻,cm,1.84,1.78,1.71
+Brand Promotion,448,雕刻做漆,,雕刻做漆1cm/1.5cm/2cmPVC 最长边＜50cm,Event,Event creative and manage fee & Event execution fee,Material,Painting,雕刻做漆1cm/1.5cm/2cmPVC,最长边＜50cm,按品牌需求雕刻,cm,1.84,1.78,1.71
 Brand Promotion,449,4mm亚克力印高清UV藏LED发光软条定制,定制灯牌,1500*3.14,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,4mm亚克力印高清UV藏LED发光软条定制,1500*3.14,,元/ 米,160,154.4,149
 Brand Promotion,450,5mm亚克力印高清UV藏LED发光软条定制,定制灯牌,L2200*W320,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,5mm亚克力印高清UV藏LED发光软条定制,L2200*W320,,m²,346.6666667,334.53,322.82
 Brand Promotion,451,5mm亚克力印高清UV藏LED发光软条定制,定制灯牌,L270*W1300,Event,Event creative and manage fee & Event execution fee,AVL,Lighting,5mm亚克力印高清UV藏LED发光软条定制,L270*W1300,,m²,380,366.7,353.87
@@ -478,7 +478,7 @@ Brand Promotion,476,铁方管,支撑,40*40*1.5mm,Event,Event creative and manage
 Brand Promotion,477,铁方管,支撑,50*50*1.5mm,Event,Event creative and manage fee & Event execution fee,Material,Steel,铁方管,50*50*1.5mm,元/米（租赁or购买）,unit,204.3333333,197.18,190.28
 Brand Promotion,478,铁圆管,支撑,80mm*2.0mm,Event,Event creative and manage fee & Event execution fee,Material,Steel,铁圆管,80mm*2.0mm,6米/根,unit,312.6666667,301.72,291.16
 Brand Promotion,479,40角铁,,壁厚足1.1，非国标（6米/根）,Event,Event creative and manage fee & Event execution fee,Material,Steel,40角铁,壁厚足1.1，非国标（6米/根）,,unit,30,28.95,27.94
-Brand Promotion,480,方管,,"2.0*2.0cm方管/2.5*3.8cm 壁厚足1.5，非国标（6米/根）",Event,Event creative and manage fee & Event execution fee,Material,Steel,2.0*2.0cm方管/2.5*3.8cm方管,壁厚足1.5，非国标（6米/根）,,unit,3.22,3.11,3
+Brand Promotion,480,方管,,2.0*2.0cm方管/2.5*3.8cm 壁厚足1.5，非国标（6米/根）,Event,Event creative and manage fee & Event execution fee,Material,Steel,2.0*2.0cm方管/2.5*3.8cm方管,壁厚足1.5，非国标（6米/根）,,unit,3.22,3.11,3
 Brand Promotion,481,镀锌方管,,40*40mm,Event,Event creative and manage fee & Event execution fee,Material,Steel,40*40镀锌方管,40*40mm,,unit,36,34.74,33.52
 Brand Promotion,482,无缝钢管,,15mm厚度,Event,Event creative and manage fee & Event execution fee,Material,Steel,15mm无缝钢管,15mm厚度,,m,22.5,21.71,20.95
 Brand Promotion,483,方管,,30方管 壁厚足2.0，非国标（6米/根）,Event,Event creative and manage fee & Event execution fee,Material,Font production,优质铁管材料,30方管,壁厚足2.0，非国标（6米/根）,unit,27,26.06,25.14
@@ -509,10 +509,10 @@ Brand Promotion,507,钛金板,,tc4钛合金板材tiAI4V,Event,Event creative and
 Brand Promotion,508,304不锈钢镀钛框架,,304不锈钢厚度60C，宽度1.5cm方管在720摄氏度镀钛工艺,Event,Event creative and manage fee & Event execution fee,Material,Steel,304不锈钢镀钛框架,304不锈钢厚度60C，宽度1.5cm方管在720摄氏度镀钛工艺,,kg,585,564.53,544.77
 Brand Promotion,509,支撑货架,,40*40镀锌方管,Event,Event creative and manage fee & Event execution fee,Material,Steel,支撑货架,40*40镀锌方管,,unit,36,34.74,33.52
 Brand Promotion,510,304不锈钢长合页排铰,,304不锈钢,Event,Event creative and manage fee & Event execution fee,Material,Steel,304不锈钢长合页排铰,304不锈钢,,unit,49.5,47.77,46.1
-Brand Promotion,511,金属条烤金属色包边,,"金属条烤金属色包边(L15000*W1000)*2",Event,Event creative and manage fee & Event execution fee,Material,Steel,金属条烤金属色包边,(L15000*W1000)*2,,m,108,104.22,100.57
-Brand Promotion,512,金属方管烤金属色,,"25mm+15mm金属方管烤金属色 L1500*W2200*2+W2200*2",Event,Event creative and manage fee & Event execution fee,Material,Steel,25mm+15mm金属方管烤金属色,L1500*W2200*2+W2200*2,,m,108,104.22,100.57
-Brand Promotion,513,金属圆管烤金属色,,"10mm金属圆管烤金属色 2000*2+1500*2",Event,Event creative and manage fee & Event execution fee,Material,Steel,10mm金属圆管烤金属色,2000*2+1500*2,,m,108,104.22,100.57
-Brand Promotion,514,金属方管烤金属色,,"25mm+15mm金属方管烤金属漆(L450+W1100)*2",Event,Event creative and manage fee & Event execution fee,Material,Steel,25mm+15mm金属方管烤金属漆,(L450+W1100)*2,,m,90,86.85,83.81
+Brand Promotion,511,金属条烤金属色包边,,金属条烤金属色包边(L15000*W1000)*2,Event,Event creative and manage fee & Event execution fee,Material,Steel,金属条烤金属色包边,(L15000*W1000)*2,,m,108,104.22,100.57
+Brand Promotion,512,金属方管烤金属色,,25mm+15mm金属方管烤金属色 L1500*W2200*2+W2200*2,Event,Event creative and manage fee & Event execution fee,Material,Steel,25mm+15mm金属方管烤金属色,L1500*W2200*2+W2200*2,,m,108,104.22,100.57
+Brand Promotion,513,金属圆管烤金属色,,10mm金属圆管烤金属色 2000*2+1500*2,Event,Event creative and manage fee & Event execution fee,Material,Steel,10mm金属圆管烤金属色,2000*2+1500*2,,m,108,104.22,100.57
+Brand Promotion,514,金属方管烤金属色,,25mm+15mm金属方管烤金属漆(L450+W1100)*2,Event,Event creative and manage fee & Event execution fee,Material,Steel,25mm+15mm金属方管烤金属漆,(L450+W1100)*2,,m,90,86.85,83.81
 Brand Promotion,515,铝合金网,,6菱形铝合金网+喷塑,Event,Event creative and manage fee & Event execution fee,Material,Steel,铝合金网,6菱形铝合金网+喷塑,,元/平方,198,191.07,184.38
 Brand Promotion,516,钢网,,1.2mm 厚 201 材质钢网,Event,Event creative and manage fee & Event execution fee,Material,Steel,钢网,钢网，1.2mm 厚 201 材质钢网,国标产品,元/平米,315,303.98,293.34
 Brand Promotion,517,钢网,,1.5mm 厚 201 材质钢网,Event,Event creative and manage fee & Event execution fee,Material,Steel,钢网,钢网，1.5mm 厚 201 材质钢网,国标产品,元/平米,315,303.98,293.34
@@ -528,7 +528,7 @@ Brand Promotion,526,多层板,,18mm多层板,Event,Event creative and manage fee
 Brand Promotion,527,三聚氰胺板,,三聚氰胺板,Event,Event creative and manage fee & Event execution fee,Material,Raw Material,三聚氰胺板,,国标产品,平方,112.5,108.56,104.76
 Brand Promotion,528,软木板,,软木饰面板（进口）,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,软木板,软木饰面板（进口）,国标产品,平方米,99,95.54,92.19
 Brand Promotion,529,软木板防水油漆,,软木板防水树脂漆,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,软木板防水油漆,软木板防水树脂漆,国标产品,桶,540,521.1,502.86
-Brand Promotion,530,防火板,,"1.0mm厚度  1.2*2.4m 红、黄、蓝、白色防火板 ",Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,红、黄、蓝、白色防火板,1.0mm  1.2*2.4m，百强，中普，富丽华或同等级别品牌,国标产品,m²,27.6,26.63,25.7
+Brand Promotion,530,防火板,,1.0mm厚度  1.2*2.4m 红、黄、蓝、白色防火板 ,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,红、黄、蓝、白色防火板,1.0mm  1.2*2.4m，百强，中普，富丽华或同等级别品牌,国标产品,m²,27.6,26.63,25.7
 Brand Promotion,531,防火板,,0.8mm厚度 （素色） 1220X2440，莫干山牌或同等级别品牌防火板,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,防火板,1220X2440X0.8mm（素色），莫干山牌或同等级别品牌防火板,国标产品,m²,32.2,31.07,29.99
 Brand Promotion,532,防火板,,1.2mm厚度 （银拉丝）1220X2440，莫干山牌或同等级别品牌防火板,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,防火板,1220X2440X1.2mm（银拉丝），莫干山牌或同等级别品牌防火板,国标产品,m²,55.2,53.27,51.4
 Brand Promotion,533,有机板,,3mm有机板，1.2*2.4m,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,3mm有机板,1.2*2.4m，3mm亿亿或同等级别品牌有机板,国标产品,m²,13.8,13.32,12.85
@@ -587,7 +587,7 @@ Brand Promotion,585,PVC管 ,,直径16mm/20mm,Event,Event creative and manage fee
 Brand Promotion,586,PVC连接件,,φ20（直接、弯头、三通）,Event,Event creative and manage fee & Event execution fee,Material,Accessory,PVC连接件,φ20（直接、弯头、三通）,,unit,0.552,0.53,0.51
 Brand Promotion,587,中性胶,,300ml,Event,Event creative and manage fee & Event execution fee,Material,Accessory,中性胶,300ml,中性胶（金鹰翔广或同等级别品牌胶8300-300ml）,unit,7.36,7.1,6.85
 Brand Promotion,588,水泥钉,,40*0.6KG,Event,Event creative and manage fee & Event execution fee,Material,Accessory,水泥钉,40*0.6KG,国标产品,box,5.52,5.33,5.14
-Brand Promotion,589,焊条,,"焊条φ2.5*5KG 大西洋或金桥焊条 ",Event,Event creative and manage fee & Event execution fee,Material,Steel,焊条φ2.5*5KG,大西洋或金桥焊条 ,国标产品,unit,1.84,1.78,1.71
+Brand Promotion,589,焊条,,焊条φ2.5*5KG 大西洋或金桥焊条 ,Event,Event creative and manage fee & Event execution fee,Material,Steel,焊条φ2.5*5KG,大西洋或金桥焊条 ,国标产品,unit,1.84,1.78,1.71
 Brand Promotion,590,焊丝,,不锈钢焊丝 304 308 309 316L ,Event,Event creative and manage fee & Event execution fee,Material,Steel,焊丝,不锈钢焊丝 304 308 309 316L ,国标产品,元/KG,18,17.37,16.76
 Brand Promotion,591,扎带,,3*100*1000支/3*120*1000支/3*200*500支/4*250*250支,Event,Event creative and manage fee & Event execution fee,Material,Accessory,扎带,3*100*1000支/3*120*1000支/3*200*500支/4*250*250支,不低于升腾牌或同等级别品牌质量,bag,7.36,7.1,6.85
 Brand Promotion,592,气动码钉,,普通水泥+H597,Event,Event creative and manage fee & Event execution fee,Material,Accessory,气动码钉,国标304不锈钢,钉厚不低于6mm,box,3.68,3.55,3.43
@@ -697,8 +697,8 @@ Brand Promotion,695,艺术吸管,,食品级塑料彩色吸管,Event,Event creati
 Brand Promotion,696,干冰,,温度-78度，纯度不低于99%,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,干冰,温度-78度，纯度不低于99%,食用级,元/场,135,130.28,125.72
 Brand Promotion,697,不锈钢量酒器,,30ml不锈钢双头量酒器,Event,Event creative and manage fee & Event execution fee,Material,Functional material,不锈钢量酒器,30ml不锈钢双头量酒器,304不锈钢级,元/个,32.661,31.52,30.41
 Brand Promotion,698,吧勺,,不锈钢吧勺,Event,Event creative and manage fee & Event execution fee,Material,Functional material,吧勺,不锈钢吧勺,304不锈钢级,元/个,21.726,20.97,20.23
-Brand Promotion,699,特调鸡尾酒,调酒师,"按天计价1名专业的鸡尾酒师+2 名服务生",Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,特调鸡尾酒团队及其他调酒材料, 现场包含1 名专业的鸡尾酒师+2 名服务生，预估调制 80 杯鸡尾酒用于活动现场饮用，除纯生啤酒，其他材料由鸡尾酒师提供,,人/天,3150,3039.75,2933.36
-Brand Promotion,700,特调鸡尾酒,调酒师,"按杯计价 1 名专业的鸡尾酒师+2 名服务生",Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,特调鸡尾酒团队及其他调酒材料, 现场包含1 名专业的鸡尾酒师+2 名服务生，鸡尾酒起订量 80，用于活动现场饮用，除啤酒，其他材料由鸡尾酒师提供,,杯,47.36666667,45.71,44.11
+Brand Promotion,699,特调鸡尾酒,调酒师,按天计价1名专业的鸡尾酒师+2 名服务生,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,特调鸡尾酒团队及其他调酒材料, 现场包含1 名专业的鸡尾酒师+2 名服务生，预估调制 80 杯鸡尾酒用于活动现场饮用，除纯生啤酒，其他材料由鸡尾酒师提供,,人/天,3150,3039.75,2933.36
+Brand Promotion,700,特调鸡尾酒,调酒师,按杯计价 1 名专业的鸡尾酒师+2 名服务生,Event,Event creative and manage fee & Event execution fee,People,Event Specific Personnel,特调鸡尾酒团队及其他调酒材料, 现场包含1 名专业的鸡尾酒师+2 名服务生，鸡尾酒起订量 80，用于活动现场饮用，除啤酒，其他材料由鸡尾酒师提供,,杯,47.36666667,45.71,44.11
 Brand Promotion,701,草坪,,仿真加密草坪，25mm,Event,Event creative and manage fee & Event execution fee,Material,Sheet Material,草坪,仿真加密草坪，25mm,仿真加密草坪，25mm,平方米,40.5,39.08,37.71
 Brand Promotion,702,相框,,白色美式实木摆台相框,Event,Event creative and manage fee & Event execution fee,Material,Printing,相框,白色美式实木摆台相框,规格15cm*10cm以内,元/个,31.5,30.4,29.33
 Brand Promotion,703,打印机,,爱普生XP2100彩色喷墨打印机,Event,Event creative and manage fee & Event execution fee,Material,Printing,现场打印机,租用，爱普生XP2100彩色喷墨打印机,租用，爱普生XP2100彩色喷墨打印机,元/个,900,868.5,838.1
@@ -716,7 +716,7 @@ Brand Promotion,714,一次性纹身贴,,烫金不干胶贴纸定做哑银拉丝�
 Brand Promotion,715,渠道礼品仓储费用,,标准仓库,Event,Event creative and manage fee & Event execution fee,Logistics,Warehouse,渠道礼品仓储费用,标准仓库,,平米/天,0.9,0.87,0.84
 Brand Promotion,716,仓储,,标准仓库，防火防水防盗，库管管理,Event,Event creative and manage fee & Event execution fee,Logistics,logistics,仓储,标准仓库，防火防水防盗，库管管理,9.6米内货车能够顺利进出,M2 /day,135,130.28,125.72
 Brand Promotion,717,手举牌,,小型异性手举牌，雪弗板写真,Event,Event creative and manage fee & Event execution fee,Material,Printing,手举牌,小型异性手举牌，雪弗板写真,,块,270,260.55,251.43
-Brand Promotion,718,口布,,"1664盘同色 ＋刺绣logo""",Event,Event creative and manage fee & Event execution fee,Material,Printing,口布,"1664盘同色 ＋刺绣logo""",30*30cm以内，刺绣处理光滑无线头,块,27,26.06,25.14
+Brand Promotion,718,口布,,1664盘同色 ＋刺绣logo,Event,Event creative and manage fee & Event execution fee,Material,Printing,口布,1664盘同色 ＋刺绣logo,30*30cm以内，刺绣处理光滑无线头,块,27,26.06,25.14
 Brand Promotion,719,罗马伞,大伞,3m*3m,Event,Event creative and manage fee & Event execution fee,Material,Functional material,罗马伞,3m*3m,高度不低于2.5m，骨架钢材厚度不低于2mm,把,1512,1459.08,1408.01
 Brand Promotion,720,欧式白色大型篷房,欧式蓬,5m*5m,Event,Event creative and manage fee & Event execution fee,Material,Functional material,欧式白色大型篷房,5m*5m,8级抗风材质,个,1080,1042.2,1005.72
 Brand Promotion,721,帐篷,,3m*3m,Event,Event creative and manage fee & Event execution fee,Material,Functional material,帐篷,3m*3m,加厚防水牛津布，骨架钢材厚度不低于2mm,顶,261,251.87,243.05
