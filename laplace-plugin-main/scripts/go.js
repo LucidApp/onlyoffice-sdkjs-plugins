@@ -1,9 +1,7 @@
 /**
- * Laplace Plugin Main v0.6
+ * Laplace Plugin Main v0.6.1
  */
 (function (window, undefined) {
-  let data_calsberg = [];
-  let data_pepsi = [];
   let data = [];
   let client = "";
   let keys_set = new Set();
@@ -43,37 +41,46 @@
       window.Asc.plugin.getInputHelper().createWindow();
       console.log("[auto]window init", window.Asc.plugin.info);
 
-      // FIXME: ugly but work
-      data_calsberg = parseCsv(csv_data_calsberg);
-      data_calsberg.map(item => {
-        item.id = item.item_no;
-      })
-      data_pepsi = parseCsv(csv_data_pepsi);
-      data_pepsi.map(item => {
-        // item.id = parseInt(item.no);
-        item.id = item.item_no;
-      });
-      // data_pepsi_v0 = parseCsv(csv_data_pepsi_v0);
-      // data_pepsi_v0.map(item => {
-      //   item.id = item.item_no;
-      //   item.description = "";
-      // });
       const { documentTitle } = window.Asc.plugin.info;
       if (pepsi_keywords.some(kw => documentTitle.includes(kw))) client = "pepsi";
       else if (calsberg_keyword.some(kw => documentTitle.includes(kw))) client = "calsberg";
+      else if (dingjin_keywords.some(kw => documentTitle.includes(kw))) client = "dingjin";
+      else if (dingyi_keywords.some(kw => documentTitle.includes(kw))) client = "dingyi";
       else client = "calsberg";
       switch (client) {
         case "calsberg":
+          const data_calsberg = parseCsv(csv_data_calsberg);
+          data_calsberg.map(item => {
+            item.id = item.item_no;
+          })
           data = data_calsberg;
           break;
         case "pepsi":
+          const data_pepsi = parseCsv(csv_data_pepsi);
+          data_pepsi.map(item => {
+            // item.id = parseInt(item.no);
+            item.id = item.item_no;
+          });
           data = data_pepsi;
           break;
         case "dingjin":
+          const data_dingjin = parseCsv(csv_data_dingjin);
+          data_dingjin.map(item => {
+            // item.id = parseInt(item.no);
+            item.id = item.item_no;
+          });
+          data = data_dingjin;
+          break;
         case "dingyi":
+          const data_dingyi = parseCsv(csv_data_dingyi);
+          data_dingyi.map(item => {
+            // item.id = parseInt(item.no);
+            item.id = item.item_no;
+          });
+          data = data_dingyi;
+          break;
         case "jinlongyu":
         default:
-          data = data_calsberg;
           break;
       }
       console.log("csv data:", documentTitle, data);
@@ -112,6 +119,9 @@
     Asc.scope.item = item;
 
     if (client === "pepsi") {
+      /**
+       * Auto Fill Pepsi Data
+       */
       this.callCommand(function () {
         const oSheet = Api.GetActiveSheet();
         const oCell = oSheet.GetActiveCell();
@@ -141,6 +151,9 @@
         console.log("[cmd-input]pepsi DONE");
       }, false, true);
     } else if (client === "calsberg") {
+      /**
+       * Auto Fill Calsberg Data
+       */
       this.callCommand(function () {
         const oSheet = Api.GetActiveSheet();
         const oCell = oSheet.GetActiveCell();
@@ -168,6 +181,72 @@
         oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
         // Select Next Row
         oSheet.GetRangeByNumber(row + 1, 6).Select();
+        console.log("[cmd-input]cmd DONE");
+        localStorage.setItem('current_cell_row', row);
+      }, false, true, function(res, error) {
+        console.debug("cell fill done.", res, error, this, localStorage);
+      });
+    } else if (client === "dingjin") {
+      /**
+       * Auto Fill Dingjin Data
+       */
+      this.callCommand(function () {
+        const oSheet = Api.GetActiveSheet();
+        const oCell = oSheet.GetActiveCell();
+        const item = Asc.scope.item;
+        let row = oCell.GetRow();
+        let col = oCell.GetCol();
+        console.log("[cmd-input]cell:", oCell, row, col);
+        console.log("[cmd-input]item:", item);
+        // Item No.
+        oSheet.GetRangeByNumber(row, 0).SetValue(`${item.item_no}`);
+        // 标准名
+        oSheet.GetRangeByNumber(row, 3).SetValue(`${item.name}`);
+        // 材料
+        oSheet.GetRangeByNumber(row, 4).SetValue(`${item.specification}`);
+        // 单位
+        oSheet.GetRangeByNumber(row, 10).SetValue(item.unit);
+        // 单价
+        oSheet.GetRangeByNumber(row, 13).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, 13).SetValue(item.price);
+        // 总价 - 年度议价
+        oSheet.GetRangeByNumber(row, 15).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, 15).SetValue(`=I${row + 1} * J${row + 1} * L${row + 1} * N${row + 1}`);
+        // 备注
+        oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
+        console.log("[cmd-input]cmd DONE");
+        localStorage.setItem('current_cell_row', row);
+      }, false, true, function(res, error) {
+        console.debug("cell fill done.", res, error, this, localStorage);
+      });
+    } else if (client === "dingyi") {
+      /**
+       * Auto Fill Dingyi Data
+       */
+      this.callCommand(function () {
+        const oSheet = Api.GetActiveSheet();
+        const oCell = oSheet.GetActiveCell();
+        const item = Asc.scope.item;
+        let row = oCell.GetRow();
+        let col = oCell.GetCol();
+        console.log("[cmd-input]cell:", oCell, row, col);
+        console.log("[cmd-input]item:", item);
+        // Item No.
+        oSheet.GetRangeByNumber(row, 1).SetValue(`${item.item_no}`);
+        // 标准名
+        oSheet.GetRangeByNumber(row, 5).SetValue(`${item.name}`);
+        // 材质
+        oSheet.GetRangeByNumber(row, 6).SetValue(`${item.specification}`);
+        // 单位
+        oSheet.GetRangeByNumber(row, 12).SetValue(item.unit);
+        // 单价
+        oSheet.GetRangeByNumber(row, 14).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, 14).SetValue(item.price);
+        // 总价 - 年度议价
+        oSheet.GetRangeByNumber(row, 15).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, 15).SetValue(`=K${row + 1} * L${row + 1} * M${row + 1} * N${row + 1}`);
+        // 备注
+        oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
         console.log("[cmd-input]cmd DONE");
         localStorage.setItem('current_cell_row', row);
       }, false, true, function(res, error) {
