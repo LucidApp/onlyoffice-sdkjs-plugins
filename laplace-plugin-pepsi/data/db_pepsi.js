@@ -1,4 +1,7 @@
-﻿const csv_data_pepsi = `item_no,name,alias,desc,supplier_price,start_date,end_date,year,price_type,supplier_no,supplier_name,business_no,price_type_en,company,department,fee,tax_desc,code,fee_cate,category,specification,description,extra,factor,remark,unit,price
+﻿/**
+ * Laplace Data Pepsi v0.6.1
+ */
+const csv_data_pepsi = `item_no,name,alias,desc,supplier_price,start_date,end_date,year,price_type,supplier_no,supplier_name,business_no,price_type_en,company,department,fee,tax_desc,code,fee_cate,category,specification,description,extra,factor,remark,unit,price
 ITEM1104M7000636496,店招,门头、招牌,全新制作 普通 3*3,2022年度***报价单,2022-01-01 00:00:00,2022-12-31 00:00:00,2022,售点,1501570,重庆奥策广告有限公司,1104,CP,重庆行销区域,主城部,0,6%进项税,DZ01,制作物费,店招（普通）,高精度喷绘画面(科宝灯布户外专用)；真不锈钢包边（现折亚光拉丝）；角钢；设计费、制作及安装人工、铺料等；计算方式：长*宽,600DPI，厚度550；3*3，0.8mm厚 ；3*3，3mm厚，有防锈漆；辅料为焊条、铆钉、膨胀螺丝等,质保期：1年；2年；2年,,,元／平方米,90
 ITEM1104M7000636497,店招,,店招换布，不含骨架 3*3,2022年度***报价单,2022-01-01 00:00:00,2022-12-31 00:00:00,2022,售点,1501570,重庆奥策广告有限公司,1104,CP,重庆行销区域,主城部,0,6%进项税,DZ02,制作物费,店招换布,高精度喷绘画面(科宝灯布户外专用)；真不锈钢包边（现折亚光拉丝）；设计费、制作及安装人工、铺料等；计算方式：长*宽,600DPI，厚度550；3*3，0.8mm厚 ；辅料为焊条、铆钉、膨胀螺丝等,质保期：1年；2年,,,元／平方米,40
 ITEM1104M7000636498,店招,,双面假灯箱（计算方式见详情）,2022年度***报价单,2022-01-01 00:00:00,2022-12-31 00:00:00,2022,售点,1501570,重庆奥策广告有限公司,1104,CP,重庆行销区域,主城部,0,6%进项税,DZ03,制作物费,店招（双面假灯箱）,双面喷绘，不锈钢磨砂边框；国标40角钢主体边框 两次防锈处理；配套及辅件；计算方式：厚40cm以下，只计算长*宽；超过40cm部分，（长+超出长度）*（宽+超出宽度）,计算方式：厚40cm以下，只计算长*宽；超过40cm部分，（长+超出长度）*（宽+超出宽度）；厚度不超过40cm，超出部分另计,质保期：1年；2年,,计算方式：厚40cm以下，只计算长*宽；超过40cm部分，（长+超出长度）*（宽+超出宽度）；厚度不超过40cm，超出部分另计,元／平方米,110
