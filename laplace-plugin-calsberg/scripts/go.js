@@ -48,7 +48,7 @@
         item.id = item.item_no;
       });
       data = data_calsberg;
-      console.log("csv data:", documentTitle, data);
+      console.log("csv data:", data);
     }
   };
 
