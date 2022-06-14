@@ -27,7 +27,7 @@
     })
   };
 
-  console.log("[go]START!", window.location.pathname, window.location.href, window.location);
+  // console.log("[go]START!", window.location.pathname, window.location.href, window.location);
 
   window.isInit = false;
 
