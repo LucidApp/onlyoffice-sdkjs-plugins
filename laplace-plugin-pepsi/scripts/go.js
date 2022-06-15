@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Pepsi v0.6.1
+ * Laplace Plugin Pepsi v0.6.2
  */
 (function (window, undefined) {
   let data = [];
