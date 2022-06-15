@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.6.1
+ * Laplace Plugin Main v0.6.2
  */
 (function (window, undefined) {
   let data = [];
@@ -199,7 +199,7 @@
         console.log("[cmd-input]cell:", oCell, row, col);
         console.log("[cmd-input]item:", item);
         // Item No.
-        oSheet.GetRangeByNumber(row, 0).SetValue(`${item.item_no}`);
+        // oSheet.GetRangeByNumber(row, 0).SetValue(`${item.item_no}`);
         // 标准名
         oSheet.GetRangeByNumber(row, 3).SetValue(`${item.name}`);
         // 材料
@@ -213,7 +213,7 @@
         oSheet.GetRangeByNumber(row, 15).SetNumberFormat("_(￥* #,##0.00_)");
         oSheet.GetRangeByNumber(row, 15).SetValue(`=I${row + 1} * J${row + 1} * L${row + 1} * N${row + 1}`);
         // 备注
-        oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
+        // oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
         console.log("[cmd-input]cmd DONE");
         localStorage.setItem('current_cell_row', row);
       }, false, true, function(res, error) {
@@ -232,7 +232,7 @@
         console.log("[cmd-input]cell:", oCell, row, col);
         console.log("[cmd-input]item:", item);
         // Item No.
-        oSheet.GetRangeByNumber(row, 1).SetValue(`${item.item_no}`);
+        // oSheet.GetRangeByNumber(row, 1).SetValue(`${item.item_no}`);
         // 标准名
         oSheet.GetRangeByNumber(row, 5).SetValue(`${item.name}`);
         // 材质
@@ -244,9 +244,9 @@
         oSheet.GetRangeByNumber(row, 14).SetValue(item.price);
         // 总价 - 年度议价
         oSheet.GetRangeByNumber(row, 15).SetNumberFormat("_(￥* #,##0.00_)");
-        oSheet.GetRangeByNumber(row, 15).SetValue(`=K${row + 1} * L${row + 1} * M${row + 1} * N${row + 1}`);
+        oSheet.GetRangeByNumber(row, 15).SetValue(`=K${row + 1} * L${row + 1} * N${row + 1} * O${row + 1}`);
         // 备注
-        oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
+        // oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
         console.log("[cmd-input]cmd DONE");
         localStorage.setItem('current_cell_row', row);
       }, false, true, function(res, error) {
