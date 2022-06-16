@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.6.2
+ * Laplace Plugin Main v0.6.3
  */
 (function (window, undefined) {
   let data = [];
