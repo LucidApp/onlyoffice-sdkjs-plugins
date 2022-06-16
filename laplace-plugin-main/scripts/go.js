@@ -382,9 +382,10 @@
       item.is_target = false;
       item.is_missed = false;
       let search_string = item.name + (item.alias || "") + (item.desc || "");
+      let search_string_low = search_string.toLowerCase();
       // console.debug("search_string:", search_string);
       for (let key of keys_set) {
-        if (search_string.includes(key)
+        if (search_string_low.includes(key.toLowerCase())
           || item.item_no.includes(key)) {
           item.hit_count++;
           item.is_target = true;
