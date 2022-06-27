@@ -26,6 +26,7 @@
             "buttons"        : [ ],
 
             "events" : [
+                "onEnableMouseEvent",
                 "event_onClick",
                 "onClick",
                 "onTargetPositionChanged",

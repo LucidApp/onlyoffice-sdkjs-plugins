@@ -1,13 +1,15 @@
 /**
- * Laplace Plugin Main v0.7.2f0
+ * Laplace Plugin Budget v0.7.2f14
  */
+
+let supplier_mode = false;
+let budget_mode = false;
+let can_show_input_helper = true;
 (function (window, undefined) {
   let data = [];
-  let supplier_mode = false;
+  let search_data = [];
+
   let client;
-  let supplier_category;
-  let supplier_corp;
-  let keys_set = new Set();
 
   const calsberg_keyword = ["嘉士伯", "calsberg"];
   const pepsi_keywords = ["百事", "pepsi"];
@@ -15,9 +17,22 @@
   const dingyi_keywords = ["顶益", "dingyi", "康面"];
   const jinglongyu_keywords = ["金龙鱼", "jinglongyu"];
 
-  // 供应商支持
+  const parseCsv = csv => {
+    let lines = csv.split("\n");
+    const header = lines[0].split(",")
+    lines.shift(); // get rid of definitions
+    return lines.map(line => {
+      const bits = line.split(",");
+      let obj = {};
+      header.forEach((h, i) => obj[h] = bits[i]); // or use reduce here
+      return obj;
+    })
+  };
+
+// 供应商支持
+  const data_supplier_wood = parseCsv(csv_data_supplier_lpi_wood_making);
   const supplier_flag = ["供应商", "supplier"];
-  const supplier_wood_keywords = ["木制作", "wood"]
+  const supplier_wood_keywords = ["木制作", "wood"];
   const supplier_corp_dict = [
     {
       "id": "wood_1",
@@ -40,22 +55,20 @@
       "price_tag": "zlsx_high",
       "keywords": ["卓历尚行", "高品质"],
     },
-  ]
+  ];
+
+  // FIXME: supplier
+  let supplier_category;
+  let supplier_corp = supplier_corp_dict[0];
+  // FIXME: very ugly
+  // budget_mode = true;
+  // data_supplier_wood.map(item => item.price = getItemPrice(item));
+  // budget_mode = false;
+
+  let keys_set = new Set();
 
   let current_col;
   let current_cell;
-
-  const parseCsv = csv => {
-    let lines = csv.split("\n");
-    const header = lines[0].split(",")
-    lines.shift(); // get rid of definitions
-    return lines.map(line => {
-      const bits = line.split(",");
-      let obj = {};
-      header.forEach((h, i) => obj[h] = bits[i]); // or use reduce here
-      return obj;
-    })
-  };
 
   // console.log("[go]START!", window.location.pathname, window.location.href, window.location);
 
@@ -129,7 +142,6 @@
         if (supplier_wood_keywords.some(kw => documentTitle.includes(kw))) supplier_category = "wood";
         switch (supplier_category) {
           case "wood":
-            const data_supplier_wood = parseCsv(csv_data_supplier_lpi_wood_making);
             data_supplier_wood.map(item => {
               item.id = item.item_no;
             });
@@ -164,36 +176,14 @@
 
   window.Asc.plugin.event_onTargetPositionChanged = function () {
     console.debug("[event]onTargetPositionChanged:", this);
-    window.Asc.plugin.executeMethod("GetCurrentContentControl", [], function(obj) {
-      console.debug("[event]GetCurrentContentControl:", obj);
-    });
-    window.Asc.plugin.executeMethod("GetCurrentContentControlPr", ["text"], function(obj){
-      console.debug("[event]GetCurrentContentControlPr:", obj);
-      window.Asc.plugin.currentContentControl = obj;
-      console.debug("[event]GetCurrentContentControlPr DATA:", window.Asc, window.Asc.plugin)
-    });
-
-    // this.callCommand(function () {
-    //     let oSheet = Api.GetActiveSheet();
-    //     let oCell = oSheet.GetActiveCell();
-    //     console.log('[cmd]cell:', oCell);
-    //     let row = oCell.GetRow();
-    //     let col = oCell.GetCol();
-    //     // let oValue= oCell.GetValue();
-    //     oSheet.GetRangeByNumber(0, 0).SetValue(`111`);
-    //     localStorage.setItem('current_cell_row', row);
-    //     localStorage.setItem('current_cell_col', col);
-    //     // localStorage.setItem('current_cell_value', oValue);
-    //     console.debug('[cmd]cell position:', row, col);
-    //     return col;
-    //   }, false, false,
-    //   function (result, error) {
-    //     // current_col = localStorage.getItem('current_cell_col');
-    //     console.log("[in-callback]localStorage:", localStorage, this);
-    //     // console.log("[in-callback]Current Col:", current_col, current_cell);
-    //     console.log("[in-callback]result:", result, error, this);
-    //   }
-    // );
+    // window.Asc.plugin.executeMethod("GetCurrentContentControl", [], function(obj) {
+    //   console.debug("[event]GetCurrentContentControl:", obj);
+    // });
+    // window.Asc.plugin.executeMethod("GetCurrentContentControlPr", ["text"], function(obj){
+    //   console.debug("[event]GetCurrentContentControlPr:", obj);
+    //   window.Asc.plugin.currentContentControl = obj;
+    //   console.debug("[event]GetCurrentContentControlPr DATA:", window.Asc, window.Asc.plugin)
+    // });
   };
 
   window.Asc.plugin.onEnableMouseEvent = function(isEnabled) {
@@ -214,13 +204,6 @@
     });
   };
 
-  // window.Asc.plugin.event_onClick = function(isSelectionUse) {
-  //   window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function(obj) {
-  //     window.Asc.plugin.currentContentControl = obj;
-  //     console.log("[event]onClick:", isSelectionUse, obj, this);
-  //   });
-  // };
-
   window.Asc.plugin.onMethodReturn = function(obj) {
     // if (window.Asc.plugin.info.methodName !== "ShowInputHelper" && window.Asc.plugin.info.methodName !== "UnShowInputHelper") {
     //   console.debug("[event]onMethodReturn:", data, window.Asc.plugin.info.methodName, window.Asc.plugin);
@@ -229,149 +212,157 @@
 
   window.Asc.plugin.inputHelper_onSelectItem = function (t) {
     if (!t) return;
-    const item = data.map(i => i).find(i => i.id === t.id);
+    const item = search_data.map(i => i).find(i => i.id === t.id || i.item_no === t.id);
     console.log("[auto]inputHelper_onSelectItem", t, item);
     item.price = getItemPrice(item);
     Asc.scope.item = item;
 
-    if (!supplier_mode) {
-      if (client === "pepsi") {
-        /**
-         * Auto Fill Pepsi Data
-         */
-        this.callCommand(function () {
-          const oSheet = Api.GetActiveSheet();
-          const oCell = oSheet.GetActiveCell();
-          const item = Asc.scope.item;
-          let row = oCell.GetRow();
-          let col = oCell.GetCol();
-          // 标准名
-          oSheet.GetRangeByNumber(row, 5).SetValue(`${item.name}`);
-          // 代码
-          oSheet.GetRangeByNumber(row, 6).SetValue(`${item.code}`);
-          // Item No.
-          oSheet.GetRangeByNumber(row, 7).SetValue(`${item.item_no}`);
-          // 项目
-          oSheet.GetRangeByNumber(row, 8).SetValue(`${item.specification}`);
-          // 材料说明
-          oSheet.GetRangeByNumber(row, 9).SetValue(`${item.description}`);
-          // 单价
-          oSheet.GetRangeByNumber(row, 14).SetNumberFormat("_(￥* #,##0.00_)");
-          oSheet.GetRangeByNumber(row, 14).SetValue(item.price);
-          // 单位
-          oSheet.GetRangeByNumber(row, 15).SetValue(item.unit);
-          // 总价
-          oSheet.GetRangeByNumber(row, 19).SetNumberFormat("_(￥* #,##0.00_)");
-          oSheet.GetRangeByNumber(row, 19).SetValue(`=N${row + 1} * O${row + 1} * S${row + 1}`);
-          // Select Next Row
-          oSheet.GetRangeByNumber(row + 1, 5).Select();
-          console.log("[cmd-input]pepsi DONE");
-        }, false, true);
-      } else if (client === "calsberg") {
-        /**
-         * Auto Fill Calsberg Data
-         */
-        this.callCommand(function () {
-          const oSheet = Api.GetActiveSheet();
-          const oCell = oSheet.GetActiveCell();
-          const item = Asc.scope.item;
-          let row = oCell.GetRow();
-          let col = oCell.GetCol();
-          console.log("[cmd-input]cell:", oCell, row, col);
-          console.log("[cmd-input]item:", item);
-          // 标准名
-          oSheet.GetRangeByNumber(row, 6).SetValue(`${item.name}`);
-          // 描述
-          oSheet.GetRangeByNumber(row, 7).SetValue(`${item.name}, ${item.specification}, ${item.description}`);
-          // 单价
-          oSheet.GetRangeByNumber(row, 12).SetNumberFormat("_(￥* #,##0.00_)");
-          oSheet.GetRangeByNumber(row, 12).SetValue(item.price);
-          // 单位
-          oSheet.GetRangeByNumber(row, 13).SetValue(item.unit);
-          // 年度议价
-          oSheet.GetRangeByNumber(row, 16).SetNumberFormat("_(￥* #,##0.00_)");
-          oSheet.GetRangeByNumber(row, 16).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
-          // 总价
-          oSheet.GetRangeByNumber(row, 18).SetNumberFormat("_(￥* #,##0.00_)");
-          oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} *  P${row + 1}`);
-          // Item No.
-          oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
-          // Select Next Row
-          oSheet.GetRangeByNumber(row + 1, 6).Select();
-          console.log("[cmd-input]cmd DONE");
-          localStorage.setItem('current_cell_row', row);
-          localStorage.setItem('current_cell_col', col);
-        }, true, true, function(res, error) {
-          console.debug("cell fill done.", res, error, this, localStorage);
-        });
-      } else if (client === "dingjin") {
-        /**
-         * Auto Fill Dingjin Data
-         */
-        this.callCommand(function () {
-          const oSheet = Api.GetActiveSheet();
-          const oCell = oSheet.GetActiveCell();
-          const item = Asc.scope.item;
-          let row = oCell.GetRow();
-          let col = oCell.GetCol();
-          console.log("[cmd-input]cell:", oCell, row, col);
-          console.log("[cmd-input]item:", item);
-          // Item No.
-          // oSheet.GetRangeByNumber(row, 0).SetValue(`${item.item_no}`);
-          // 标准名
-          oSheet.GetRangeByNumber(row, 3).SetValue(`${item.name}`);
-          // 材料
-          oSheet.GetRangeByNumber(row, 4).SetValue(`${item.specification}`);
-          // 单位
-          oSheet.GetRangeByNumber(row, 10).SetValue(item.unit);
-          // 单价
-          oSheet.GetRangeByNumber(row, 13).SetNumberFormat("_(￥* #,##0.00_)");
-          oSheet.GetRangeByNumber(row, 13).SetValue(item.price);
-          // 总价 - 年度议价
-          oSheet.GetRangeByNumber(row, 15).SetNumberFormat("_(￥* #,##0.00_)");
-          oSheet.GetRangeByNumber(row, 15).SetValue(`=I${row + 1} * J${row + 1} * L${row + 1} * N${row + 1}`);
-          // 备注
-          // oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
-          console.log("[cmd-input]cmd DONE");
-          localStorage.setItem('current_cell_row', row);
-        }, false, true, function(res, error) {
-          console.debug("cell fill done.", res, error, this, localStorage);
-        });
-      } else if (client === "dingyi") {
-        /**
-         * Auto Fill Dingyi Data
-         */
-        this.callCommand(function () {
-          const oSheet = Api.GetActiveSheet();
-          const oCell = oSheet.GetActiveCell();
-          const item = Asc.scope.item;
-          let row = oCell.GetRow();
-          let col = oCell.GetCol();
-          console.log("[cmd-input]cell:", oCell, row, col);
-          console.log("[cmd-input]item:", item);
-          // Item No.
-          // oSheet.GetRangeByNumber(row, 1).SetValue(`${item.item_no}`);
-          // 标准名
-          oSheet.GetRangeByNumber(row, 5).SetValue(`${item.name}`);
-          // 材质
-          oSheet.GetRangeByNumber(row, 6).SetValue(`${item.specification}`);
-          // 单位
-          oSheet.GetRangeByNumber(row, 12).SetValue(item.unit);
-          // 单价
-          oSheet.GetRangeByNumber(row, 14).SetNumberFormat("_(￥* #,##0.00_)");
-          oSheet.GetRangeByNumber(row, 14).SetValue(item.price);
-          // 总价 - 年度议价
-          oSheet.GetRangeByNumber(row, 15).SetNumberFormat("_(￥* #,##0.00_)");
-          oSheet.GetRangeByNumber(row, 15).SetValue(`=K${row + 1} * L${row + 1} * N${row + 1} * O${row + 1}`);
-          // 备注
-          // oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
-          console.log("[cmd-input]cmd DONE");
-          localStorage.setItem('current_cell_row', row);
-        }, false, true, function(res, error) {
-          console.debug("cell fill done.", res, error, this, localStorage);
-        });
+    if (!supplier_mode && !budget_mode) {
+      switch (client) {
+        case "pepsi":
+          /**
+           * Auto Fill Pepsi Data
+           */
+          this.callCommand(function () {
+            const oSheet = Api.GetActiveSheet();
+            const oCell = oSheet.GetActiveCell();
+            const item = Asc.scope.item;
+            let row = oCell.GetRow();
+            let col = oCell.GetCol();
+            // 标准名
+            oSheet.GetRangeByNumber(row, 5).SetValue(`${item.name}`);
+            // 代码
+            oSheet.GetRangeByNumber(row, 6).SetValue(`${item.code}`);
+            // Item No.
+            oSheet.GetRangeByNumber(row, 7).SetValue(`${item.item_no}`);
+            // 项目
+            oSheet.GetRangeByNumber(row, 8).SetValue(`${item.specification}`);
+            // 材料说明
+            oSheet.GetRangeByNumber(row, 9).SetValue(`${item.description}`);
+            // 单价
+            oSheet.GetRangeByNumber(row, 14).SetNumberFormat("_(￥* #,##0.00_)");
+            oSheet.GetRangeByNumber(row, 14).SetValue(item.price);
+            // 单位
+            oSheet.GetRangeByNumber(row, 15).SetValue(item.unit);
+            // 总价
+            oSheet.GetRangeByNumber(row, 19).SetNumberFormat("_(￥* #,##0.00_)");
+            oSheet.GetRangeByNumber(row, 19).SetValue(`=N${row + 1} * O${row + 1} * S${row + 1}`);
+            // Select Next Row
+            oSheet.GetRangeByNumber(row + 1, 5).Select();
+            console.log("[cmd-input]pepsi DONE");
+          }, false, true);
+          break;
+
+        case "calsberg":
+          /**
+           * Auto Fill Calsberg Data
+           */
+          this.callCommand(function () {
+            const oSheet = Api.GetActiveSheet();
+            const oCell = oSheet.GetActiveCell();
+            const item = Asc.scope.item;
+            let row = oCell.GetRow();
+            let col = oCell.GetCol();
+            console.log("[cmd-input]cell:", oCell, row, col);
+            console.log("[cmd-input]item:", item);
+            // 标准名
+            oSheet.GetRangeByNumber(row, 6).SetValue(`${item.name}`);
+            // 描述
+            oSheet.GetRangeByNumber(row, 7).SetValue(`${item.name}, ${item.specification}, ${item.description}`);
+            // 单价
+            oSheet.GetRangeByNumber(row, 12).SetNumberFormat("_(￥* #,##0.00_)");
+            oSheet.GetRangeByNumber(row, 12).SetValue(item.price);
+            // 单位
+            oSheet.GetRangeByNumber(row, 13).SetValue(item.unit);
+            // 年度议价
+            oSheet.GetRangeByNumber(row, 16).SetNumberFormat("_(￥* #,##0.00_)");
+            oSheet.GetRangeByNumber(row, 16).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
+            // 总价
+            oSheet.GetRangeByNumber(row, 18).SetNumberFormat("_(￥* #,##0.00_)");
+            oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} *  P${row + 1}`);
+            // Item No.
+            oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
+            // Select Next Row
+            oSheet.GetRangeByNumber(row + 1, 6).Select();
+            console.log("[cmd-input]cmd DONE");
+            localStorage.setItem('current_cell_row', row);
+            localStorage.setItem('current_cell_col', col);
+          }, false, true, function(res, error) {
+            console.debug("cell fill done.", res, error, this, localStorage);
+          });
+          break;
+
+        case "dingjin":
+          /**
+           * Auto Fill Dingjin Data
+           */
+          this.callCommand(function () {
+            const oSheet = Api.GetActiveSheet();
+            const oCell = oSheet.GetActiveCell();
+            const item = Asc.scope.item;
+            let row = oCell.GetRow();
+            let col = oCell.GetCol();
+            console.log("[cmd-input]cell:", oCell, row, col);
+            console.log("[cmd-input]item:", item);
+            // Item No.
+            // oSheet.GetRangeByNumber(row, 0).SetValue(`${item.item_no}`);
+            // 标准名
+            oSheet.GetRangeByNumber(row, 3).SetValue(`${item.name}`);
+            // 材料
+            oSheet.GetRangeByNumber(row, 4).SetValue(`${item.specification}`);
+            // 单位
+            oSheet.GetRangeByNumber(row, 10).SetValue(item.unit);
+            // 单价
+            oSheet.GetRangeByNumber(row, 13).SetNumberFormat("_(￥* #,##0.00_)");
+            oSheet.GetRangeByNumber(row, 13).SetValue(item.price);
+            // 总价 - 年度议价
+            oSheet.GetRangeByNumber(row, 15).SetNumberFormat("_(￥* #,##0.00_)");
+            oSheet.GetRangeByNumber(row, 15).SetValue(`=I${row + 1} * J${row + 1} * L${row + 1} * N${row + 1}`);
+            // 备注
+            // oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
+            console.log("[cmd-input]cmd DONE");
+            localStorage.setItem('current_cell_row', row);
+          }, false, true, function(res, error) {
+            console.debug("cell fill done.", res, error, this, localStorage);
+          });
+          break;
+
+        case "dingyi":
+          /**
+           * Auto Fill Dingyi Data
+           */
+          this.callCommand(function () {
+            const oSheet = Api.GetActiveSheet();
+            const oCell = oSheet.GetActiveCell();
+            const item = Asc.scope.item;
+            let row = oCell.GetRow();
+            let col = oCell.GetCol();
+            console.log("[cmd-input]cell:", oCell, row, col);
+            console.log("[cmd-input]item:", item);
+            // Item No.
+            // oSheet.GetRangeByNumber(row, 1).SetValue(`${item.item_no}`);
+            // 标准名
+            oSheet.GetRangeByNumber(row, 5).SetValue(`${item.name}`);
+            // 材质
+            oSheet.GetRangeByNumber(row, 6).SetValue(`${item.specification}`);
+            // 单位
+            oSheet.GetRangeByNumber(row, 12).SetValue(item.unit);
+            // 单价
+            oSheet.GetRangeByNumber(row, 14).SetNumberFormat("_(￥* #,##0.00_)");
+            oSheet.GetRangeByNumber(row, 14).SetValue(item.price);
+            // 总价 - 年度议价
+            oSheet.GetRangeByNumber(row, 15).SetNumberFormat("_(￥* #,##0.00_)");
+            oSheet.GetRangeByNumber(row, 15).SetValue(`=K${row + 1} * L${row + 1} * N${row + 1} * O${row + 1}`);
+            // 备注
+            // oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
+            console.log("[cmd-input]cmd DONE");
+            localStorage.setItem('current_cell_row', row);
+          }, false, true, function(res, error) {
+            console.debug("cell fill done.", res, error, this, localStorage);
+          });
+          break;
       }
-    } else {
+    } else if (supplier_mode) {
       if (supplier_category === "wood") {
         /**
          * Auto Fill Supplier Wood Making Data
@@ -399,6 +390,34 @@
           console.log("[cmd-input]supplier-wood DONE");
         }, false, true);
       }
+    } else if (budget_mode) {
+      /**
+       * Auto Fill Supplier Wood Making Data
+       */
+      // TODO:
+      this.callCommand(function () {
+        const oSheet = Api.GetActiveSheet();
+        const oCell = oSheet.GetActiveCell();
+        const item = Asc.scope.item;
+        let row = oCell.GetRow();
+        let col = oCell.GetCol();
+        // 标准名
+        oSheet.GetRangeByNumber(row, col).SetValue(`${item.name}`);
+        // 材料说明
+        oSheet.GetRangeByNumber(row, col + 1).SetValue(`${item.specification}`);
+        // 单位
+        oSheet.GetRangeByNumber(row, col + 7).SetValue(item.unit);
+        // 单价
+        oSheet.GetRangeByNumber(row, col + 9).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, col + 9).SetValue(item.price);
+        // 供应商
+        oSheet.GetRangeByNumber(row, col + 16).SetValue(supplier_corp['name']);
+        // 总价
+        // oSheet.GetRangeByNumber(row, 13).SetNumberFormat("_(￥* #,##0.00_)");
+        // oSheet.GetRangeByNumber(row, 13).SetValue(`=I${row + 1} * K${row + 1} * M${row + 1}`);
+        // Select Next Row
+        console.log("[cmd-input]budget-fill DONE");
+      }, false, true);
     }
 
 
@@ -415,38 +434,58 @@
     window.Asc.plugin.getInputHelper().unShow();
   };
 
-  window.Asc.plugin.event_onInputHelperInput = function (data) {
+  window.Asc.plugin.event_onInputHelperInput = function (obj) {
     console.debug("[event]onInputHelperInput:", client, "|", supplier_corp);
-    console.debug("[event]onInputHelperInput:", data, data.add, this);
+    console.debug("[event]onInputHelperInput:", obj, obj.add, this);
     if (!client && !supplier_corp) return;
-    if (data.add)
-      window.Asc.plugin.currentText += data.text;
-    else
-      window.Asc.plugin.currentText = data.text;
 
-    // FIXME: May Cause File Save & Co-Editing Issues.
-    // this.callCommand(function () {
-    //     let oSheet = Api.GetActiveSheet();
-    //     let oCell = oSheet.GetActiveCell();
-    //     console.log('[cmd]cell:', oCell);
-    //     let row = oCell.GetRow();
-    //     let col = oCell.GetCol();
-    //     // let oValue= oCell.GetValue();
-    //     oSheet.GetRangeByNumber(0, 0).SetValue(`111`);
-    //     localStorage.setItem('current_cell_row', row);
-    //     localStorage.setItem('current_cell_col', col);
-    //     // localStorage.setItem('current_cell_value', oValue);
-    //     console.debug('[cmd]cell position:', row, col, '|', oText, ',', oValue);
-    //     return col;
-    //   }, false, true,
-    //   function (result, error) {
-    //     // current_col = localStorage.getItem('current_cell_col');
-    //     console.log("[in-callback]localStorage:", localStorage, this);
-    //     // console.log("[in-callback]Current Col:", current_col, current_cell);
-    //     console.log("[in-callback]result:", result, error, this);
-    //   }
-    // );
-    // console.log("Current Col:", current_col, current_cell, localStorage);
+    this.callCommand(function () {
+        let oSheet = Api.GetActiveSheet();
+        let oCell = oSheet.GetActiveCell();
+        console.log('[cmd]cell:', oCell);
+        let row = oCell.GetRow();
+        let col = oCell.GetCol();
+        // let oValue= oCell.GetValue();
+        // oSheet.GetRangeByNumber(0, 0).SetValue(`111`);
+        localStorage.setItem('current_cell_row', row);
+        localStorage.setItem('current_cell_col', col);
+        // localStorage.setItem('current_cell_value', oValue);
+        console.debug('[cmd]cell position:', row, col);
+      }, false, false,
+      function (result, error) {
+        // console.log("[in-callback]Current Col:", current_col, current_cell);
+        console.log("[in-callback]result:", result, error, this);
+        switch (localStorage['current_cell_col']) {
+          case '6':
+            budget_mode = false;
+            can_show_input_helper = true;
+            search_data = data;
+            break;
+          case '22':
+            budget_mode = true;
+            can_show_input_helper = true;
+            search_data = data_supplier_wood;
+            supplier_corp = supplier_corp_dict[0];
+            break;
+          default:
+            can_show_input_helper = false;
+            console.debug('can not show inputHelper cause not in search column');
+            window.Asc.plugin.getInputHelper().unShow();
+        }
+        console.log("[in-callback]localStorage:", localStorage, can_show_input_helper);
+      }
+    );
+
+    if (!can_show_input_helper) {
+      console.debug('can not show inputHelper cause not in search column');
+      window.Asc.plugin.getInputHelper().unShow();
+      return;
+    }
+
+    if (obj.add)
+      window.Asc.plugin.currentText += obj.text;
+    else
+      window.Asc.plugin.currentText = obj.text;
 
 
     // correct by space
@@ -472,8 +511,8 @@
       for (let i in variants) {
         const item = variants[i];
         items.push({
-          id: item.id,
-          text: `${item.id}. ${item.name}${item.alias && item.alias.length > 0 ? "(" + item.alias + ")" : ""}, ${item.desc} ,<b style="color:red;">￥${getItemPrice(item)}</b>`
+          id: item.item_no || item.id,
+          text: `${item.item_no}. ${item.name}${item.alias && item.alias.length > 0 ? "(" + item.alias + ")" : ""}, ${item.desc} ,<b style="color:red;">￥${getItemPrice(item)}</b>`
         });
       }
 
@@ -487,7 +526,7 @@
   // Item Multiple Price Case
   const getItemPrice = item => {
     if (!item) return 0;
-    if (supplier_mode && supplier_corp && supplier_corp["price_tag"]) {
+    if ((supplier_mode || budget_mode) && supplier_corp && supplier_corp["price_tag"]) {
       const item_price_tag = supplier_corp["price_tag"];
       return item[`price_${item_price_tag}`];
     }
@@ -520,26 +559,12 @@
       keys_set.add(t);
     });
     console.debug("_keys_set:", text, "|", keys_set);
-    // chrome.storage.local.get(['client'], function(result) {
-    //   console.log('Value currently is ', result);
-    //   client = result.client;
-    // });
-    // let client_id = localStorage.getItem('client_id');
-    // switch (client_id) {
-    //   case '1':
-    //     data = data_calsberg;
-    //     break;
-    //   case '2':
-    //     data = data_pepsi;
-    //     break;
-    // }
-    // console.log("current data:", data);
 
     window.isAutoCompleteReady = true;
 
     const ret = [];
 
-    data.map(item => {
+    search_data.map(item => {
       item.hit_count = 0;
       item.is_target = false;
       item.is_missed = false;
