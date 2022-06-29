@@ -1,8 +1,9 @@
 /**
- * Laplace Plugin Budget v0.7.2f14
+ * Laplace Plugin Budget v0.7.2g0
  */
 
-let supplier_mode = false;
+let is_supplier_table = false;
+let is_budget_table = false;
 let budget_mode = false;
 let can_show_input_helper = true;
 (function (window, undefined) {
@@ -29,20 +30,35 @@ let can_show_input_helper = true;
     })
   };
 
-// 供应商支持
+  // 供应商支持
+  const data_supplier_build = parseCsv(csv_data_supplier_lpi_build);
+  const data_supplier_device = parseCsv(csv_data_supplier_lpi_device);
   const data_supplier_wood = parseCsv(csv_data_supplier_lpi_wood_making);
+  const data_supplier = [
+    ...new Set(
+      [
+        ...data_supplier_build,
+        ...data_supplier_device,
+        ...data_supplier_wood,
+      ]
+    )
+  ]
+
   const supplier_flag = ["供应商", "supplier"];
   const supplier_wood_keywords = ["木制作", "wood"];
   const supplier_corp_dict = [
+    // 木制作 wood
     {
       "id": "wood_1",
+      "no": "1",
       "category": "wood making",
       "name": "叁肆玖",
       "price_tag": "349",
-      "keywords": ["叁肆玖"],
+      "keywords": ["叁肆玖", "349"],
     },
     {
       "id": "wood_2",
+      "no": "2",
       "category": "wood making",
       "name": "卓历尚行 常规品质",
       "price_tag": "zlsx_normal",
@@ -50,20 +66,111 @@ let can_show_input_helper = true;
     },
     {
       "id": "wood_2h",
+      "no": "2h",
       "category": "wood making",
       "name": "卓历尚行 高品质",
       "price_tag": "zlsx_high",
       "keywords": ["卓历尚行", "高品质"],
+    },
+    // 搭建类 build
+    {
+      "id": "build_1",
+      "no": "1",
+      "category": "build",
+      "name": "桔子",
+      "price_tag": "juzi",
+      "keywords": ["桔子", "orange", "juzi"],
+    },
+    {
+      "id": "build_2",
+      "no": "2",
+      "category": "build",
+      "name": "孙国江",
+      "price_tag": "sunguojiang",
+      "keywords": ["孙国江", "guojiang", "sunguojiang"],
+    },
+    {
+      "id": "build_3",
+      "no": "3",
+      "category": "build",
+      "name": "昊诚文化",
+      "price_tag": "haocheng",
+      "keywords": ["昊诚", "haocheng"],
+    },
+    // 设备类 device
+    {
+      "id": "device_1",
+      "no": "1",
+      "category": "device",
+      "name": "鼎呈",
+      "price_tag": "dingcheng",
+      "keywords": ["鼎呈", "dingcheng"],
+    },
+    {
+      "id": "device_2",
+      "no": "2",
+      "category": "device",
+      "name": "野牛",
+      "price_tag": "yeniu",
+      "keywords": ["野牛", "yeniu"],
+    },
+    {
+      "id": "device_3",
+      "no": "3",
+      "category": "device",
+      "name": "声准",
+      "price_tag": "shengzhun",
+      "keywords": ["声准", "shengzhun"],
+    },
+    {
+      "id": "device_4",
+      "no": "4",
+      "category": "device",
+      "name": "梵点",
+      "price_tag": "fandian",
+      "keywords": ["梵点", "fandian"],
+    },
+    {
+      "id": "device_5",
+      "no": "5",
+      "category": "device",
+      "name": "昊诚文化",
+      "price_tag": "haocheng",
+      "keywords": ["昊诚", "haocheng"],
+    },
+    // 输出类 output
+    {
+      "id": "output_1",
+      "no": "1",
+      "category": "output",
+      "name": "协同",
+      "price_tag": "xietong",
+      "keywords": ["协同", "xietong"],
+    },
+    {
+      "id": "output_2",
+      "no": "2",
+      "category": "output",
+      "name": "真彩",
+      "price_tag": "zhencai",
+      "keywords": ["真彩", "zhencai"],
+    },
+    {
+      "id": "output_3",
+      "no": "3",
+      "category": "output",
+      "name": "美港",
+      "price_tag": "meigang",
+      "keywords": ["美港", "meigang"],
     },
   ];
 
   // FIXME: supplier
   let supplier_category;
   let supplier_corp = supplier_corp_dict[0];
-  // FIXME: very ugly
-  // budget_mode = true;
-  // data_supplier_wood.map(item => item.price = getItemPrice(item));
-  // budget_mode = false;
+
+  // 预算支持
+  const budget_flag = ["预算", "budget"];
 
   let keys_set = new Set();
 
@@ -90,12 +197,17 @@ let can_show_input_helper = true;
 
       const { documentTitle } = window.Asc.plugin.info;
 
-      if (supplier_flag.some(kw => documentTitle.includes(kw))) {
-        supplier_mode = true
+      if (budget_flag.some(kw => documentTitle.includes(kw))) {
+        is_budget_table = true
         client = null;
       }
 
-      if (!supplier_mode) {
+      if (supplier_flag.some(kw => documentTitle.includes(kw))) {
+        is_supplier_table = true
+        client = null;
+      }
+
+      if (!is_supplier_table) {
         if (pepsi_keywords.some(kw => documentTitle.includes(kw))) client = "pepsi";
         else if (calsberg_keyword.some(kw => documentTitle.includes(kw))) client = "calsberg";
         else if (dingjin_keywords.some(kw => documentTitle.includes(kw))) client = "dingjin";
@@ -217,7 +329,7 @@ let can_show_input_helper = true;
     item.price = getItemPrice(item);
     Asc.scope.item = item;
 
-    if (!supplier_mode && !budget_mode) {
+    if (!is_supplier_table && !budget_mode) {
       switch (client) {
         case "pepsi":
           /**
@@ -362,7 +474,7 @@ let can_show_input_helper = true;
           });
           break;
       }
-    } else if (supplier_mode) {
+    } else if (is_supplier_table) {
       if (supplier_category === "wood") {
         /**
          * Auto Fill Supplier Wood Making Data
@@ -464,7 +576,7 @@ let can_show_input_helper = true;
           case '22':
             budget_mode = true;
             can_show_input_helper = true;
-            search_data = data_supplier_wood;
+            search_data = data_supplier;
             supplier_corp = supplier_corp_dict[0];
             break;
           default:
@@ -526,11 +638,11 @@ let can_show_input_helper = true;
   // Item Multiple Price Case
   const getItemPrice = item => {
     if (!item) return 0;
-    if ((supplier_mode || budget_mode) && supplier_corp && supplier_corp["price_tag"]) {
-      const item_price_tag = supplier_corp["price_tag"];
+    if ((is_supplier_table || budget_mode) && supplier_corp && supplier_corp["no"]) {
+      const item_price_tag = supplier_corp["no"];
       return item[`price_${item_price_tag}`];
     }
-    return item["price"];
+    return item["price_1"] || item["price"];
   }
 
   function getInputHelperSize() {
