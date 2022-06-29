@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Budget v0.7.2g0
+ * Laplace Plugin Budget v0.7.2g1
  */
 
 let is_supplier_table = false;
@@ -33,12 +33,14 @@ let can_show_input_helper = true;
   // 供应商支持
   const data_supplier_build = parseCsv(csv_data_supplier_lpi_build);
   const data_supplier_device = parseCsv(csv_data_supplier_lpi_device);
+  const data_supplier_output = parseCsv(csv_data_supplier_lpi_output);
   const data_supplier_wood = parseCsv(csv_data_supplier_lpi_wood_making);
   const data_supplier = [
     ...new Set(
       [
         ...data_supplier_build,
         ...data_supplier_device,
+        ...data_supplier_output,
         ...data_supplier_wood,
       ]
     )
