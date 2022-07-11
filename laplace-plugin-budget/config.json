@@ -21,13 +21,12 @@
             "initData"        : "",
 
 			"isUpdateOleOnResize" : false,
-            "initOnSelectionChanged" : false,
+            "initOnSelectionChanged" : true,
 
             "buttons"        : [ ],
 
             "events" : [
                 "onEnableMouseEvent",
-                "event_onClick",
                 "onClick",
                 "onTargetPositionChanged",
                 "onCommandCallback",
