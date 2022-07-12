@@ -21,7 +21,7 @@
             "initData"        : "",
 
 			"isUpdateOleOnResize" : false,
-            "initOnSelectionChanged" : true,
+            "initOnSelectionChanged" : false,
 
             "buttons"        : [ ],
 

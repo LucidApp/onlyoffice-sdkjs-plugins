@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Budget v0.7.3a1
+ * Laplace Plugin Budget v0.7.3b2.6
  */
 
 let is_supplier_table = false;
@@ -283,7 +283,6 @@ let in_action = false;
     // if (!in_action) {
     //   in_action = true;
     // getCurrentCursor(true);
-    // excuteCurrentCursor();
     // }
 
     // FIXME: temporary test
@@ -297,23 +296,23 @@ let in_action = false;
 
   window.Asc.plugin.onCommandCallback = function (result) {
     console.log("[callback]Current Col:", current_col, current_cell);
-    switch (localStorage['current_cell_col']) {
-      case '6':
-        budget_mode = false;
-        can_show_input_helper = true;
-        search_data = data;
-        break;
-      case '22':
-        budget_mode = true;
-        can_show_input_helper = true;
-        search_data = data_supplier;
-        supplier_corp = supplier_corp_dict[0];
-        break;
-      default:
-        can_show_input_helper = false;
-        console.debug('can not show inputHelper cause not in search column');
-        window.Asc.plugin.getInputHelper().unShow();
-    }
+    // switch (localStorage['current_cell_col']) {
+    //   case '6':
+    //     budget_mode = false;
+    //     can_show_input_helper = true;
+    //     search_data = data;
+    //     break;
+    //   case '22':
+    //     budget_mode = true;
+    //     can_show_input_helper = true;
+    //     search_data = data_supplier;
+    //     supplier_corp = supplier_corp_dict[0];
+    //     break;
+    //   default:
+    //     can_show_input_helper = false;
+    //     console.debug('can not show inputHelper cause not in search column');
+    //     window.Asc.plugin.getInputHelper().unShow();
+    // }
     // console.log("[callback]result:", result);
   };
 
@@ -351,17 +350,6 @@ let in_action = false;
 
   window.Asc.plugin.event_onClick = function (isSelectionUse) {
     console.debug("[---event]event_onClick:", isSelectionUse);
-    window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function (obj) {
-      console.debug("[event]event_onClick GetCurrentContentControlPr:", obj);
-      window.Asc.plugin.currentContentControl = obj;
-      var controlTag = obj ? obj.Tag : "";
-      if (isSelectionUse)
-        controlTag = "";
-    });
-  };
-
-  window.Asc.plugin.onClick = function (isSelectionUse) {
-    console.debug("[---event]onClick:", isSelectionUse);
     window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function (obj) {
       console.debug("[event]event_onClick GetCurrentContentControlPr:", obj);
       window.Asc.plugin.currentContentControl = obj;
@@ -454,8 +442,8 @@ let in_action = false;
             // oSheet.GetRangeByNumber(row + 1, 6).Select();
             Api.Save();
             console.log("[cmd-input]cmd DONE");
-            localStorage.setItem('current_cell_row', row);
-            localStorage.setItem('current_cell_col', col);
+            // localStorage.setItem('current_cell_row', row);
+            // localStorage.setItem('current_cell_col', col);
           }, false, true, function (res, error) {
             console.debug("cell fill done.", res, error, this, localStorage);
           });
@@ -490,7 +478,7 @@ let in_action = false;
             // 备注
             // oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
             console.log("[cmd-input]cmd DONE");
-            localStorage.setItem('current_cell_row', row);
+            // localStorage.setItem('current_cell_row', row);
           }, false, true, function (res, error) {
             console.debug("cell fill done.", res, error, this, localStorage);
           });
@@ -525,7 +513,7 @@ let in_action = false;
             // 备注
             // oSheet.GetRangeByNumber(row, 16).SetValue(`${item.description}`);
             console.log("[cmd-input]cmd DONE");
-            localStorage.setItem('current_cell_row', row);
+            // localStorage.setItem('current_cell_row', row);
           }, false, true, function (res, error) {
             console.debug("cell fill done.", res, error, this, localStorage);
           });
@@ -593,62 +581,27 @@ let in_action = false;
 
     // window.dispatchEvent(new KeyboardEvent('keydown', {'key':'a'} ));
     // window.dispatchEvent(new KeyboardEvent('keyup', {'key':'a'} ));
+    inputReset();
     // window.Asc.plugin.info.recalculate = true;
-    window.Asc.plugin.executeMethod("InputText", [item.name, window.Asc.plugin.currentText]);
+    // window.Asc.plugin.executeMethod("InputText", [item.name, window.Asc.plugin.currentText]);
     window.Asc.plugin.getInputHelper().unShow();
   };
 
   window.Asc.plugin.event_onInputHelperClear = function () {
-    console.log("[event]onInputHelperClear...", keys_set, this);
-    // keys_set.clear();
-    // window.Asc.plugin.currentText = "";
-    // window.Asc.plugin.getInputHelper().unShow();
+    console.log("[event]onInputHelperClear...", keys_set, localStorage, this);
+    if (isCursorMoved()) {
+      inputReset();
+    }
   };
 
   window.Asc.plugin.event_onInputHelperInput = function (obj) {
     console.debug("[event]onInputHelperInput:", client, "|", supplier_corp);
-    console.debug("[event]onInputHelperInput:", obj, obj.add, this);
+    console.debug("[event]onInputHelperInput:", obj, obj.add, data);
     if (!client && !supplier_corp) return;
 
     // if (!in_action) {
       // in_action = true
-      // this.callCommand(function () {
-      //     let oSheet = Api.GetActiveSheet();
-      //     let oCell = oSheet.GetActiveCell();
-      //     console.log('[cmd]cell:', oCell);
-      //     let row = oCell.Row;
-      //     let col = oCell.Col;
-      //     // let oValue= oCell.GetValue();
-      //     // oSheet.GetRangeByNumber(0, 0).SetValue(`111`);
-      //     localStorage.setItem('current_cell_row', row);
-      //     localStorage.setItem('current_cell_col', col);
-      //     // localStorage.setItem('current_cell_value', oValue);
-      //     console.debug('[cmd]cell position:', row, col);
-      //     // oCell.SetValue('');
-      //   }, false, false,
-      //   function (result, error) {
-      //     // console.log("[in-callback]Current Col:", current_col, current_cell);
-      //     console.log("[in-callback]result:", result, error, this);
-      //     switch (localStorage['current_cell_col']) {
-      //       case '6':
-      //         budget_mode = false;
-      //         can_show_input_helper = true;
-      //         search_data = data;
-      //         break;
-      //       case '22':
-      //         budget_mode = true;
-      //         can_show_input_helper = true;
-      //         search_data = data_supplier;
-      //         supplier_corp = supplier_corp_dict[0];
-      //         break;
-      //       default:
-      //         can_show_input_helper = false;
-      //         console.debug('can not show inputHelper cause not in search column');
-      //         window.Asc.plugin.getInputHelper().unShow();
-      //     }
-      //     console.log("[in-callback]localStorage:", localStorage, can_show_input_helper);
-      //   }
-      // );
+    // getCurrentCursor(true);
     // }
 
     if (!can_show_input_helper) {
@@ -706,35 +659,56 @@ let in_action = false;
         let col = oCell.GetCol();
         // let oValue= oCell.GetValue();
         // oSheet.GetRangeByNumber(0, 0).SetValue(`111`);
-        localStorage.setItem('current_cell_row', row);
-        localStorage.setItem('current_cell_col', col);
+        localStorage.setItem('next_cell_row', row);
+        localStorage.setItem('next_cell_col', col);
         // localStorage.setItem('current_cell_value', oValue);
         console.debug('[cmd]cell position:', row, col);
         // oCell.SetValue('');
       }, false, isCalc,
       function (result, error) {
-        // console.log("[in-callback]Current Col:", current_col, current_cell);
-        console.log("[in-callback]result:", result, error, this);
-        switch (localStorage['current_cell_col']) {
-          case '6':
-            budget_mode = false;
-            can_show_input_helper = true;
-            search_data = data;
-            break;
-          case '22':
-            budget_mode = true;
-            can_show_input_helper = true;
-            search_data = data_supplier;
-            supplier_corp = supplier_corp_dict[0];
-            break;
-          default:
-            can_show_input_helper = false;
-            console.debug('can not show inputHelper cause not in search column');
-            window.Asc.plugin.getInputHelper().unShow();
-        }
+        // console.log("[in-callback]result:", result, error, this);
         console.log("[in-callback]localStorage:", localStorage, can_show_input_helper);
+        isCursorMoved();
       }
     );
+  }
+
+  const isCursorMoved = () => {
+    let isMoved = false;
+    if (localStorage['next_cell_col'] === localStorage['cell_col'] &&
+      localStorage['next_cell_row'] === localStorage['cell_row']) {
+      console.debug('[isCursorMoved]cursor not moved');
+      return isMoved;
+    }
+    isMoved = true;
+    localStorage.setItem('cell_col', localStorage['next_cell_col']);
+    localStorage.setItem('cell_row', localStorage['next_cell_row']);
+    switch (localStorage['cell_col']) {
+      case '6':
+        budget_mode = false;
+        can_show_input_helper = true;
+        search_data = data;
+        break;
+      case '22':
+        budget_mode = true;
+        can_show_input_helper = true;
+        search_data = data_supplier;
+        supplier_corp = supplier_corp_dict[0];
+        break;
+      default:
+        can_show_input_helper = false;
+        console.debug('can not show inputHelper cause not in search column');
+        window.Asc.plugin.getInputHelper().unShow();
+    }
+    keys_set.clear();
+    console.warn('[isCursorMoved]cursor moved');
+    return isMoved;
+  }
+
+  const inputReset = () => {
+    keys_set.clear();
+    window.Asc.plugin.currentText = "";
+    window.Asc.plugin.getInputHelper().unShow();
   }
 
   const executeCurrentCursor = () => {
