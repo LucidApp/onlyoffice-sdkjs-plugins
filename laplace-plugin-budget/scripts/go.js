@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Budget v0.7.3base3
+ * Laplace Plugin Budget v0.7.3base4
  */
 
 let is_supplier_table = false;
@@ -675,23 +675,39 @@ let in_action = false;
 
   const isCursorMoved = () => {
     let isMoved = false;
-    switch (localStorage['cell_col']) {
-      case '6':
-        budget_mode = false;
-        can_show_input_helper = true;
-        search_data = data;
-        break;
-      case '23':
-        budget_mode = true;
-        can_show_input_helper = true;
-        search_data = data_supplier;
-        supplier_corp = supplier_corp_dict[0];
-        break;
-      default:
-        can_show_input_helper = false;
-        console.debug('can not show inputHelper cause not in search column');
-        window.Asc.plugin.getInputHelper().unShow();
+    const current_col = localStorage.getItem('cell_col');
+    if ((current_col === '6' && client === 'calsberg') ||
+      (current_col === '5' && client === 'pepsi')) {
+      budget_mode = false;
+      can_show_input_helper = true;
+      search_data = data;
+    } else if (current_col === '23') {
+      budget_mode = true;
+      can_show_input_helper = true;
+      search_data = data_supplier;
+      supplier_corp = supplier_corp_dict[0];
+    } else {
+      can_show_input_helper = false;
+      console.debug('can not show inputHelper cause not in search column');
+      window.Asc.plugin.getInputHelper().unShow();
     }
+    // switch (localStorage['cell_col']) {
+    //   case '6':
+    //     budget_mode = false;
+    //     can_show_input_helper = true;
+    //     search_data = data;
+    //     break;
+    //   case '23':
+    //     budget_mode = true;
+    //     can_show_input_helper = true;
+    //     search_data = data_supplier;
+    //     supplier_corp = supplier_corp_dict[0];
+    //     break;
+    //   default:
+    //     can_show_input_helper = false;
+    //     console.debug('can not show inputHelper cause not in search column');
+    //     window.Asc.plugin.getInputHelper().unShow();
+    // }
     if (localStorage['next_cell_col'] === localStorage['cell_col'] &&
       localStorage['next_cell_row'] === localStorage['cell_row']) {
       // console.debug('[isCursorMoved]cursor not moved');
