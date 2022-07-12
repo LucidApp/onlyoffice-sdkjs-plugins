@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Budget v0.7.3b2.6
+ * Laplace Plugin Budget v0.7.3base2
  */
 
 let is_supplier_table = false;
@@ -584,11 +584,11 @@ let in_action = false;
     inputReset();
     // window.Asc.plugin.info.recalculate = true;
     // window.Asc.plugin.executeMethod("InputText", [item.name, window.Asc.plugin.currentText]);
-    window.Asc.plugin.getInputHelper().unShow();
+    // window.Asc.plugin.getInputHelper().unShow();
   };
 
   window.Asc.plugin.event_onInputHelperClear = function () {
-    console.log("[event]onInputHelperClear...", keys_set, localStorage, this);
+    // console.log("[event]onInputHelperClear...", keys_set, localStorage, this);
     if (isCursorMoved()) {
       inputReset();
     }
@@ -630,7 +630,7 @@ let in_action = false;
     //   return;
     // }
 
-    let variants = window.getAutoComplete(window.Asc.plugin.currentText);
+    let variants = window.getAutoCompleteBase(window.Asc.plugin.currentText);
     console.log('variants:', variants);
     if (variants.length <= 0) {
       window.Asc.plugin.getInputHelper().unShow();
@@ -675,14 +675,6 @@ let in_action = false;
 
   const isCursorMoved = () => {
     let isMoved = false;
-    if (localStorage['next_cell_col'] === localStorage['cell_col'] &&
-      localStorage['next_cell_row'] === localStorage['cell_row']) {
-      console.debug('[isCursorMoved]cursor not moved');
-      return isMoved;
-    }
-    isMoved = true;
-    localStorage.setItem('cell_col', localStorage['next_cell_col']);
-    localStorage.setItem('cell_row', localStorage['next_cell_row']);
     switch (localStorage['cell_col']) {
       case '6':
         budget_mode = false;
@@ -700,6 +692,14 @@ let in_action = false;
         console.debug('can not show inputHelper cause not in search column');
         window.Asc.plugin.getInputHelper().unShow();
     }
+    if (localStorage['next_cell_col'] === localStorage['cell_col'] &&
+      localStorage['next_cell_row'] === localStorage['cell_row']) {
+      console.debug('[isCursorMoved]cursor not moved');
+      return isMoved;
+    }
+    isMoved = true;
+    localStorage.setItem('cell_col', localStorage['next_cell_col']);
+    localStorage.setItem('cell_row', localStorage['next_cell_row']);
     keys_set.clear();
     console.warn('[isCursorMoved]cursor moved');
     return isMoved;
@@ -781,6 +781,30 @@ let in_action = false;
       }
       if ((item.is_target && !item.is_missed)
         || (item.hit_count >= Math.floor(keys_set.size / 2) && item.hit_count >= 1)) {
+        ret.push(item);
+      }
+    });
+
+    return ret;
+  };
+
+  window.getAutoCompleteBase = (text) => {
+    console.debug("base search text:", text, search_data);
+    if (search_data?.length <= 0 || text?.length <= 0 || text === "") return [];
+
+    window.isAutoCompleteReady = true;
+
+    const ret = [];
+
+    search_data.map(item => {
+      item.hit_count = 0;
+      item.is_target = false;
+      item.is_missed = false;
+      const search_string = item.name + (item.alias || "") + (item.desc || "");
+      const search_string_low = search_string.toLowerCase();
+      console.debug("search_string:", search_string);
+      if (search_string_low.includes(text.toLowerCase())
+        || item.item_no.includes(text)) {
         ret.push(item);
       }
     });
