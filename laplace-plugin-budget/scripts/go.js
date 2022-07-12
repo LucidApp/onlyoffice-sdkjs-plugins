@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Budget v0.7.3base2
+ * Laplace Plugin Budget v0.7.3base3
  */
 
 let is_supplier_table = false;
@@ -681,7 +681,7 @@ let in_action = false;
         can_show_input_helper = true;
         search_data = data;
         break;
-      case '22':
+      case '23':
         budget_mode = true;
         can_show_input_helper = true;
         search_data = data_supplier;
@@ -694,7 +694,7 @@ let in_action = false;
     }
     if (localStorage['next_cell_col'] === localStorage['cell_col'] &&
       localStorage['next_cell_row'] === localStorage['cell_row']) {
-      console.debug('[isCursorMoved]cursor not moved');
+      // console.debug('[isCursorMoved]cursor not moved');
       return isMoved;
     }
     isMoved = true;
@@ -789,7 +789,7 @@ let in_action = false;
   };
 
   window.getAutoCompleteBase = (text) => {
-    console.debug("base search text:", text, search_data);
+    // console.debug("base search text:", text, search_data);
     if (search_data?.length <= 0 || text?.length <= 0 || text === "") return [];
 
     window.isAutoCompleteReady = true;
@@ -802,7 +802,7 @@ let in_action = false;
       item.is_missed = false;
       const search_string = item.name + (item.alias || "") + (item.desc || "");
       const search_string_low = search_string.toLowerCase();
-      console.debug("search_string:", search_string);
+      // console.debug("search_string:", search_string);
       if (search_string_low.includes(text.toLowerCase())
         || item.item_no.includes(text)) {
         ret.push(item);
