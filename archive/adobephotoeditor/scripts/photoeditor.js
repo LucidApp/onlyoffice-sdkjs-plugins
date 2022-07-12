@@ -23,7 +23,7 @@
     var oImage = false;
 
     window.Asc.plugin.init = function(sHtml){
-		
+
 		function showAlert(sMessage, fCallback){
 			var oMessageMask = document.getElementById("idMessageMask");
 			oMessageMask.style.display = "block";
@@ -31,7 +31,7 @@
 			oMessageDiv.style.display = "block";
 			var oMaskParagraph = document.getElementById("message_paragraph");
 			oMaskParagraph.textContent = sMessage;
-			var oMessageButton = document.getElementById("message_button");			
+			var oMessageButton = document.getElementById("message_button");
 			var fEventListener = function(e){
 				oMessageMask.style.display = "none";
 				oMessageDiv.style.display = "none";
@@ -41,11 +41,11 @@
 			};
 			oMessageButton.addEventListener("click", fEventListener);
 		}
-		
-		if(typeof $ === "undefined" || typeof Aviary === "undefined"){		
+
+		if(typeof $ === "undefined" || typeof Aviary === "undefined"){
 			showAlert("There is no Internet connection", function(){
 				window.Asc.plugin.executeCommand("close", "");
-			});            
+			});
 			return;
 		}
 
@@ -60,7 +60,7 @@
         }
 
         this.resizeWindow(10000, 10000, 10000, 10000, 10000, 10000);
-		if(typeof Aviary === "undefined"){			
+		if(typeof Aviary === "undefined"){
             this.executeCommand("close", "");
 			return;
 		}
@@ -78,16 +78,16 @@
                 )
             },
             onSave: function(imageID, newURL) {
-                oImage.src = newURL;                
+                oImage.src = newURL;
 				var oImageDimensions = oFeatherEditor.getImageDimensions();
 				var sScript = createScript(newURL, oImageDimensions.width, oImageDimensions.height);
 				window.Asc.plugin.info.recalculate = true;
-				window.Asc.plugin.executeCommand("close", sScript);                
+				window.Asc.plugin.`executeCommand`("close", sScript);
             },
             onError: function(e){
 					showAlert(e.message, function(){
 						window.Asc.plugin.executeCommand("close", "");
-					});            
+					});
             },
             onClose: function(isDirty){
                 window.Asc.plugin.executeCommand("close", "");

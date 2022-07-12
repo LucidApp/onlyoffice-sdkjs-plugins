@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Budget v0.7.2j4b
+ * Laplace Plugin Budget v0.7.3a1
  */
 
 let is_supplier_table = false;
@@ -7,8 +7,7 @@ let is_budget_table = false;
 let budget_mode = false;
 let can_show_input_helper = true;
 let in_action = false;
-(function (window, obj) {
-  console.warn('Laplace Plugin Budget', obj);
+(function (window, undefined) {
   let data = [];
   let search_data = [];
 
@@ -281,48 +280,11 @@ let in_action = false;
       console.log("csv data:", documentTitle, data);
     }
 
-    if (!in_action) {
-      in_action = true;
-    //   window.Asc.plugin.executeMethod("StartAction", [1, 'get current col']);
-      window.Asc.plugin.callCommand(function () {
-          let oSheet = Api.GetActiveSheet();
-          let oCell = oSheet.GetActiveCell();
-          console.log('[cmd]cell:', oCell);
-          let row = oCell.Row;
-          let col = oCell.Col;
-          // let oValue= oCell.GetValue();
-          // oSheet.GetRangeByNumber(0, 0).SetValue(`111`);
-          localStorage.setItem('current_cell_row', row);
-          localStorage.setItem('current_cell_col', col);
-          // localStorage.setItem('current_cell_value', oValue);
-          console.debug('[cmd]cell position:', row, col);
-          // oCell.SetValue('');
-        }, false, true,
-        function () {
-          // console.log("[in-callback]Current Col:", current_col, current_cell);
-          console.log("[in-callback]result:", this);
-          switch (localStorage['current_cell_col']) {
-            case '6':
-              budget_mode = false;
-              can_show_input_helper = true;
-              search_data = data;
-              break;
-            case '22':
-              budget_mode = true;
-              can_show_input_helper = true;
-              search_data = data_supplier;
-              supplier_corp = supplier_corp_dict[0];
-              break;
-            default:
-              can_show_input_helper = false;
-              console.debug('can not show inputHelper cause not in search column');
-              window.Asc.plugin.getInputHelper().unShow();
-          }
-          console.log("[in-callback]localStorage:", localStorage, can_show_input_helper);
-        }
-      );
-    //   window.Asc.plugin.executeMethod("EndAction", [1, 'get current col']);
-    }
+    // if (!in_action) {
+    //   in_action = true;
+    // getCurrentCursor(true);
+    // excuteCurrentCursor();
+    // }
 
     // FIXME: temporary test
     // search_data = data;
@@ -334,12 +296,30 @@ let in_action = false;
   };
 
   window.Asc.plugin.onCommandCallback = function (result) {
-    // console.log("[callback]Current Col:", current_col, current_cell);
+    console.log("[callback]Current Col:", current_col, current_cell);
+    switch (localStorage['current_cell_col']) {
+      case '6':
+        budget_mode = false;
+        can_show_input_helper = true;
+        search_data = data;
+        break;
+      case '22':
+        budget_mode = true;
+        can_show_input_helper = true;
+        search_data = data_supplier;
+        supplier_corp = supplier_corp_dict[0];
+        break;
+      default:
+        can_show_input_helper = false;
+        console.debug('can not show inputHelper cause not in search column');
+        window.Asc.plugin.getInputHelper().unShow();
+    }
     // console.log("[callback]result:", result);
   };
 
   window.Asc.plugin.event_onTargetPositionChanged = function () {
     console.debug("[event]onTargetPositionChanged:", this);
+    getCurrentCursor(true);
     // window.Asc.plugin.executeMethod("AddContentControl", [4, {
     //   "Tag": "{tag}",
     //   "Id": 0,
@@ -359,43 +339,6 @@ let in_action = false;
     //   window.Asc.plugin.currentContentControl = obj;
     //   console.debug("[event]GetCurrentContentControlPr DATA:", window.Asc, window.Asc.plugin)
     // });
-    this.callCommand(function () {
-        let oSheet = Api.GetActiveSheet();
-        let oCell = oSheet.GetActiveCell();
-        console.log('[cmd]cell:', oCell);
-        let row = oCell.Row;
-        let col = oCell.Col;
-        // let oValue= oCell.GetValue();
-        // oSheet.GetRangeByNumber(0, 0).SetValue(`111`);
-        localStorage.setItem('current_cell_row', row);
-        localStorage.setItem('current_cell_col', col);
-        // localStorage.setItem('current_cell_value', oValue);
-        console.debug('[cmd]cell position:', row, col);
-        // oCell.SetValue('');
-      }, false, true,
-      function (result, error) {
-        // console.log("[in-callback]Current Col:", current_col, current_cell);
-        console.log("[in-callback]result:", result, error, this);
-        switch (localStorage['current_cell_col']) {
-          case '6':
-            budget_mode = false;
-            can_show_input_helper = true;
-            search_data = data;
-            break;
-          case '22':
-            budget_mode = true;
-            can_show_input_helper = true;
-            search_data = data_supplier;
-            supplier_corp = supplier_corp_dict[0];
-            break;
-          default:
-            can_show_input_helper = false;
-            console.debug('can not show inputHelper cause not in search column');
-            // window.Asc.plugin.getInputHelper().unShow();
-        }
-        console.log("[in-callback]localStorage:", localStorage, can_show_input_helper);
-      }
-    );
   };
 
   window.Asc.plugin.onEnableMouseEvent = function (isEnabled) {
@@ -508,7 +451,7 @@ let in_action = false;
             // Item No.
             oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
             // Select Next Row
-            oSheet.GetRangeByNumber(row + 1, 6).Select();
+            // oSheet.GetRangeByNumber(row + 1, 6).Select();
             Api.Save();
             console.log("[cmd-input]cmd DONE");
             localStorage.setItem('current_cell_row', row);
@@ -642,7 +585,6 @@ let in_action = false;
         // 总价
         // oSheet.GetRangeByNumber(row, 13).SetNumberFormat("_(￥* #,##0.00_)");
         // oSheet.GetRangeByNumber(row, 13).SetValue(`=I${row + 1} * K${row + 1} * M${row + 1}`);
-        // Select Next Row
         console.log("[cmd-input]budget-fill DONE");
       }, false, true, function (res, error) {
         in_action = false;
@@ -651,15 +593,16 @@ let in_action = false;
 
     // window.dispatchEvent(new KeyboardEvent('keydown', {'key':'a'} ));
     // window.dispatchEvent(new KeyboardEvent('keyup', {'key':'a'} ));
+    // window.Asc.plugin.info.recalculate = true;
     window.Asc.plugin.executeMethod("InputText", [item.name, window.Asc.plugin.currentText]);
     window.Asc.plugin.getInputHelper().unShow();
   };
 
   window.Asc.plugin.event_onInputHelperClear = function () {
-    // console.log("[event]onInputHelperClear...", data, this);
-    keys_set.clear();
-    window.Asc.plugin.currentText = "";
-    window.Asc.plugin.getInputHelper().unShow();
+    console.log("[event]onInputHelperClear...", keys_set, this);
+    // keys_set.clear();
+    // window.Asc.plugin.currentText = "";
+    // window.Asc.plugin.getInputHelper().unShow();
   };
 
   window.Asc.plugin.event_onInputHelperInput = function (obj) {
@@ -754,6 +697,56 @@ let in_action = false;
       window.Asc.plugin.getInputHelper().show(_sizes.w, _sizes.h, false);
     }
   };
+
+  const getCurrentCursor = (isCalc) => {
+    window.Asc.plugin.callCommand(function () {
+        let oSheet = Api.GetActiveSheet();
+        let oCell = oSheet.GetActiveCell();
+        let row = oCell.GetRow();
+        let col = oCell.GetCol();
+        // let oValue= oCell.GetValue();
+        // oSheet.GetRangeByNumber(0, 0).SetValue(`111`);
+        localStorage.setItem('current_cell_row', row);
+        localStorage.setItem('current_cell_col', col);
+        // localStorage.setItem('current_cell_value', oValue);
+        console.debug('[cmd]cell position:', row, col);
+        // oCell.SetValue('');
+      }, false, isCalc,
+      function (result, error) {
+        // console.log("[in-callback]Current Col:", current_col, current_cell);
+        console.log("[in-callback]result:", result, error, this);
+        switch (localStorage['current_cell_col']) {
+          case '6':
+            budget_mode = false;
+            can_show_input_helper = true;
+            search_data = data;
+            break;
+          case '22':
+            budget_mode = true;
+            can_show_input_helper = true;
+            search_data = data_supplier;
+            supplier_corp = supplier_corp_dict[0];
+            break;
+          default:
+            can_show_input_helper = false;
+            console.debug('can not show inputHelper cause not in search column');
+            window.Asc.plugin.getInputHelper().unShow();
+        }
+        console.log("[in-callback]localStorage:", localStorage, can_show_input_helper);
+      }
+    );
+  }
+
+  const executeCurrentCursor = () => {
+    let aScript = `const oSheet = Api.GetActiveSheet();\r\n`;
+    aScript += `const oCell = oSheet.GetActiveCell();\r\n`;
+    aScript += `const row = oCell.GetRow();\r\n`;
+    aScript += `const col = oCell.GetCol();\r\n`;
+    aScript += `localStorage.setItem('current_cell_row', row);\r\n`;
+    aScript += `localStorage.setItem('current_cell_col', col);\r\n`;
+    window.Asc.plugin.info.recalculate = false;
+    window.Asc.plugin.executeCommand("command", aScript);
+  }
 
   // Item Multiple Price Case
   const getItemPrice = item => {
