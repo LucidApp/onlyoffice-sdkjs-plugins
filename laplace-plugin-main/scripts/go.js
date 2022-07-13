@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.7.2f0
+ * Laplace Plugin Main v0.7.3a
  */
 (function (window, undefined) {
   let data = [];
@@ -214,13 +214,6 @@
     });
   };
 
-  // window.Asc.plugin.event_onClick = function(isSelectionUse) {
-  //   window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function(obj) {
-  //     window.Asc.plugin.currentContentControl = obj;
-  //     console.log("[event]onClick:", isSelectionUse, obj, this);
-  //   });
-  // };
-
   window.Asc.plugin.onMethodReturn = function(obj) {
     // if (window.Asc.plugin.info.methodName !== "ShowInputHelper" && window.Asc.plugin.info.methodName !== "UnShowInputHelper") {
     //   console.debug("[event]onMethodReturn:", data, window.Asc.plugin.info.methodName, window.Asc.plugin);
@@ -301,7 +294,7 @@
           console.log("[cmd-input]cmd DONE");
           localStorage.setItem('current_cell_row', row);
           localStorage.setItem('current_cell_col', col);
-        }, true, true, function(res, error) {
+        }, false, true, function(res, error) {
           console.debug("cell fill done.", res, error, this, localStorage);
         });
       } else if (client === "dingjin") {
@@ -401,7 +394,6 @@
       }
     }
 
-
     // window.dispatchEvent(new KeyboardEvent('keydown', {'key':'a'} ));
     // window.dispatchEvent(new KeyboardEvent('keyup', {'key':'a'} ));
     // window.Asc.plugin.executeMethod("InputText", [item.name, window.Asc.plugin.currentText]);
@@ -447,7 +439,6 @@
     //   }
     // );
     // console.log("Current Col:", current_col, current_cell, localStorage);
-
 
     // correct by space
     // var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");
