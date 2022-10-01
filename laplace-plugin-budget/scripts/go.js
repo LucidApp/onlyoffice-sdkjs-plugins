@@ -7,10 +7,10 @@ let is_budget_table = false;
 let budget_mode = false;
 let can_show_input_helper = true;
 let in_action = false;
+
 (function (window, undefined) {
   let data = [];
   let search_data = [];
-
   let client;
 
   const calsberg_keyword = ["嘉士伯", "calsberg"];
@@ -199,7 +199,7 @@ let in_action = false;
       window.Asc.plugin.getInputHelper().createWindow();
       console.log("[auto]window init", window.Asc.plugin.info);
 
-      const {documentTitle} = window.Asc.plugin.info;
+      const { documentTitle } = window.Asc.plugin.info;
 
       if (budget_flag.some(kw => documentTitle.includes(kw))) {
         is_budget_table = true

@@ -1,7 +1,7 @@
 ﻿/**
- * Laplace Data Calsberg v0.7.0
+ * Laplace Supplier Data Wood Making v0.7.2
  */
-const csv_data_supplier_lpi_wood_making = `item_no,name,desc,serial_no,category,specification,unit,price_349,price_zlsx_normal,price_zlsx_high,description
+const csv_data_supplier_lpi_wood_making = `item_no,name,desc,serial_no,category,specification,unit,price_1,price_2,price_2h,description
 ZZ-2022-1,常规木制作,单面木制多层面板车贴画面,1,常规木制作（背景墙）,单面木制多层面板车贴画面,平米,140.00 ,130.00 ,150.00 ,背景墙1、厚度在20cm以内的只算正面1个面尺寸，厚度在25cm-40cm需要加算展开两侧画面，顶部画面不计算；2、厚度在40cm-120cm的，算展开木制基层面积，顶和底面不算木基层面积（需要算顶部画面）；3、厚度在120Cm以上展开面积计算 底部不计算
 ZZ-2022-2,常规木制作,单面木制免漆面板车贴、户外写真画面,2,常规木制作（背景墙）,单面木制免漆面板车贴、户外写真画面,平米,150.00 ,140.00 ,160.00 ,
 ZZ-2022-3,常规木制作,单面木质基层乳胶漆,3,常规木制作（背景墙）,单面木质基层乳胶漆,平米,140.00 ,140.00 ,140.00 ,
