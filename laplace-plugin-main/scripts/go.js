@@ -554,8 +554,15 @@ let in_action = false;
         // 供应商
         oSheet.GetRangeByNumber(row, col + 16).SetValue(supplier_corp['name']);
         // 总价
-        // oSheet.GetRangeByNumber(row, col + 17).SetNumberFormat("_(￥* #,##0.00_)");
-        // oSheet.GetRangeByNumber(row, 13).SetValue(`=I${row + 1} * K${row + 1} * M${row + 1}`);
+        const colorBgGreen = Api.CreateRGBColor(99, 190, 123);
+        const colorBgYellow = Api.CreateRGBColor(255, 235, 132);
+        const colorBgRed = Api.CreateRGBColor(248, 105, 107);
+        const sClassType = oFill.GetClassType();
+        const totalCell = oSheet.GetRangeByNumber(row, col + 17);
+        totalCell.SetNumberFormat("_(￥* #,##0.00_)");
+        totalCell.SetValue("Class Type = " + sClassType);
+        totalCell.SetValue(`=I${row + 1} * K${row + 1} * M${row + 1}`);
+        totalCell.SetNumberFormat("_(￥* #,##0.00_)");
         console.log("[cmd-input]budget-fill DONE");
       }, false, true, function (res, error) {
         in_action = false;
