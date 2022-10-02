@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.8.4
+ * Laplace Plugin Main v0.9.0
  */
 
 let is_supplier_table = false;
@@ -557,12 +557,14 @@ let in_action = false;
         const colorBgGreen = Api.CreateRGBColor(99, 190, 123);
         const colorBgYellow = Api.CreateRGBColor(255, 235, 132);
         const colorBgRed = Api.CreateRGBColor(248, 105, 107);
-        const sClassType = oFill.GetClassType();
+        // const fillGreen = Api.CreateSolidFill(colorBgGreen);
+        // const fillYellow = Api.CreateSolidFill(colorBgYellow);
+        // const fillRed = Api.CreateSolidFill(colorBgRed);
+        // const sClassType = oFill.GetClassType();
         const totalCell = oSheet.GetRangeByNumber(row, col + 17);
         totalCell.SetNumberFormat("_(￥* #,##0.00_)");
-        totalCell.SetValue("Class Type = " + sClassType);
+        totalCell.SetFillColor(colorBgGreen);
         totalCell.SetValue(`=I${row + 1} * K${row + 1} * M${row + 1}`);
-        totalCell.SetNumberFormat("_(￥* #,##0.00_)");
         console.log("[cmd-input]budget-fill DONE");
       }, false, true, function (res, error) {
         in_action = false;
