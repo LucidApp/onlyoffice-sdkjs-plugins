@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.9.0
+ * Laplace Plugin Main v0.9.4
  */
 
 let is_supplier_table = false;
@@ -21,14 +21,14 @@ let in_action = false;
 
   const parseCsv = csv => {
     let lines = csv.split("\n");
-    const header = lines[0].split(",")
+    const header = lines[0].split(",");
     lines.shift(); // get rid of definitions
     return lines.map(line => {
       const bits = line.split(",");
       let obj = {};
       header.forEach((h, i) => obj[h] = bits[i]); // or use reduce here
       return obj;
-    })
+    });
   };
 
   // 供应商支持
@@ -43,9 +43,9 @@ let in_action = false;
         ...data_supplier_device,
         ...data_supplier_output,
         ...data_supplier_wood,
-      ]
-    )
-  ]
+      ],
+    ),
+  ];
 
   const supplier_flag = ["供应商", "supplier"];
   const supplier_wood_keywords = ["木制作", "wood"];
@@ -193,21 +193,21 @@ let in_action = false;
         console.debug("[method]GetAllContentControls: ", obj);
       });
 
-      window.Asc.plugin.currentText = ""
+      window.Asc.plugin.currentText = "";
       window.Asc.plugin.currentContentControl = null;
       window.Asc.plugin.createInputHelper();
       window.Asc.plugin.getInputHelper().createWindow();
       console.log("[auto]window init", window.Asc.plugin.info);
 
-      const { documentTitle } = window.Asc.plugin.info;
+      const {documentTitle} = window.Asc.plugin.info;
 
       if (budget_flag.some(kw => documentTitle.includes(kw))) {
-        is_budget_table = true
+        is_budget_table = true;
         client = null;
       }
 
       if (supplier_flag.some(kw => documentTitle.includes(kw))) {
-        is_supplier_table = true
+        is_supplier_table = true;
         client = null;
       }
 
@@ -222,7 +222,7 @@ let in_action = false;
             const data_calsberg = parseCsv(csv_data_calsberg);
             data_calsberg.map(item => {
               item.id = item.item_no;
-            })
+            });
             data = data_calsberg;
             break;
           case "pepsi":
@@ -274,7 +274,7 @@ let in_action = false;
             supplier_corp = corp;
             return true;
           }
-        })
+        });
       }
 
       console.log("csv data:", documentTitle, data);
@@ -301,7 +301,7 @@ let in_action = false;
 
   window.Asc.plugin.event_onTargetPositionChanged = function () {
     console.debug("[event]onTargetPositionChanged:", this);
-    getCurrentCursor(false);
+    // getCurrentCursor(false);
     // window.Asc.plugin.executeMethod("AddContentControl", [4, {
     //   "Tag": "{tag}",
     //   "Id": 0,
@@ -342,12 +342,12 @@ let in_action = false;
     });
   };
 
-  window.Asc.plugin.onMethodReturn = function (obj) {
-    console.debug("[!!event]onMethodReturn:", obj, window, window.Asc);
-    // if (window.Asc.plugin.info.methodName !== "ShowInputHelper" && window.Asc.plugin.info.methodName !== "UnShowInputHelper") {
-    //   console.debug("[event]onMethodReturn:", data, window.Asc.plugin.info.methodName, window.Asc.plugin);
-    // }
-  };
+  // window.Asc.plugin.onMethodReturn = function (obj) {
+  //   console.debug("[!!event]onMethodReturn:", obj, window, window.Asc);
+  //   if (window.Asc.plugin.info.methodName !== "ShowInputHelper" && window.Asc.plugin.info.methodName !== "UnShowInputHelper") {
+  //     console.debug("[event]onMethodReturn:", data, window.Asc.plugin.info.methodName, window.Asc.plugin);
+  //   }
+  // };
 
   window.Asc.plugin.inputHelper_onSelectItem = function (t) {
     if (!t) return;
@@ -552,19 +552,20 @@ let in_action = false;
         oSheet.GetRangeByNumber(row, col + 9).SetNumberFormat("_(￥* #,##0.00_)");
         oSheet.GetRangeByNumber(row, col + 9).SetValue(item.price);
         // 供应商
-        oSheet.GetRangeByNumber(row, col + 16).SetValue(supplier_corp['name']);
+        // oSheet.GetRangeByNumber(row, col + 16).SetValue(supplier_corp['name']);
         // 总价
-        const colorBgGreen = Api.CreateRGBColor(99, 190, 123);
-        const colorBgYellow = Api.CreateRGBColor(255, 235, 132);
-        const colorBgRed = Api.CreateRGBColor(248, 105, 107);
+        const totalCell = oSheet.GetRangeByNumber(row, col + 10);
+        // not work in plugins
+        // const colorBgGreen = Api.CreateRGBColor(99, 190, 123);
+        // const colorBgYellow = Api.CreateRGBColor(255, 235, 132);
+        // const colorBgRed = Api.CreateRGBColor(248, 105, 107);
         // const fillGreen = Api.CreateSolidFill(colorBgGreen);
         // const fillYellow = Api.CreateSolidFill(colorBgYellow);
         // const fillRed = Api.CreateSolidFill(colorBgRed);
         // const sClassType = oFill.GetClassType();
-        const totalCell = oSheet.GetRangeByNumber(row, col + 17);
+        // totalCell.SetFillColor(colorBgGreen);
         totalCell.SetNumberFormat("_(￥* #,##0.00_)");
-        totalCell.SetFillColor(colorBgGreen);
-        totalCell.SetValue(`=I${row + 1} * K${row + 1} * M${row + 1}`);
+        totalCell.SetValue(`=AD${row + 1} * AF${row + 1} * AG${row + 1}`);
         console.log("[cmd-input]budget-fill DONE");
       }, false, true, function (res, error) {
         in_action = false;
@@ -581,21 +582,19 @@ let in_action = false;
 
   window.Asc.plugin.event_onInputHelperClear = function () {
     // console.log("[event]onInputHelperClear...", keys_set, localStorage, this);
+    promiseCursor(false);
     if (isCursorMoved()) {
       inputReset();
     }
   };
 
-  window.Asc.plugin.event_onInputHelperInput = function (obj) {
+  window.Asc.plugin.event_onInputHelperInput = async function (obj) {
     console.debug("[event]onInputHelperInput:", client, "|", supplier_corp);
     console.debug("[event]onInputHelperInput:", obj, obj.add, data);
     if (!client && !supplier_corp) return;
 
-    // if (!in_action) {
-      // in_action = true
-    // getCurrentCursor(true);
-    // }
-
+    await promiseCursor(false);
+    // .then(() => {
     if (!can_show_input_helper) {
       console.debug('can not show inputHelper cause not in search column');
       window.Asc.plugin.getInputHelper().unShow();
@@ -606,7 +605,6 @@ let in_action = false;
       window.Asc.plugin.currentText += obj.text;
     else
       window.Asc.plugin.currentText = obj.text;
-
 
     // correct by space
     // var lastIndexSpace = window.Asc.plugin.currentText.lastIndexOf(" ");
@@ -632,7 +630,7 @@ let in_action = false;
         const item = variants[i];
         items.push({
           id: item.item_no || item.id,
-          text: `${item.item_no}. ${item.name}${item.alias && item.alias.length > 0 ? "(" + item.alias + ")" : ""}, ${item.desc} ,<b style="color:red;">￥${getItemPrice(item)}</b>`
+          text: `${item.item_no}. ${item.name}${item.alias && item.alias.length > 0 ? "(" + item.alias + ")" : ""}, ${item.desc} ,<b style="color:red;">￥${getItemPrice(item)}</b>`,
         });
       }
 
@@ -641,145 +639,55 @@ let in_action = false;
       console.log("[auto]inputHelper SHOW");
       window.Asc.plugin.getInputHelper().show(_sizes.w, _sizes.h, false);
     }
+    // });
   };
 
-  // Item Multiple Price Case
-  // const getItemPrice = item => {
-  //   if (!item) return 0;
-  //   if (supplier_mode && supplier_corp && supplier_corp["price_tag"]) {
-  //     const item_price_tag = supplier_corp["price_tag"];
-  //     return item[`price_${item_price_tag}`];
-  //   }
-  //   return item["price"];
-  // }
-  //
-  // function getInputHelperSize() {
-  //   var _size = window.Asc.plugin.getInputHelper().getScrollSizes();
-  //   var _width = 400; //_size.w;
-  //   var _height = _size.h;
-  //   var _heightMin = window.Asc.plugin.getInputHelper().getItemsHeight(Math.min(5, window.Asc.plugin.getInputHelper().getItems().length));
-  //
-  //   if (_width > 400)
-  //     _width = 400;
-  //   if (_height > _heightMin)
-  //     _height = _heightMin;
-  //
-  //   _width += 30;
-  //
-  //   return {w: _width, h: _height};
-  // }
-  //
-  // window.isAutoCompleteReady = false;
-  // window.getAutoComplete = function (text) {
-  //   text.split(" ").map(t => {
-  //     if (t.length < 1) return;
-  //     for (let key of keys_set) {
-  //       if (t.includes(key)) keys_set.delete(key);
-  //     }
-  //     keys_set.add(t);
+  const promiseCursor = async (isCalc) => {
+    return await new Promise((resolve) => {
+      window.Asc.plugin.callCommand(function () {
+          let oSheet = Api.GetActiveSheet();
+          let oCell = oSheet.GetActiveCell();
+          let row = oCell.GetRow();
+          let col = oCell.GetCol();
+          // let oValue= oCell.GetValue();
+          localStorage.setItem('next_cell_row', row);
+          localStorage.setItem('next_cell_col', col);
+          // localStorage.setItem('current_cell_value', oValue);
+          console.debug('[cmd]cell position:', row, col);
+        }, false, isCalc, () => {
+          console.log("[in-callback]localStorage:", localStorage, can_show_input_helper);
+          const current_col = localStorage.getItem('cell_col');
+          if ((current_col === '6' && client === 'calsberg') ||
+            (current_col === '5' && client === 'pepsi')) {
+            budget_mode = false;
+            can_show_input_helper = true;
+            search_data = data;
+          } else if (current_col === '23') {
+            budget_mode = true;
+            can_show_input_helper = true;
+            search_data = data_supplier;
+            supplier_corp = supplier_corp_dict[0];
+          } else {
+            can_show_input_helper = false;
+            console.debug('can not show inputHelper cause not in search column');
+            window.Asc.plugin.getInputHelper().unShow();
+          }
+
+          isCursorMoved();
+          resolve(can_show_input_helper);
+        },
+      );
+    });
+  };
+
+  // const promiseCursor = (isCalc) => {
+  //   return new Promise((resolve, reject) => {
+  //     getCurrentCursor(isCalc);
   //   });
-  //   console.debug("_keys_set:", text, "|", keys_set);
-  //   // chrome.storage.local.get(['client'], function(result) {
-  //   //   console.log('Value currently is ', result);
-  //   //   client = result.client;
-  //   // });
-  //   // let client_id = localStorage.getItem('client_id');
-  //   // switch (client_id) {
-  //   //   case '1':
-  //   //     data = data_calsberg;
-  //   //     break;
-  //   //   case '2':
-  //   //     data = data_pepsi;
-  //   //     break;
-  //   // }
-  //   // console.log("current data:", data);
-  //
-  //   window.isAutoCompleteReady = true;
-  //
-  //   const ret = [];
-  //
-  //   data.map(item => {
-  //     item.hit_count = 0;
-  //     item.is_target = false;
-  //     item.is_missed = false;
-  //     let search_string = item.name + (item.alias || "") + (item.desc || "");
-  //     let search_string_low = search_string.toLowerCase();
-  //     // console.debug("search_string:", search_string);
-  //     for (let key of keys_set) {
-  //       if (search_string_low.includes(key.toLowerCase())
-  //         || item.item_no.includes(key)) {
-  //         item.hit_count++;
-  //         item.is_target = true;
-  //       } else {
-  //         item.is_missed = true;
-  //       }
-  //     }
-  //     if ((item.is_target && !item.is_missed)
-  //       || (item.hit_count >= Math.floor(keys_set.size / 2) && item.hit_count >= 1)) {
-  //       ret.push(item);
-  //     }
-  //   });
-  //
-  //   return ret;
   // };
 
-  const getCurrentCursor = (isCalc) => {
-    window.Asc.plugin.callCommand(function () {
-        let oSheet = Api.GetActiveSheet();
-        let oCell = oSheet.GetActiveCell();
-        let row = oCell.GetRow();
-        let col = oCell.GetCol();
-        // let oValue= oCell.GetValue();
-        // oSheet.GetRangeByNumber(0, 0).SetValue(`111`);
-        localStorage.setItem('next_cell_row', row);
-        localStorage.setItem('next_cell_col', col);
-        // localStorage.setItem('current_cell_value', oValue);
-        console.debug('[cmd]cell position:', row, col);
-        // oCell.SetValue('');
-      }, false, isCalc,
-      function (result, error) {
-        // console.log("[in-callback]result:", result, error, this);
-        console.log("[in-callback]localStorage:", localStorage, can_show_input_helper);
-        isCursorMoved();
-      }
-    );
-  }
-
-  const isCursorMoved = () => {
+  const isCursorMoved = async () => {
     let isMoved = false;
-    const current_col = localStorage.getItem('cell_col');
-    if ((current_col === '6' && client === 'calsberg') ||
-      (current_col === '5' && client === 'pepsi')) {
-      budget_mode = false;
-      can_show_input_helper = true;
-      search_data = data;
-    } else if (current_col === '23') {
-      budget_mode = true;
-      can_show_input_helper = true;
-      search_data = data_supplier;
-      supplier_corp = supplier_corp_dict[0];
-    } else {
-      can_show_input_helper = false;
-      console.debug('can not show inputHelper cause not in search column');
-      window.Asc.plugin.getInputHelper().unShow();
-    }
-    // switch (localStorage['cell_col']) {
-    //   case '6':
-    //     budget_mode = false;
-    //     can_show_input_helper = true;
-    //     search_data = data;
-    //     break;
-    //   case '23':
-    //     budget_mode = true;
-    //     can_show_input_helper = true;
-    //     search_data = data_supplier;
-    //     supplier_corp = supplier_corp_dict[0];
-    //     break;
-    //   default:
-    //     can_show_input_helper = false;
-    //     console.debug('can not show inputHelper cause not in search column');
-    //     window.Asc.plugin.getInputHelper().unShow();
-    // }
     if (localStorage['next_cell_col'] === localStorage['cell_col'] &&
       localStorage['next_cell_row'] === localStorage['cell_row']) {
       // console.debug('[isCursorMoved]cursor not moved');
@@ -791,13 +699,13 @@ let in_action = false;
     keys_set.clear();
     console.warn('[isCursorMoved]cursor moved');
     return isMoved;
-  }
+  };
 
   const inputReset = () => {
     keys_set.clear();
     window.Asc.plugin.currentText = "";
     window.Asc.plugin.getInputHelper().unShow();
-  }
+  };
 
   const executeCurrentCursor = () => {
     let aScript = `const oSheet = Api.GetActiveSheet();\r\n`;
@@ -808,7 +716,7 @@ let in_action = false;
     aScript += `localStorage.setItem('current_cell_col', col);\r\n`;
     window.Asc.plugin.info.recalculate = false;
     window.Asc.plugin.executeCommand("command", aScript);
-  }
+  };
 
   // Item Multiple Price Case
   const getItemPrice = item => {
@@ -818,7 +726,7 @@ let in_action = false;
       return item[`price_${item_price_tag}`];
     }
     return item["price_1"] || item["price"];
-  }
+  };
 
   function getInputHelperSize() {
     var _size = window.Asc.plugin.getInputHelper().getScrollSizes();
