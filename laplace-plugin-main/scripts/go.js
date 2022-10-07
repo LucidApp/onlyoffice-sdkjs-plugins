@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.9.4
+ * Laplace Plugin Main v0.9.5a
  */
 
 let is_supplier_table = false;
@@ -537,6 +537,8 @@ let in_action = false;
       // TODO:
       this.callCommand(function () {
         const oSheet = Api.GetActiveSheet();
+        const hRow = oSheet.GetRows(2);
+        console.debug("budget hRow Values:", hRow.GetValue(), hRow.GetValue2());
         const oCell = oSheet.ActiveCell;
         const item = Asc.scope.item;
         console.debug("[cmd-input]cell:", oCell);
@@ -544,17 +546,19 @@ let in_action = false;
         let col = oCell.GetCol();
         // 标准名
         oSheet.GetRangeByNumber(row, col).SetValue(`${item.name}`);
+        // 物料编码
+        oSheet.GetRangeByNumber(row, col + 1).SetValue(`${item.item_no}`);
         // 材料说明
-        oSheet.GetRangeByNumber(row, col + 1).SetValue(`${item.specification}`);
+        oSheet.GetRangeByNumber(row, col + 2).SetValue(`${item.specification}`);
         // 单位
-        oSheet.GetRangeByNumber(row, col + 7).SetValue(item.unit);
+        oSheet.GetRangeByNumber(row, col + 8).SetValue(item.unit);
         // 单价
-        oSheet.GetRangeByNumber(row, col + 9).SetNumberFormat("_(￥* #,##0.00_)");
-        oSheet.GetRangeByNumber(row, col + 9).SetValue(item.price);
+        oSheet.GetRangeByNumber(row, col + 10).SetNumberFormat("_(￥* #,##0.00_)");
+        oSheet.GetRangeByNumber(row, col + 10).SetValue(item.price);
         // 供应商
         // oSheet.GetRangeByNumber(row, col + 16).SetValue(supplier_corp['name']);
         // 总价
-        const totalCell = oSheet.GetRangeByNumber(row, col + 10);
+        const totalCell = oSheet.GetRangeByNumber(row, col + 11);
         // not work in plugins
         // const colorBgGreen = Api.CreateRGBColor(99, 190, 123);
         // const colorBgYellow = Api.CreateRGBColor(255, 235, 132);
@@ -565,7 +569,7 @@ let in_action = false;
         // const sClassType = oFill.GetClassType();
         // totalCell.SetFillColor(colorBgGreen);
         totalCell.SetNumberFormat("_(￥* #,##0.00_)");
-        totalCell.SetValue(`=AD${row + 1} * AF${row + 1} * AG${row + 1}`);
+        totalCell.SetValue(`=AE${row + 1} * AG${row + 1} * AH${row + 1}`);
         console.log("[cmd-input]budget-fill DONE");
       }, false, true, function (res, error) {
         in_action = false;
