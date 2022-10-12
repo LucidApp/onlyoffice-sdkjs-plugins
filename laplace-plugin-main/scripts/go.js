@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.9.5a
+ * Laplace Plugin Main v0.9.5b
  */
 
 let is_supplier_table = false;
