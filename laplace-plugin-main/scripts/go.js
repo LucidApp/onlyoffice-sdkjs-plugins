@@ -420,7 +420,8 @@ let in_action = false;
             oSheet.GetRangeByNumber(row, 18).SetNumberFormat("_(￥* #,##0.00_)");
             oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} *  P${row + 1}`);
             // Item No.
-            oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
+            // oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
+            oSheet.GetRangeByNumber(row, 19).SetValue(`${item.item_no}`);
             // Select Next Row
             // oSheet.GetRangeByNumber(row + 1, 6).Select();
             Api.Save();
