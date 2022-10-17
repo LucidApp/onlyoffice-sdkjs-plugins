@@ -1,9 +1,9 @@
 /**
- * Laplace Plugin Main v0.9.5b
+ * Laplace Plugin Main v0.10.5
  */
 
-let is_supplier_table = false;
-let is_budget_table = false;
+let _isSupplierTable = false;
+let _isBudgetTable = false;
 let budget_mode = false;
 let can_show_input_helper = true;
 let in_action = false;
@@ -36,19 +36,23 @@ let in_action = false;
   const data_supplier_device = parseCsv(csv_data_supplier_lpi_device);
   const data_supplier_output = parseCsv(csv_data_supplier_lpi_output);
   const data_supplier_wood = parseCsv(csv_data_supplier_lpi_wood_making);
-  const data_supplier = [
-    ...new Set(
-      [
-        ...data_supplier_build,
-        ...data_supplier_device,
-        ...data_supplier_output,
-        ...data_supplier_wood,
-      ],
-    ),
-  ];
+  let data_supplier = [];
+  // const data_supplier = [
+  //   ...new Set(
+  //     [
+  //       ...data_supplier_build,
+  //       ...data_supplier_device,
+  //       ...data_supplier_output,
+  //       ...data_supplier_wood,
+  //     ],
+  //   ),
+  // ];
 
   const supplier_flag = ["供应商", "supplier"];
-  const supplier_wood_keywords = ["木制作", "wood"];
+  const supplier_cate_build_kws = ["搭建", "build"];
+  const supplier_cate_device_kws = ["设备", "build"];
+  const supplier_cate_output_kws = ["输出", "build"];
+  const supplier_cate_wood_kws = ["木制作", "制作", "wood"];
   const supplier_corp_dict = [
     // 木制作 wood
     {
@@ -177,9 +181,6 @@ let in_action = false;
 
   let keys_set = new Set();
 
-  let current_col;
-  let current_cell;
-
   // console.log("[go]START!", window.location.pathname, window.location.href, window.location);
 
   window.isInit = false;
@@ -188,6 +189,7 @@ let in_action = false;
     console.log("[auto]plugin init");
     if (!window.isInit) {
       window.isInit = true;
+      localStorage.clear();
 
       this.executeMethod("GetAllContentControls", [], function (obj) {
         console.debug("[method]GetAllContentControls: ", obj);
@@ -202,16 +204,16 @@ let in_action = false;
       const {documentTitle} = window.Asc.plugin.info;
 
       if (budget_flag.some(kw => documentTitle.includes(kw))) {
-        is_budget_table = true;
+        _isBudgetTable = true;
         client = null;
       }
 
       if (supplier_flag.some(kw => documentTitle.includes(kw))) {
-        is_supplier_table = true;
+        _isSupplierTable = true;
         client = null;
       }
 
-      if (!is_supplier_table) {
+      if (!_isSupplierTable) {
         if (pepsi_keywords.some(kw => documentTitle.includes(kw))) client = "pepsi";
         else if (calsberg_keyword.some(kw => documentTitle.includes(kw))) client = "calsberg";
         else if (dingjin_keywords.some(kw => documentTitle.includes(kw))) client = "dingjin";
@@ -294,13 +296,13 @@ let in_action = false;
     // FIXME: this.executeCommand("close", "");
   };
 
-  window.Asc.plugin.onCommandCallback = function (result) {
-    console.log("[callback]Current Col:", current_col, current_cell);
-    console.log("[callback]result:", result);
-  };
+  // window.Asc.plugin.onCommandCallback = function (result) {
+  //   console.log("[callback]Current Col:", current_col, current_cell);
+  //   console.log("[callback]result:", result);
+  // };
 
-  window.Asc.plugin.event_onTargetPositionChanged = function () {
-    console.debug("[event]onTargetPositionChanged:", this);
+  // window.Asc.plugin.event_onTargetPositionChanged = function () {
+  //   console.debug("[event]onTargetPositionChanged:", this);
     // getCurrentCursor(false);
     // window.Asc.plugin.executeMethod("AddContentControl", [4, {
     //   "Tag": "{tag}",
@@ -321,32 +323,25 @@ let in_action = false;
     //   window.Asc.plugin.currentContentControl = obj;
     //   console.debug("[event]GetCurrentContentControlPr DATA:", window.Asc, window.Asc.plugin)
     // });
-  };
+  // };
 
-  window.Asc.plugin.onEnableMouseEvent = function (isEnabled) {
-    console.debug("[event]onEnableMouseEvent:", isEnabled);
-    var _frames = document.getElementsByTagName("iframe");
-    if (_frames && _frames[0]) {
-      _frames[0].style.pointerEvents = isEnabled ? "none" : "";
-    }
-  };
-
-  window.Asc.plugin.event_onClick = function (isSelectionUse) {
-    console.debug("[---event]event_onClick:", isSelectionUse);
-    window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function (obj) {
-      console.debug("[event]event_onClick GetCurrentContentControlPr:", obj);
-      window.Asc.plugin.currentContentControl = obj;
-      var controlTag = obj ? obj.Tag : "";
-      if (isSelectionUse)
-        controlTag = "";
-    });
-  };
-
-  // window.Asc.plugin.onMethodReturn = function (obj) {
-  //   console.debug("[!!event]onMethodReturn:", obj, window, window.Asc);
-  //   if (window.Asc.plugin.info.methodName !== "ShowInputHelper" && window.Asc.plugin.info.methodName !== "UnShowInputHelper") {
-  //     console.debug("[event]onMethodReturn:", data, window.Asc.plugin.info.methodName, window.Asc.plugin);
+  // window.Asc.plugin.onEnableMouseEvent = function (isEnabled) {
+  //   console.debug("[event]onEnableMouseEvent:", isEnabled);
+  //   var _frames = document.getElementsByTagName("iframe");
+  //   if (_frames && _frames[0]) {
+  //     _frames[0].style.pointerEvents = isEnabled ? "none" : "";
   //   }
+  // };
+  //
+  // window.Asc.plugin.event_onClick = function (isSelectionUse) {
+  //   console.debug("[---event]event_onClick:", isSelectionUse);
+  //   window.Asc.plugin.executeMethod("GetCurrentContentControlPr", [], function (obj) {
+  //     console.debug("[event]event_onClick GetCurrentContentControlPr:", obj);
+  //     window.Asc.plugin.currentContentControl = obj;
+  //     var controlTag = obj ? obj.Tag : "";
+  //     if (isSelectionUse)
+  //       controlTag = "";
+  //   });
   // };
 
   window.Asc.plugin.inputHelper_onSelectItem = function (t) {
@@ -356,7 +351,7 @@ let in_action = false;
     item.price = getItemPrice(item);
     Asc.scope.item = item;
 
-    if (!is_supplier_table && !budget_mode) {
+    if (!_isSupplierTable && !budget_mode) {
       switch (client) {
         case "pepsi":
           /**
@@ -503,7 +498,7 @@ let in_action = false;
           });
           break;
       }
-    } else if (is_supplier_table) {
+    } else if (_isSupplierTable) {
       if (supplier_category === "wood") {
         /**
          * Auto Fill Supplier Wood Making Data
@@ -657,21 +652,70 @@ let in_action = false;
           // let oValue= oCell.GetValue();
           localStorage.setItem('next_cell_row', row);
           localStorage.setItem('next_cell_col', col);
+
+          let hasBudgetCols =
+            localStorage.getItem('budget_category_col')?.length > 0 &&
+            localStorage.getItem('budget_supplier_col')?.length > 0 &&
+            localStorage.getItem('budget_search_col')?.length > 0;
+          if (!hasBudgetCols) {
+            let isBudgetMode = false;
+            let oHeaderRange = oSheet.GetRange("A1:AQ3");
+            oHeaderRange.ForEach((range) => {
+              const sVal = range.GetValue();
+              const sRow = range.GetRow();
+              const sCol = range.GetCol();
+              if (sVal.includes('成本预算')) {
+                localStorage.setItem('budget_area_col', sCol);
+              }
+              if (sCol >= localStorage.getItem('budget_area_col') &&
+                (sVal.includes('类别') || sVal.includes('分类'))) {
+                localStorage.setItem('budget_category_col', sCol);
+              }
+              if (sCol >= localStorage.getItem('budget_area_col') &&
+                sVal.includes('供应商')) {
+                localStorage.setItem('budget_supplier_col', sCol);
+              }
+              if (sCol >= localStorage.getItem('budget_area_col') &&
+                (sVal.includes('搜索') || sVal.includes('标准名'))) {
+                localStorage.setItem('budget_search_col', sCol);
+              }
+              console.debug("oHeader:", sVal, sCol);
+            })
+          }
+
+          const cateCol = parseInt(localStorage.getItem('budget_category_col'));
+          const cateVal = oSheet.GetRangeByNumber(row, cateCol).GetValue();
+          localStorage.setItem('budget_category', cateVal);
+
+          const supCol = parseInt(localStorage.getItem('budget_supplier_col'));
+          const supVal = oSheet.GetRangeByNumber(row, supCol).GetValue();
+          localStorage.setItem('budget_supplier', supVal);
           // localStorage.setItem('current_cell_value', oValue);
           console.debug('[cmd]cell position:', row, col);
         }, false, isCalc, () => {
           console.log("[in-callback]localStorage:", localStorage, can_show_input_helper);
           const current_col = localStorage.getItem('cell_col');
+          const budget_search_col = localStorage.getItem('budget_search_col');
+          const isBudgetMode = (budget_search_col?.length > 0 && parseInt(budget_search_col) > 0);
+
           if ((current_col === '6' && client === 'calsberg') ||
             (current_col === '5' && client === 'pepsi')) {
             budget_mode = false;
             can_show_input_helper = true;
             search_data = data;
-          } else if (current_col === '23') {
+          } else if (isBudgetMode && current_col === budget_search_col) {
             budget_mode = true;
             can_show_input_helper = true;
+            const category = localStorage.getItem('budget_category');
+            const supplier = localStorage.getItem('budget_supplier');
+            if (supplier_cate_build_kws.includes(category)) data_supplier = data_supplier_build;
+            else if (supplier_cate_wood_kws.includes(category)) data_supplier = data_supplier_wood;
+            else if (supplier_cate_device_kws.includes(category)) data_supplier = data_supplier_device;
+            else if (supplier_cate_output_kws.includes(category)) data_supplier = data_supplier_output;
+            else can_show_input_helper = false;
+
             search_data = data_supplier;
-            supplier_corp = supplier_corp_dict[0];
+            supplier_corp = supplier_corp_dict.find((sup) => sup.keywords.some((k) => supplier.includes(k)));
           } else {
             can_show_input_helper = false;
             console.debug('can not show inputHelper cause not in search column');
@@ -712,21 +756,10 @@ let in_action = false;
     window.Asc.plugin.getInputHelper().unShow();
   };
 
-  const executeCurrentCursor = () => {
-    let aScript = `const oSheet = Api.GetActiveSheet();\r\n`;
-    aScript += `const oCell = oSheet.GetActiveCell();\r\n`;
-    aScript += `const row = oCell.GetRow();\r\n`;
-    aScript += `const col = oCell.GetCol();\r\n`;
-    aScript += `localStorage.setItem('current_cell_row', row);\r\n`;
-    aScript += `localStorage.setItem('current_cell_col', col);\r\n`;
-    window.Asc.plugin.info.recalculate = false;
-    window.Asc.plugin.executeCommand("command", aScript);
-  };
-
   // Item Multiple Price Case
   const getItemPrice = item => {
     if (!item) return 0;
-    if ((is_supplier_table || budget_mode) && supplier_corp && supplier_corp["no"]) {
+    if ((_isSupplierTable || budget_mode) && supplier_corp && supplier_corp["no"]) {
       const item_price_tag = supplier_corp["no"];
       return item[`price_${item_price_tag}`];
     }
