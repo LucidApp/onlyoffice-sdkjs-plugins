@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.10.6
+ * Laplace Plugin Main v0.11.2
  */
 
 let _isSupplierTable = false;
@@ -623,17 +623,24 @@ let in_action = false;
 
     let variants = window.getAutoCompleteBase(window.Asc.plugin.currentText);
     console.log('variants:', variants);
-    if (variants.length <= 0) {
+    if (variants?.length <= 0) {
       window.Asc.plugin.getInputHelper().unShow();
     } else {
       let items = [];
-      for (let i in variants) {
-        const item = variants[i];
+      variants.map((item) => {
+        if (isNaN(getItemPrice(item))) return;
         items.push({
           id: item.item_no || item.id,
           text: `${item.item_no}. ${item.name}${item.alias && item.alias.length > 0 ? "(" + item.alias + ")" : ""}, ${item.desc} ,<b style="color:red;">￥${getItemPrice(item)}</b>`,
         });
-      }
+      });
+      // for (let i in variants) {
+      //   const item = variants[i];
+      //   items.push({
+      //     id: item.item_no || item.id,
+      //     text: `${item.item_no}. ${item.name}${item.alias && item.alias.length > 0 ? "(" + item.alias + ")" : ""}, ${item.desc} ,<b style="color:red;">￥${getItemPrice(item)}</b>`,
+      //   });
+      // }
 
       window.Asc.plugin.getInputHelper().setItems(items);
       let _sizes = getInputHelperSize();
