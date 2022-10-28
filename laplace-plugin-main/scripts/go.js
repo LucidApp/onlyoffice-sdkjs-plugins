@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.11.2
+ * Laplace Plugin Main v0.11.4
  */
 
 let _isSupplierTable = false;
@@ -359,6 +359,7 @@ let in_action = false;
            */
           this.callCommand(function () {
             const oSheet = Api.GetActiveSheet();
+            oSheet.GetCells().SetWrap(true);
             const oCell = oSheet.GetActiveCell();
             const item = Asc.scope.item;
             let row = oCell.GetRow();
@@ -393,6 +394,7 @@ let in_action = false;
            */
           this.callCommand(function () {
             const oSheet = Api.GetActiveSheet();
+            oSheet.GetCells().SetWrap(true);
             const oCell = oSheet.GetActiveCell();
             const item = Asc.scope.item;
             let row = oCell.GetRow();
@@ -419,7 +421,7 @@ let in_action = false;
             oSheet.GetRangeByNumber(row, 19).SetValue(`${item.item_no}`);
             // Select Next Row
             // oSheet.GetRangeByNumber(row + 1, 6).Select();
-            Api.Save();
+            // Api.Save();
             console.log("[cmd-input]cmd DONE");
             // localStorage.setItem('current_cell_row', row);
             // localStorage.setItem('current_cell_col', col);
@@ -434,6 +436,7 @@ let in_action = false;
            */
           this.callCommand(function () {
             const oSheet = Api.GetActiveSheet();
+            oSheet.GetCells().SetWrap(true);
             const oCell = oSheet.GetActiveCell();
             const item = Asc.scope.item;
             let row = oCell.GetRow();
@@ -469,6 +472,7 @@ let in_action = false;
            */
           this.callCommand(function () {
             const oSheet = Api.GetActiveSheet();
+            oSheet.GetCells().SetWrap(true);
             const oCell = oSheet.GetActiveCell();
             const item = Asc.scope.item;
             let row = oCell.GetRow();
@@ -506,6 +510,7 @@ let in_action = false;
         // TODO:
         this.callCommand(function () {
           const oSheet = Api.GetActiveSheet();
+          oSheet.GetCells().SetWrap(true);
           const oCell = oSheet.GetActiveCell();
           const item = Asc.scope.item;
           let row = oCell.GetRow();
@@ -533,6 +538,7 @@ let in_action = false;
       // TODO:
       this.callCommand(function () {
         const oSheet = Api.GetActiveSheet();
+        oSheet.GetCells().SetWrap(true);
         const hRow = oSheet.GetRows(2);
         console.debug("budget hRow Values:", hRow.GetValue(), hRow.GetValue2());
         const oCell = oSheet.ActiveCell;
