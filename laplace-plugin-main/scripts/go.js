@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.11.4
+ * Laplace Plugin Main v0.12.2
  */
 
 let _isSupplierTable = false;
@@ -412,10 +412,12 @@ let in_action = false;
             oSheet.GetRangeByNumber(row, 13).SetValue(item.unit);
             // 年度议价
             oSheet.GetRangeByNumber(row, 16).SetNumberFormat("_(￥* #,##0.00_)");
-            oSheet.GetRangeByNumber(row, 16).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
+            // oSheet.GetRangeByNumber(row, 16).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
+            oSheet.GetRangeByNumber(row, 16).SetValue(`=IFERROR(QUOTE_PRICE * IF(ISNUMBER(QUOTE_AMOUNT), QUOTE_AMOUNT, 1) * IF(ISNUMBER(QUOTE_TIMES, QUOTE_TIMES, 1), 0)`);
             // 总价
             oSheet.GetRangeByNumber(row, 18).SetNumberFormat("_(￥* #,##0.00_)");
-            oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} *  P${row + 1}`);
+            // oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
+            oSheet.GetRangeByNumber(row, 18).SetValue(`=IFERROR(QUOTE_PRICE * IF(ISNUMBER(QUOTE_AMOUNT), QUOTE_AMOUNT, 1) * IF(ISNUMBER(QUOTE_TIMES, QUOTE_TIMES, 1), 0)`);
             // Item No.
             // oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
             oSheet.GetRangeByNumber(row, 19).SetValue(`${item.item_no}`);
