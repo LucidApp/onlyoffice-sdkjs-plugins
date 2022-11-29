@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.12.4
+ * Laplace Plugin Main v0.12.5
  */
 
 let _isSupplierTable = false;
@@ -574,7 +574,8 @@ let in_action = false;
         // const sClassType = oFill.GetClassType();
         // totalCell.SetFillColor(colorBgGreen);
         totalCell.SetNumberFormat("_(￥* #,##0.00_)");
-        totalCell.SetValue(`=IFERROR(AH${row + 1} * AE${row + 1} * IF(ISNUMBER(AG${row + 1}), AG${row + 1}, 1), 0)`);
+        totalCell.SetValue(`=IFERROR(BUDGET_PRICE * IF(ISNUMBER(BUDGET_AMOUNT), BUDGET_AMOUNT, 1) * IF(ISNUMBER(BUDGET_TIMES), BUDGET_TIMES, 1), 0)`)
+        // totalCell.SetValue(`=IFERROR(AH${row + 1} * AE${row + 1} * IF(ISNUMBER(AG${row + 1}), AG${row + 1}, 1), 0)`);
         // =IFERROR(AH5*AE5*IF(ISNUMBER(AG5),AG5,1),0)
         console.log("[cmd-input]budget-fill DONE");
       }, false, true, function (res, error) {
