@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.12.5
+ * Laplace Plugin Main v0.12.6
  */
 
 let _isSupplierTable = false;
@@ -554,7 +554,7 @@ let in_action = false;
         // 物料编码
         oSheet.GetRangeByNumber(row, col + 1).SetValue(`${item.item_no}`);
         // 材料说明
-        oSheet.GetRangeByNumber(row, col + 2).SetValue(`${item.specification}`);
+        oSheet.GetRangeByNumber(row, col + 2).SetValue(`${item.name}, ${item.specification}`);
         // 单位
         oSheet.GetRangeByNumber(row, col + 8).SetValue(item.unit);
         // 单价
