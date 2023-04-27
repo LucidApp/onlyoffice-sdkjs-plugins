@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.13.2
+ * Laplace Plugin Main v0.14.1.20220427b
  */
 
 let _isSupplierTable = false;
@@ -232,12 +232,17 @@ let in_action = false;
             data = data_calsberg?.data;
             break;
           case "pepsi":
-            const data_pepsi = parseCsv(csv_data_pepsi);
-            data_pepsi.map(item => {
+            // const data_pepsi = parseCsv(csv_data_pepsi);
+            const data_pepsi = Papa.parse(csv_data_pepsi, {
+              header: true,
+              skipEmptyLines: true,
+            });
+            console.log("[auto]data_pepsi", data_pepsi);
+            data_pepsi?.data.map(item => {
               // item.id = parseInt(item.no);
               item.id = item.item_no;
             });
-            data = data_pepsi;
+            data = data_pepsi?.data;
             break;
           case "dingjin":
             const data_dingjin = parseCsv(csv_data_dingjin);
@@ -375,9 +380,9 @@ let in_action = false;
             // Item No.
             oSheet.GetRangeByNumber(row, 7).SetValue(`${item.item_no}`);
             // 项目
-            oSheet.GetRangeByNumber(row, 8).SetValue(`${item.specification}`);
+            oSheet.GetRangeByNumber(row, 8).SetValue(`${item.category}`);
             // 材料说明
-            oSheet.GetRangeByNumber(row, 9).SetValue(`${item.description}`);
+            oSheet.GetRangeByNumber(row, 9).SetValue(`${item.specification}`);
             // 单价
             oSheet.GetRangeByNumber(row, 14).SetNumberFormat("_(￥* #,##0.00_)");
             oSheet.GetRangeByNumber(row, 14).SetValue(item.price);
