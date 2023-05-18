@@ -1,5 +1,5 @@
 /**
- * Laplace Plugin Main v0.14.1.20220427c
+ * Laplace Plugin Main v0.15.1.20230518d
  */
 
 let _isSupplierTable = false;
@@ -221,8 +221,8 @@ let in_action = false;
         // else client = "calsberg";
         switch (client) {
           case "calsberg":
-            // const data_calsberg = Papa.parse(csv_data_calsberg_2023, {
-            const data_calsberg = Papa.parse(csv_data_calsberg, {
+            const data_calsberg = Papa.parse(csv_data_calsberg_2023, {
+            // const data_calsberg = Papa.parse(csv_data_calsberg, {
               header: true,
               skipEmptyLines: true,
             });
@@ -400,47 +400,6 @@ let in_action = false;
           break;
 
         // TODO: calsberg 2023
-        // case "calsberg":
-        //   /**
-        //    * Auto Fill Calsberg Data
-        //    */
-        //   this.callCommand(function () {
-        //     const oSheet = Api.GetActiveSheet();
-        //     oSheet.GetCells().SetWrap(true);
-        //     const oCell = oSheet.GetActiveCell();
-        //     const item = Asc.scope.item;
-        //     let row = oCell.GetRow();
-        //     let col = oCell.GetCol();
-        //     console.log("[cmd-input]cell:", oCell, row, col);
-        //     console.log("[cmd-input]item:", item);
-        //
-        //     // Category 分类
-        //     oSheet.GetRangeByNumber(row, 3).SetValue(`${item.category}`);
-        //     // Type 类型
-        //     oSheet.GetRangeByNumber(row, 4).SetValue(`${item.type}`);
-        //     // Item Name 项目名称
-        //     oSheet.GetRangeByNumber(row, 5).SetValue(`${item.name}`);
-        //
-        //     // 单价
-        //     oSheet.GetRangeByNumber(row, 7).SetNumberFormat("_(￥* #,##0.00_)");
-        //     oSheet.GetRangeByNumber(row, 7).SetValue(item.price);
-        //
-        //     // 标准名
-        //     oSheet.GetRangeByNumber(row, 6).SetValue(`${item.name}`);
-        //     // 描述
-        //     oSheet.GetRangeByNumber(row, 14).SetValue(item.description);
-        //
-        //     console.log("[cmd-input]cmd DONE");
-        //     // localStorage.setItem('current_cell_row', row);
-        //     // localStorage.setItem('current_cell_col', col);
-        //   }, false, true, function (res, error) {
-        //     console.debug("cell fill done.", res, error, this, localStorage);
-        //   });
-        //   break;
-
-        /**
-         * Calsberg 2022
-         */
         case "calsberg":
           /**
            * Auto Fill Calsberg Data
@@ -454,29 +413,23 @@ let in_action = false;
             let col = oCell.GetCol();
             console.log("[cmd-input]cell:", oCell, row, col);
             console.log("[cmd-input]item:", item);
+
+            // Category 分类
+            oSheet.GetRangeByNumber(row, 3).SetValue(`${item.category}`);
+            // Type 类型
+            oSheet.GetRangeByNumber(row, 4).SetValue(`${item.type}`);
+            // Item Name 项目名称
+            oSheet.GetRangeByNumber(row, 5).SetValue(`${item.name}`);
+
+            // 单价
+            oSheet.GetRangeByNumber(row, 7).SetNumberFormat("_(￥* #,##0.00_)");
+            oSheet.GetRangeByNumber(row, 7).SetValue(item.price);
+
             // 标准名
             oSheet.GetRangeByNumber(row, 6).SetValue(`${item.name}`);
             // 描述
-            oSheet.GetRangeByNumber(row, 7).SetValue(`${item.name}, ${item.specification}, ${item.description}`);
-            // 单价
-            oSheet.GetRangeByNumber(row, 12).SetNumberFormat("_(￥* #,##0.00_)");
-            oSheet.GetRangeByNumber(row, 12).SetValue(item.price);
-            // 单位
-            oSheet.GetRangeByNumber(row, 13).SetValue(item.unit);
-            // 年度议价
-            oSheet.GetRangeByNumber(row, 16).SetNumberFormat("_(￥* #,##0.00_)");
-            // oSheet.GetRangeByNumber(row, 16).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
-            oSheet.GetRangeByNumber(row, 16).SetValue(`=IFERROR(QUOTE_PRICE * IF(ISNUMBER(QUOTE_AMOUNT), QUOTE_AMOUNT, 1) * IF(ISNUMBER(QUOTE_TIMES), QUOTE_TIMES, 1), 0)`);
-            // 总价
-            oSheet.GetRangeByNumber(row, 18).SetNumberFormat("_(￥* #,##0.00_)");
-            // oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
-            oSheet.GetRangeByNumber(row, 18).SetValue(`=IFERROR(QUOTE_PRICE * IF(ISNUMBER(QUOTE_AMOUNT), QUOTE_AMOUNT, 1) * IF(ISNUMBER(QUOTE_TIMES), QUOTE_TIMES, 1), 0)`);
-            // Item No.
-            // oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
-            oSheet.GetRangeByNumber(row, 19).SetValue(`${item.item_no}`);
-            // Select Next Row
-            // oSheet.GetRangeByNumber(row + 1, 6).Select();
-            // Api.Save();
+            oSheet.GetRangeByNumber(row, 14).SetValue(item.description);
+
             console.log("[cmd-input]cmd DONE");
             // localStorage.setItem('current_cell_row', row);
             // localStorage.setItem('current_cell_col', col);
@@ -484,6 +437,53 @@ let in_action = false;
             console.debug("cell fill done.", res, error, this, localStorage);
           });
           break;
+
+        /**
+         * Calsberg 2022
+         */
+        // case "calsberg":
+        //   /**
+        //    * Auto Fill Calsberg Data
+        //    */
+        //   this.callCommand(function () {
+        //     const oSheet = Api.GetActiveSheet();
+        //     oSheet.GetCells().SetWrap(true);
+        //     const oCell = oSheet.GetActiveCell();
+        //     const item = Asc.scope.item;
+        //     let row = oCell.GetRow();
+        //     let col = oCell.GetCol();
+        //     console.log("[cmd-input]cell:", oCell, row, col);
+        //     console.log("[cmd-input]item:", item);
+        //     // 标准名
+        //     oSheet.GetRangeByNumber(row, 6).SetValue(`${item.name}`);
+        //     // 描述
+        //     oSheet.GetRangeByNumber(row, 7).SetValue(`${item.name}, ${item.specification}, ${item.description}`);
+        //     // 单价
+        //     oSheet.GetRangeByNumber(row, 12).SetNumberFormat("_(￥* #,##0.00_)");
+        //     oSheet.GetRangeByNumber(row, 12).SetValue(item.price);
+        //     // 单位
+        //     oSheet.GetRangeByNumber(row, 13).SetValue(item.unit);
+        //     // 年度议价
+        //     oSheet.GetRangeByNumber(row, 16).SetNumberFormat("_(￥* #,##0.00_)");
+        //     // oSheet.GetRangeByNumber(row, 16).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
+        //     oSheet.GetRangeByNumber(row, 16).SetValue(`=IFERROR(QUOTE_PRICE * IF(ISNUMBER(QUOTE_AMOUNT), QUOTE_AMOUNT, 1) * IF(ISNUMBER(QUOTE_TIMES), QUOTE_TIMES, 1), 0)`);
+        //     // 总价
+        //     oSheet.GetRangeByNumber(row, 18).SetNumberFormat("_(￥* #,##0.00_)");
+        //     // oSheet.GetRangeByNumber(row, 18).SetValue(`=M${row + 1} * O${row + 1} * P${row + 1}`);
+        //     oSheet.GetRangeByNumber(row, 18).SetValue(`=IFERROR(QUOTE_PRICE * IF(ISNUMBER(QUOTE_AMOUNT), QUOTE_AMOUNT, 1) * IF(ISNUMBER(QUOTE_TIMES), QUOTE_TIMES, 1), 0)`);
+        //     // Item No.
+        //     // oSheet.GetRangeByNumber(row, 19).SetValue(`Item No. ${item.item_no}`);
+        //     oSheet.GetRangeByNumber(row, 19).SetValue(`${item.item_no}`);
+        //     // Select Next Row
+        //     // oSheet.GetRangeByNumber(row + 1, 6).Select();
+        //     // Api.Save();
+        //     console.log("[cmd-input]cmd DONE");
+        //     // localStorage.setItem('current_cell_row', row);
+        //     // localStorage.setItem('current_cell_col', col);
+        //   }, false, true, function (res, error) {
+        //     console.debug("cell fill done.", res, error, this, localStorage);
+        //   });
+        //   break;
 
         case "dingjin":
           /**
